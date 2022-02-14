@@ -1,7 +1,5 @@
 # Prerequisites: 
-Node.js
-Xcode
-Android Studio
+Node.js, Xcode, Android Studio
 
 
 # Getting Started
