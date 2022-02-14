@@ -23,7 +23,8 @@
     "react-navigation-stack": "^2.10.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "husky": "^7.0.2"
   },
   "private": true
 }
