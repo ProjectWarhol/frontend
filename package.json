@@ -1,11 +1,27 @@
 {
+  "name": "warhol-frontend",
+  "version": "0.0.1",
+  "description": "This is the Project Warhol mobile application",
+  "keywords": ["react", "react-native", "nft", "blockchain", "web3", "solidity", "social-media"],
   "main": "node_modules/expo/AppEntry.js",
+  "author": "Project Warhol",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ProjectWarhol/frontend"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "compile": "truffle compile",
+    "test": "truffle test",
+    "mDev": "truffle migrate --network development",
+    "mOnDev": "truffle migrate --network onlineDevelopment",
+    "mStaging": "truffle migrate --network staging"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -24,7 +40,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@truffle/hdwallet-provider": "^2.0.3",
+    "dotenv": "^16.0.0",
     "husky": "^7.0.2"
-  },
-  "private": true
+  }
 }
