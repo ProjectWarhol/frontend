@@ -77,7 +77,36 @@ Coming soon...
 
 ### Smart Contracts
 
-Coming soon...
+The development of the Smart Contracts is separated from the frontend development.
+
+Smart Contracts are located in the `contracts` folder and the files need to be in CamelCase notation (e.g `PetAdoption.sol`)
+
+In the solidity files, add the following lines at the top to configure the compiler and set a license:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.8.12 <0.9.0;
+```
+
+To check if these files can be compiled, use:
+
+```zsh
+yarn compile
+```
+
+To deploy them to the different environments, use:
+
+- Local development (make sure that Ganache is running)
+
+    ```zsh
+    yarn mDev
+    ```
+
+- Online development (alchemy setup)
+
+    ```zsh
+    yarn mOnDev
+    ```
 
 ## Running tests
 
@@ -87,7 +116,11 @@ Coming soon...
 
 ### Smart Contracts
 
-Coming soon...
+To test all Smart Contracts, run:
+
+```zsh
+yarn test
+```
 
 ## Deployment
 
