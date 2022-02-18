@@ -26,11 +26,12 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "compile": "truffle compile",
-    "test": "truffle test",
-    "mDev": "truffle migrate --network development",
-    "mOnDev": "truffle migrate --network onlineDevelopment",
-    "mStaging": "truffle migrate --network staging"
+    "solHint": "solhint 'contracts/**/*.sol'",
+    "compile": "yarn solHint && truffle compile",
+    "test": "yarn solHint && truffle test",
+    "mDev": "yarn solHint && truffle migrate --network development",
+    "mOnDev": "yarn solHint && truffle migrate --network onlineDevelopment",
+    "mStaging": "yarn solHint && truffle migrate --network staging"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -53,6 +54,7 @@
     "dotenv": "^16.0.0",
     "eslint": "^7.12.1",
     "eslint-plugin-react": "^7.28.0",
-    "husky": "^7.0.2"
+    "husky": "^7.0.2",
+    "solhint": "^3.3.7"
   }
 }
