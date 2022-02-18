@@ -2,7 +2,15 @@
   "name": "warhol-frontend",
   "version": "0.0.1",
   "description": "This is the Project Warhol mobile application",
-  "keywords": ["react", "react-native", "nft", "blockchain", "web3", "solidity", "social-media"],
+  "keywords": [
+    "react",
+    "react-native",
+    "nft",
+    "blockchain",
+    "web3",
+    "solidity",
+    "social-media"
+  ],
   "main": "node_modules/expo/AppEntry.js",
   "author": "Project Warhol",
   "license": "MIT",
@@ -12,6 +20,7 @@
     "url": "https://github.com/ProjectWarhol/frontend"
   },
   "scripts": {
+    "lint": "eslint",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -42,6 +51,8 @@
     "@babel/core": "^7.12.9",
     "@truffle/hdwallet-provider": "^2.0.3",
     "dotenv": "^16.0.0",
+    "eslint": "^7.12.1",
+    "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.2"
   }
 }
