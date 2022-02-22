@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-
+// eslint-disable-next-line no-unused-vars
 const createWallet = () => {
   const wallet = ethers.Wallet.createRandom()
   let data = {}
