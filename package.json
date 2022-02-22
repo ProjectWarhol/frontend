@@ -19,6 +19,7 @@
     "type": "git",
     "url": "https://github.com/ProjectWarhol/frontend"
   },
+  "type": "module",
   "scripts": {
     "lint": "eslint",
     "start": "expo start",
