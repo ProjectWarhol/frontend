@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
-const GreyScreen = () => {
+const UnavailableScreen = () => {
   return <Text style={styles.text}>Grey Screen</Text>
 }
 
@@ -11,4 +11,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default GreyScreen
+export default UnavailableScreen
