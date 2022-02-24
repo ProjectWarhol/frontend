@@ -15,6 +15,7 @@ import ThirdPartyWalletSelectionScreen from './src/screens/ThirdPartyWalletSelec
 import SigninScreen from './src/screens/SigninScreen';
 import StorageChoiceScreen from './src/screens/StorageChoiceScreen';
 import validatePhraseScreen from './src/screens/ValidatePhraseScreen';
+import { Provider as AuthProvider } from './src/context/AuthContext';
 
 
 const navigator = createSwitchNavigator({
@@ -52,4 +53,13 @@ const navigator = createSwitchNavigator({
     })
 })
 
-export default createAppContainer(navigator);
+const App = createAppContainer(navigator);
+
+export default () => {
+  return(
+    <AuthProvider>
+      <App/>
+    </AuthProvider>
+  )
+}
+
