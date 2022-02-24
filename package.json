@@ -19,7 +19,6 @@
     "type": "git",
     "url": "https://github.com/ProjectWarhol/frontend"
   },
-  "type": "module",
   "scripts": {
     "lint": "eslint",
     "format": "npx prettier --config .prettierrc -w .",

@@ -1,4 +1,4 @@
-import { ethers } from 'ethers'
+const { ethers } = require('ethers')
 // eslint-disable-next-line no-unused-vars
 const createWallet = () => {
     const wallet = ethers.Wallet.createRandom()
