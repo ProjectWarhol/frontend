@@ -33,11 +33,20 @@ const createOurWallet = () => {
 
 }
 
-// const storeWalletInfo = (walletInfo) => {
-//     const data = {
-        
-//     }
+const storeOurWallet = (ourWalletData, password) => {
+    const wallet = ourWalletData.wallet[0]
+    const seedPhrase = ourWalletData.seedPhrase
+    const address = wallet.address
+    const privateKey = wallet.privateKey
+    const encryptedPrivateKey = web3.eth.accounts.encrypt(privateKey, password)
+    const data = {
+        address: address,
+        encryptedPrivateKey: encryptedPrivateKey,
+        seedPhrase: seedPhrase
+    }
+    return data
+}
 
-// }
-
-console.log(createOurWallet().wallet[0].address)
+const newWallet = createOurWallet()
+const stored = storeOurWallet(newWallet, 'test')
+console.log(stored)
