@@ -21,3 +21,23 @@ const createAccount = (password) => {
     }
     return data
 }
+
+const createOurWallet = () => {
+    const wallet = web3.eth.accounts.wallet.create(1)
+    const seedPhrase = generateSeedPhrase()
+    const data = {
+        wallet: wallet,
+        seedPhrase: seedPhrase,
+    }
+    return data
+
+}
+
+// const storeWalletInfo = (walletInfo) => {
+//     const data = {
+        
+//     }
+
+// }
+
+console.log(createOurWallet().wallet[0].address)
