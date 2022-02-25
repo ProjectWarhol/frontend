@@ -7,3 +7,17 @@ const generateSeedPhrase = () => {
     mnemonic = bip39.generateMnemonic()
     return mnemonic
 }
+
+const createAccount = (password) => {
+    const account = web3.eth.accounts.create()
+    const privateKey = account.privateKey
+    const encryptedPrivateKey = web3.eth.accounts.encrypt(privateKey, password)
+    const address = account.address
+    const seedPhrase = generateSeedPhrase()
+    const data = {
+        address: address,
+        encryptedPrivateKey: encryptedPrivateKey,
+        seedPhrase: seedPhrase,
+    }
+    return data
+}
