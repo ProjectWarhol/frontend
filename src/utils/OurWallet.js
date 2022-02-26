@@ -1,6 +1,6 @@
 // third-party
 const Web3 = require('web3')
-var bip39 = require('bip39')
+let bip39 = require('bip39')
 
 const web3 = new Web3()
 // eslint-disable-next-line no-unused-vars
@@ -9,7 +9,7 @@ exports.generateSeedPhrase = () => {
     return mnemonic
 }
 
-const createOurWallet = () => {
+exports.createOurWallet = () => {
     const wallet = web3.eth.accounts.wallet.create(1)
     const seedPhrase = generateSeedPhrase()
     const data = {
