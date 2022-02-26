@@ -17,7 +17,6 @@ exports.createOurWallet = () => {
         seedPhrase: seedPhrase,
     }
     return data
-
 }
 
 const storeOurWallet = (ourWalletData, password) => {
@@ -29,7 +28,7 @@ const storeOurWallet = (ourWalletData, password) => {
     const data = {
         address: address,
         encryptedPrivateKey: encryptedPrivateKey,
-        seedPhrase: seedPhrase
+        seedPhrase: seedPhrase,
     }
     return data
 }
