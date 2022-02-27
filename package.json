@@ -31,6 +31,7 @@
     "compile": "yarn solHint && truffle compile",
     "test": "yarn solHint && truffle test",
     "jest": "jest",
+    "mocha":"mocha",
     "mDev": "yarn solHint && truffle migrate --network development",
     "mOnDev": "yarn solHint && truffle migrate --network onlineDevelopment",
     "mStaging": "yarn solHint && truffle migrate --network staging"
@@ -62,11 +63,13 @@
     "@babel/core": "^7.12.9",
     "@openzeppelin/contracts": "^4.5.0",
     "@truffle/hdwallet-provider": "^2.0.3",
+    "chai": "^4.3.6",
     "dotenv": "^16.0.0",
     "eslint": "^7.12.1",
     "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.2",
     "jest": "^27.5.1",
+    "mocha": "^9.2.1",
     "solhint": "^3.3.7"
   }
 }
