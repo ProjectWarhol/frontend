@@ -3,7 +3,7 @@ const Web3 = require('web3')
 let bip39 = require('bip39')
 
 const web3 = new Web3()
-// eslint-disable-next-line no-unused-vars
+
 exports.generateSeedPhrase = () => {
     const mnemonic = bip39.generateMnemonic()
     return mnemonic
@@ -19,7 +19,7 @@ exports.createOurWallet = () => {
     return data
 }
 
-const storeOurWallet = (ourWalletData, password) => {
+exports.storeOurWallet = (ourWalletData, password) => {
     const wallet = ourWalletData.wallet[0]
     const seedPhrase = ourWalletData.seedPhrase
     const address = wallet.address
