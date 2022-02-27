@@ -11,7 +11,7 @@ exports.generateSeedPhrase = () => {
 
 exports.createOurWallet = () => {
     const wallet = web3.eth.accounts.wallet.create(1)
-    const seedPhrase = generateSeedPhrase()
+    const seedPhrase = exports.generateSeedPhrase()
     const data = {
         wallet: wallet,
         seedPhrase: seedPhrase,
