@@ -9,7 +9,6 @@ which sections of the codebase will affect contributors and users of the library
 
 (prefer animated gif for frontend)
 
-- [Ticket URL](url)
 
 ### Checklists
 
