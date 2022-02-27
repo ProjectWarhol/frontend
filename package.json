@@ -30,8 +30,7 @@
     "solHint": "solhint 'contracts/**/*.sol'",
     "compile": "yarn solHint && truffle compile",
     "test": "yarn solHint && truffle test",
-    "jest": "jest",
-    "mocha":"mocha",
+    "mocha": "mocha 'test/**/*.js'|| true",
     "mDev": "yarn solHint && truffle migrate --network development",
     "mOnDev": "yarn solHint && truffle migrate --network onlineDevelopment",
     "mStaging": "yarn solHint && truffle migrate --network staging"
@@ -68,7 +67,6 @@
     "eslint": "^7.12.1",
     "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.2",
-    "jest": "^27.5.1",
     "mocha": "^9.2.1",
     "solhint": "^3.3.7"
   }
