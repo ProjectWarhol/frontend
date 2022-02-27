@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 require('dotenv').config()
 const { ALCHEMY_DEV_ID, ALCHEMY_STAGING_ID, MNENOMIC } = process.env
 const POLYGON_TESTNET = 'https://polygon-mumbai.g.alchemy.com/v2/'
@@ -7,9 +8,9 @@ module.exports = {
   license: 'MIT',
   networks: {
     development: {
-     host: '127.0.0.1',
-     port: 7545,
-     network_id: '*',
+      host: '127.0.0.1',
+      port: 7545,
+      network_id: '*',
     },
     onlineDevelopment: {
       provider: () => new HDWalletProvider(MNENOMIC, POLYGON_TESTNET + ALCHEMY_DEV_ID),
