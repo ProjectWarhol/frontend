@@ -1,15 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { Text, StyleSheet } from 'react-native'
-import { Context as AuthContext } from '../context/AuthContext'
 
-const unAuthenticatedFeedScreen = () => {
-  const { tryLocalSignin } = useContext(AuthContext)
+const UnAuthenticatedFeedScreen = () => {
 
-  useEffect(() => {
-    tryLocalSignin()
-  }, [])
-
-  return <Text style={styles.text}>FeedScreen</Text>
+  return <Text style={styles.text}>UnauthenticatedScreen</Text>
 }
 
 const styles = StyleSheet.create({
@@ -18,4 +12,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default unAuthenticatedFeedScreen
+export default UnAuthenticatedFeedScreen

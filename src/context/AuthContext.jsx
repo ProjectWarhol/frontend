@@ -11,9 +11,23 @@ const authReducer = (state, action) => {
       return {errorMessage: '', token: action.payload}
     case 'clear_error_message':
       return { ...state, errorMessage: '' }
+    case 'signout':
+      return { cookie: null, errorMessage: '' }
     default:
       return state
   }
+}
+
+const signout = dispatch => async () => {
+  const cookie = await SecureStore.getItemAsync('cookie')
+  const config = {headers:{
+    'my.sid': cookie
+  }}
+  const response = await Api.post('/users/logout', config)
+  console.log(response)
+  await SecureStore.deleteItemAsync('cookie')
+  dispatch({ type: 'signout'})
+  navigate('default')
 }
 
 const tryLocalSignin = dispatch => async () => {
@@ -25,7 +39,6 @@ const tryLocalSignin = dispatch => async () => {
   else{
     navigate('default')
   }
-
 }
 
 const clearErrorMessage = dispatch => () => {
@@ -61,11 +74,6 @@ const signin = (dispatch) => async ({ email, password }) => {
       {dispatch({ type: 'add_error',  payload: 'Something went wrong' }, console.log(err))}
     }
   }
-
-const signout = (dispatch) => {
-  return () => {
-  }
-}
 
 export const { Provider, Context } = createDataContext(
   authReducer,

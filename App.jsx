@@ -15,14 +15,16 @@ import ThirdPartyWalletSelectionScreen from './src/screens/ThirdPartyWalletSelec
 import SigninScreen from './src/screens/SigninScreen';
 import StorageChoiceScreen from './src/screens/StorageChoiceScreen';
 import validatePhraseScreen from './src/screens/ValidatePhraseScreen';
-import unAuthenticatedFeedScreen from './src/screens/unAuthenticatedFeedScreen';
+import UnAuthenticatedFeedScreen from './src/screens/UnAuthenticatedFeedScreen';
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import  { setNavigator } from './src/navigationRef';
 
 
 const navigator = createSwitchNavigator({
+  resolveAuth: ResolveAuthScreen,
   default: createBottomTabNavigator({
-    unAuthenticatedFeed: unAuthenticatedFeedScreen,
+    unAuthenticatedFeed: UnAuthenticatedFeedScreen,
     camera: UnavailableScreen,
     signupFlow: createStackNavigator({
     signin: SigninScreen,
