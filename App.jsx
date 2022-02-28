@@ -14,7 +14,7 @@ import SignupScreen from './src/screens/SignupScreen'
 import ThirdPartyWalletSelectionScreen from './src/screens/ThirdPartyWalletSelectionScreen'
 import SigninScreen from './src/screens/SigninScreen'
 import StorageChoiceScreen from './src/screens/StorageChoiceScreen'
-import validatePhraseScreen from './src/screens/ValidatePhraseScreen'
+import ValidatePhraseScreen from './src/screens/ValidatePhraseScreen'
 
 const navigator = createSwitchNavigator({
     default: createBottomTabNavigator({
@@ -34,7 +34,7 @@ const navigator = createSwitchNavigator({
                         choice: createStackNavigator({
                             storageChoice: StorageChoiceScreen,
                             validation: createStackNavigator({
-                                validatePhrase: validatePhraseScreen,
+                                validatePhrase: ValidatePhraseScreen,
                             }),
                         }),
                     }),
