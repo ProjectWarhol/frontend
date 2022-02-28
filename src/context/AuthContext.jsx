@@ -1,10 +1,13 @@
-import createDataContext from "./createDataContext";
+import * as SecureStore from 'expo-secure-store'
+import createDataContext from "./createDataContext"
 import Api from '../api/api'
 
 const authReducer = (state, action) => {
   switch (action.type){
     case 'add_error':
       return {...state, errorMessage: action.payload }
+    case 'sigin':
+      return { errorMessage: '', token: action.payload}
     default:
       return state
   }
@@ -21,23 +24,22 @@ const signup = (dispatch) => {
   }
 }
 
-const signin = (dispatch) => {
-  return async ({ email, password }) => {
+const signin = (dispatch) => async ({ email, password }) => {
     try{
       const response = await Api.post('/users/login', { email: email, password: password })
       let cookieArray = response["headers"]["set-cookie"]
       let cookieString = cookieArray.toString()
       let cookie = cookieString.substring(
-        cookieString.indexOf("=") + 1,
-        cookieString.indexOf(";")
+        cookieString.indexOf('=') + 1,
+        cookieString.indexOf(';')
       )
-      console.log(cookie)
+      await SecureStore.setItemAsync('token', cookie)
+      dispatch({ type: 'signin', payload: cookie})
 
     }catch (err){
       {dispatch({ type: 'add_error',  payload: 'Something went wrong' }, console.log(err))}
     }
   }
-}
 
 const signout = (dispatch) => {
   return () => {
@@ -47,5 +49,5 @@ const signout = (dispatch) => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { signin, signup, signout },
-  { isSignedIn: false, errorMessage: '' }
+  { token: null, errorMessage: '' }
 )

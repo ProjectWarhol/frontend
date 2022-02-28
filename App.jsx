@@ -58,7 +58,7 @@ const App = createAppContainer(navigator);
 export default () => {
   return(
     <AuthProvider>
-      <App/>
+      <App />
     </AuthProvider>
   )
 }
