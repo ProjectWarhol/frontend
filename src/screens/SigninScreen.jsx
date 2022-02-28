@@ -1,14 +1,14 @@
 import React, {useState, useContext} from 'react'
-import {  StyleSheet, View, ViewBase, TouchableOpacity } from 'react-native'
+import {  StyleSheet, View } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
+import NavLink from '../components/NavLink'
 
 const SigninScreen = ( {navigation }) => {
   const {state, signin } = useContext(AuthContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
-
 
   return (
   <View style={styles.container}>
@@ -34,8 +34,7 @@ const SigninScreen = ( {navigation }) => {
   {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
     <Button title='Sign In' onPress={() => signin({ email, password })} />
     <Spacer/>
-    <TouchableOpacity onPress={()=> navigation.navigate('signup')}><Text>Already have an Account? Sign up!</Text>
-    </TouchableOpacity>
+    <NavLink routeName='signup' text='Dont have an Account yet? Sign up!'/>
   </View>
   )
 }

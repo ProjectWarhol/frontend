@@ -1,8 +1,10 @@
 import React, {useState, useContext} from 'react'
 import {  StyleSheet, View, TouchableOpacity } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
+import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
+import NavLink from '../components/NavLink'
 
 const SignupScreen = ( {navigation }) => {
   const {state, signup } = useContext(AuthContext)
@@ -41,10 +43,13 @@ const SignupScreen = ( {navigation }) => {
       autoCorrect={false}
     />
   {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
-    <Button title='Sign Up' onPress={() => signup({ userName, email, password })} />
+    <Button
+    title='Sign Up'
+    onPress={() => signup({ userName, email, password })} />
     <Spacer/>
-    <TouchableOpacity onPress={()=> navigation.navigate('signin')}><Text>Already have an Account? Sign in!</Text>
-    </TouchableOpacity>
+    <NavLink
+    routeName='signin'
+    text='Already have an Account? Sign in!' />
   </View>
   )
 }
