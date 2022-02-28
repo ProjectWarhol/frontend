@@ -16,6 +16,18 @@ const authReducer = (state, action) => {
   }
 }
 
+const tryLocalSignin = dispatch => async () => {
+  const cookie = await SecureStore.getItemAsync('cookie')
+  if (cookie) {
+    dispatch({ type: 'signin', payload: cookie})
+    navigate('mainFlow')
+  }
+  else{
+    navigate('default')
+  }
+
+}
+
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
@@ -36,13 +48,11 @@ const signin = (dispatch) => async ({ email, password }) => {
       const response = await Api.post('/users/login', { email: email, password: password })
       let cookieArray = response["headers"]["set-cookie"]
       let cookieString = cookieArray.toString()
-      let cookie = cookieString.substring(
+      const cookie = cookieString.substring(
         cookieString.indexOf('=') + 1,
         cookieString.indexOf(';')
       )
-      console.log(cookie)
-      await SecureStore.setItemAsync('token', cookie)
-      console.log(cookie + "2")
+      await SecureStore.setItemAsync('cookie', cookie)
       dispatch({ type: 'signin', payload: cookie})
 
       navigate('mainFlow')
@@ -59,6 +69,6 @@ const signout = (dispatch) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signup, signout, clearErrorMessage },
+  { signin, signup, signout, clearErrorMessage, tryLocalSignin },
   { token: null, errorMessage: '' }
 )
