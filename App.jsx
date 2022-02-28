@@ -23,7 +23,9 @@ const navigator = createSwitchNavigator({
     feed: FeedScreen,
     camera: UnavailableScreen,
     signupFlow: createStackNavigator({
+    signin: SigninScreen,
     signup: SignupScreen,
+    forgotPw: ForgotPasswordScreen,
     walletFlow: createStackNavigator({
       selectWallet: SelectWalletScreen,
       expressWallet: createStackNavigator({
@@ -42,8 +44,6 @@ const navigator = createSwitchNavigator({
             })
           })
         }),
-        signin: SigninScreen,
-        forgotPw: ForgotPasswordScreen,
       })
     }),
     mainFlow: createBottomTabNavigator({

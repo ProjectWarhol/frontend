@@ -22,14 +22,25 @@ const signup = (dispatch) => {
 }
 
 const signin = (dispatch) => {
-  return ({ email, password }) => {
+  return async ({ email, password }) => {
+    try{
+      const response = await Api.post('/users/login', { email: email, password: password })
+      let cookieArray = response["headers"]["set-cookie"]
+      let cookieString = cookieArray.toString()
+      let cookie = cookieString.substring(
+        cookieString.indexOf("=") + 1,
+        cookieString.indexOf(";")
+      )
+      console.log(cookie)
 
+    }catch (err){
+      {dispatch({ type: 'add_error',  payload: 'Something went wrong' }, console.log(err))}
+    }
   }
 }
 
 const signout = (dispatch) => {
   return () => {
-
   }
 }
 
