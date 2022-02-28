@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useWalletConnect, withWalletConnect } from '@walletconnect/react-native-dapp'
-import * as React from 'react'
-import { Button } from 'react-native'
+import React from 'react'
+import { Button, Text } from 'react-native'
 
 function SignupScreen() {
   const connector = useWalletConnect();
