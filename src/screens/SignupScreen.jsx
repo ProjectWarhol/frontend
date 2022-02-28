@@ -1,14 +1,21 @@
-import React from 'react'
-import { Text, StyleSheet } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useWalletConnect, withWalletConnect } from '@walletconnect/react-native-dapp'
+import * as React from 'react'
+import { Button } from 'react-native'
 
-const SignupScreen = () => {
-  return <Text style={styles.text}>Signup Screen</Text>
+function SignupScreen() {
+  const connector = useWalletConnect();
+  if (!connector.connected) {
+    return <Button title="Connect" onPress={() => connector.connect()} />
+  }
+  return <Button title="Kill Session" onPress={() => connector.killSession()} />
 }
 
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 30,
+export default withWalletConnect(SignupScreen, {
+  redirectUrl: Platform.OS === 'web' ? window.location.origin : 'yourappscheme://',
+  storageOptions: {
+    asyncStorage: AsyncStorage,
   },
 })
 
-export default SignupScreen
+// export default SignupScreen

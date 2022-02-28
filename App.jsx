@@ -1,3 +1,4 @@
+import 'react-native-get-random-values'
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
