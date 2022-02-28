@@ -16,6 +16,7 @@ import SigninScreen from './src/screens/SigninScreen';
 import StorageChoiceScreen from './src/screens/StorageChoiceScreen';
 import validatePhraseScreen from './src/screens/ValidatePhraseScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import  { setNavigator } from './src/navigationRef';
 
 
 const navigator = createSwitchNavigator({
@@ -58,7 +59,7 @@ const App = createAppContainer(navigator);
 export default () => {
   return(
     <AuthProvider>
-      <App />
+      <App ref={(navigator)=>{ setNavigator(navigator) }} />
     </AuthProvider>
   )
 }

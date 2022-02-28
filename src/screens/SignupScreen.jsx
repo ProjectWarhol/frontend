@@ -42,6 +42,7 @@ const SignupScreen = ( {navigation }) => {
     />
   {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
     <Button title='Sign Up' onPress={() => signup({ userName, email, password })} />
+    <Spacer/>
     <TouchableOpacity onPress={()=> navigation.navigate('signin')}><Text>Already have an Account? Sign in!</Text>
     </TouchableOpacity>
   </View>

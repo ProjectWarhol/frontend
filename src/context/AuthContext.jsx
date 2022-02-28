@@ -1,13 +1,14 @@
 import * as SecureStore from 'expo-secure-store'
 import createDataContext from "./createDataContext"
 import Api from '../api/api'
+import { navigate } from '../navigationRef'
 
 const authReducer = (state, action) => {
   switch (action.type){
     case 'add_error':
       return {...state, errorMessage: action.payload }
-    case 'sigin':
-      return { errorMessage: '', token: action.payload}
+    case 'signin':
+      return {errorMessage: '', token: action.payload}
     default:
       return state
   }
@@ -33,9 +34,13 @@ const signin = (dispatch) => async ({ email, password }) => {
         cookieString.indexOf('=') + 1,
         cookieString.indexOf(';')
       )
+      console.log(cookie)
       await SecureStore.setItemAsync('token', cookie)
+      console.log(cookie + "2")
       dispatch({ type: 'signin', payload: cookie})
 
+      navigate('mainFlow')
+      console.log(cookie + "2")
     }catch (err){
       {dispatch({ type: 'add_error',  payload: 'Something went wrong' }, console.log(err))}
     }
