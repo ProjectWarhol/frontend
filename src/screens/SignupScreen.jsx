@@ -7,7 +7,7 @@ import { Context as AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
 
 const SignupScreen = ( {navigation }) => {
-  const {state, signup } = useContext(AuthContext)
+  const {state, signup, clearErrorMessage } = useContext(AuthContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
   const[userName, setUsername] = useState('')
@@ -15,6 +15,9 @@ const SignupScreen = ( {navigation }) => {
 
   return (
   <View style={styles.container}>
+    <NavigationEvents
+    onWillBlur={clearErrorMessage}
+    />
     <Spacer/>
       <Text h3>Signup Screen</Text>
     <Spacer/>

@@ -1,17 +1,21 @@
 import React, {useState, useContext} from 'react'
 import {  StyleSheet, View } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
+import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
 
 const SigninScreen = ( {navigation }) => {
-  const {state, signin } = useContext(AuthContext)
+  const {state, signin, clearErrorMessage } = useContext(AuthContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
 
   return (
   <View style={styles.container}>
+    <NavigationEvents
+    onWillBlur={clearErrorMessage}
+    />
     <Spacer/>
       <Text h3>Signin Screen</Text>
     <Spacer/>
