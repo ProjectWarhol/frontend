@@ -12,10 +12,18 @@ function SignupScreen() {
 }
 
 export default withWalletConnect(SignupScreen, {
-  redirectUrl: Platform.OS === 'web' ? window.location.origin : 'yourappscheme://',
+  rpc: {
+    4: 'https://rinkeby.infura.io/v3/',
+    80001: 'https://polygon-mumbai.g.alchemy.com/v2/Pfpvdz49MNd58vUxy8DG96oU84FEN797'
+  },
+  redirectUrl: Platform.OS === 'web' ? window.location.origin : 'exp://wg-qka.community.app.exp.direct:80',
   storageOptions: {
     asyncStorage: AsyncStorage,
   },
+  qrcodeModalOptions: {
+    mobileLinks: [
+      "rainbow",
+      "metamask"
+    ]
+  }
 })
-
-// export default SignupScreen

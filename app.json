@@ -2,6 +2,7 @@
   "expo": {
     "name": "rn-starter-1",
     "slug": "rn-starter-1",
+    "scheme": "warhol",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
