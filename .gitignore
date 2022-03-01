@@ -223,3 +223,6 @@ blockchain/history
 
 #ignore vs code settings
 .vscode
+
+# ignore expo
+.expo
