@@ -5,12 +5,12 @@ import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
 
 const ProfileScreen = () => {
-  const { signout } = useContext(AuthContext)
+  const { logout } = useContext(AuthContext)
 
   return (<>
   <Text style={styles.text}>Profile Screen</Text>
   <Spacer />
-  <Button title='Sign Out' onPress={signout} />
+  <Button title='Sign Out' onPress={logout} />
   </>)
 
 }

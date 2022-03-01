@@ -7,18 +7,18 @@ const authReducer = (state, action) => {
   switch (action.type){
     case 'add_error':
       return {...state, errorMessage: action.payload }
-    case 'signin':
+    case 'login':
       return {errorMessage: '', token: action.payload}
     case 'clear_error_message':
       return { ...state, errorMessage: '' }
-    case 'signout':
+    case 'logout':
       return { cookie: null, errorMessage: '' }
     default:
       return state
   }
 }
 
-const signout = dispatch => async () => {
+const logout = dispatch => async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
   const config = {headers:{
     'my.sid': cookie
@@ -26,14 +26,14 @@ const signout = dispatch => async () => {
   const response = await Api.post('/users/logout', config)
   console.log(response)
   await SecureStore.deleteItemAsync('cookie')
-  dispatch({ type: 'signout'})
+  dispatch({ type: 'logout'})
   navigate('default')
 }
 
-const tryLocalSignin = dispatch => async () => {
+const tryLocalLogin = dispatch => async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
   if (cookie) {
-    dispatch({ type: 'signin', payload: cookie})
+    dispatch({ type: 'login', payload: cookie})
     navigate('mainFlow')
   }
   else{
@@ -56,7 +56,7 @@ const signup = (dispatch) => {
   }
 }
 
-const signin = (dispatch) => async ({ email, password }) => {
+const login = (dispatch) => async ({ email, password }) => {
     try{
       const response = await Api.post('/users/login', { email: email, password: password })
       let cookieArray = response["headers"]["set-cookie"]
@@ -66,7 +66,7 @@ const signin = (dispatch) => async ({ email, password }) => {
         cookieString.indexOf(';')
       )
       await SecureStore.setItemAsync('cookie', cookie)
-      dispatch({ type: 'signin', payload: cookie})
+      dispatch({ type: 'login', payload: cookie})
 
       navigate('mainFlow')
       console.log(cookie + "2")
@@ -77,6 +77,6 @@ const signin = (dispatch) => async ({ email, password }) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signup, signout, clearErrorMessage, tryLocalSignin },
+  { login, signup, logout, clearErrorMessage, tryLocalLogin },
   { token: null, errorMessage: '' }
 )

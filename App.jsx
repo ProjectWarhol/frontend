@@ -12,11 +12,12 @@ import RecoveryKeyScreen from './src/screens/RecoveryKeyScreen';
 import SelectWalletScreen from './src/screens/SelectWalletScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import ThirdPartyWalletSelectionScreen from './src/screens/ThirdPartyWalletSelectionScreen';
-import SigninScreen from './src/screens/SigninScreen';
+import LoginScreen from './src/screens/LoginScreen';
 import StorageChoiceScreen from './src/screens/StorageChoiceScreen';
 import validatePhraseScreen from './src/screens/ValidatePhraseScreen';
 import UnAuthenticatedFeedScreen from './src/screens/UnAuthenticatedFeedScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
+import SelectAuthenticationScreen from './src/screens/SelectAuthenticationScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import  { setNavigator } from './src/navigationRef';
 
@@ -27,7 +28,8 @@ const navigator = createSwitchNavigator({
     unAuthenticatedFeed: UnAuthenticatedFeedScreen,
     camera: UnavailableScreen,
     signupFlow: createStackNavigator({
-    signin: SigninScreen,
+    selectAuthentication: SelectAuthenticationScreen,
+    login: LoginScreen,
     signup: SignupScreen,
     forgotPw: ForgotPasswordScreen,
     walletFlow: createStackNavigator({

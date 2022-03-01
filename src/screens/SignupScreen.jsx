@@ -51,7 +51,7 @@ const SignupScreen = ( { navigation }) => {
     onPress={() => signup({ userName, email, password })} />
     <Spacer/>
     <NavLink
-    routeName='signin'
+    routeName='login'
     text='Already have an Account? Sign in!' />
   </View>
   )

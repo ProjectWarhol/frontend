@@ -6,8 +6,8 @@ import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
 
-const SigninScreen = ( {navigation }) => {
-  const { state, signin, clearErrorMessage } = useContext(AuthContext)
+const LoginScreen = ( {navigation }) => {
+  const { state, login, clearErrorMessage } = useContext(AuthContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
 
@@ -17,7 +17,7 @@ const SigninScreen = ( {navigation }) => {
     onWillBlur={clearErrorMessage}
     />
     <Spacer/>
-      <Text h3>Signin Screen</Text>
+      <Text h3>Welcome back</Text>
     <Spacer/>
     <Input
       label='Email'
@@ -36,7 +36,7 @@ const SigninScreen = ( {navigation }) => {
       autoCorrect={false}
     />
   {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
-    <Button title='Sign In' onPress={() => signin({ email, password })} />
+    <Button title='Login' onPress={() => login({ email, password })} />
     <Spacer/>
     <NavLink routeName='signup' text='Dont have an Account yet? Sign up!'/>
   </View>
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SigninScreen
+export default LoginScreen
