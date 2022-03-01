@@ -2,9 +2,9 @@ const assert = require('chai').assert
 // local
 const {
     generateSeedPhrase,
-    createOurWallet,
-    storeOurWallet,
-} = require('../../../src/utils/OurWallet')
+    createCustodialWallet,
+    storeCustodialWallet,
+} = require('../../../src/wallet/CustodialWallet')
 
 describe('generateSeedPhrase', () => {
     it('should return 12 words', () => {
@@ -14,8 +14,8 @@ describe('generateSeedPhrase', () => {
     })
 })
 
-describe('createOurWallet', () => {
-    const actual = createOurWallet()
+describe('createCustodialWallet', () => {
+    const actual = createCustodialWallet()
     it('should return wallet and seedPhrase as keys', () => {
         const expected = {
             wallet: 'new wallet',
@@ -32,8 +32,8 @@ describe('createOurWallet', () => {
     })
 })
 
-describe('storeOurWallet', () => {
-    const ourWalletData = {
+describe('storeCustodialWallet', () => {
+    const custodialWalletData = {
         wallet: {
             0: {
                 address: '0x0d2995d304fe3E28E12827001E3fE7c916343221',
@@ -45,7 +45,7 @@ describe('storeOurWallet', () => {
             'blouse diet retreat cry sun badge return decide ski stick glory lazy',
     }
     const password = 'test'
-    const actual = storeOurWallet(ourWalletData, password)
+    const actual = storeCustodialWallet(custodialWalletData, password)
 
     it('should return three keys', () => {
         const expected = {
@@ -56,15 +56,15 @@ describe('storeOurWallet', () => {
         assert.hasAllKeys(actual, expected)
     })
     it('should return the correct address', () => {
-        const expected = ourWalletData.wallet[0].address
+        const expected = custodialWalletData.wallet[0].address
         assert.equal(actual.address, expected)
     })
     it('should encrypt the private key', () => {
-        const notExpected = ourWalletData.wallet[0].privateKey
+        const notExpected = custodialWalletData.wallet[0].privateKey
         assert.notEqual(actual.encryptedPrivateKey, notExpected)
     })
     it('should return the correct seedPhrase', () => {
-        const expected = ourWalletData.seedPhrase
+        const expected = custodialWalletData.seedPhrase
         assert.equal(actual.seedPhrase, expected)
     })
 })

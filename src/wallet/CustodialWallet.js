@@ -9,7 +9,7 @@ exports.generateSeedPhrase = () => {
     return mnemonic
 }
 
-exports.createOurWallet = () => {
+exports.createCustodialWallet = () => {
     const wallet = web3.eth.accounts.wallet.create(1)
     const seedPhrase = exports.generateSeedPhrase()
     const data = {
@@ -19,7 +19,7 @@ exports.createOurWallet = () => {
     return data
 }
 
-exports.storeOurWallet = (ourWalletData, password) => {
+exports.storeCustodialWallet = (ourWalletData, password) => {
     const wallet = ourWalletData.wallet[0]
     const seedPhrase = ourWalletData.seedPhrase
     const address = wallet.address
