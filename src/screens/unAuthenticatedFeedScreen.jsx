@@ -7,9 +7,9 @@ const UnAuthenticatedFeedScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 30,
-  },
+    text: {
+        fontSize: 30,
+    },
 })
 
 export default UnAuthenticatedFeedScreen

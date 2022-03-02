@@ -1,5 +1,5 @@
-import React from 'react';
-import { createStackNavigator } from 'react-navigation-stack';
+import React from 'react'
+import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import FeedScreen from './src/screens/FeedScreen';
@@ -53,10 +53,10 @@ const navigator = createSwitchNavigator({
       })
     }),
     mainFlow: createBottomTabNavigator({
-      feed: FeedScreen,
-      camera: CameraScreen,
-      profile: ProfileScreen
-    })
+        feed: FeedScreen,
+        camera: CameraScreen,
+        profile: ProfileScreen,
+    }),
 })
 
 const App = createAppContainer(navigator);
