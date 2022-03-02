@@ -6,7 +6,7 @@ import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
 
-const LoginScreen = ( {navigation }) => {
+const LoginScreen = ( {navigation } ) => {
   const { state, login, clearErrorMessage } = useContext(AuthContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
