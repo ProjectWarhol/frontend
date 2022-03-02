@@ -12,7 +12,6 @@ const ProfileScreen = () => {
   <Spacer />
   <Button title='Sign Out' onPress={logout} />
   </>)
-
 }
 
 const styles = StyleSheet.create({
