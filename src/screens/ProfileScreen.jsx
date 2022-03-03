@@ -10,7 +10,7 @@ const ProfileScreen = () => {
   return (<>
   <Text style={styles.text}>Profile Screen</Text>
   <Spacer />
-  <Button title='Sign Out' onPress={logout} />
+  <Button title='Logut' onPress={logout} />
   </>)
 }
 
