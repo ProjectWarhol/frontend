@@ -1,8 +1,11 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
-const FeedScreen = () => {
-    return <Text style={styles.text}>FeedScreen</Text>
+const FeedScreen = ({navigation}) => {
+    return (
+    <>
+    <Text style={styles.text}>FeedScreen</Text>
+    </>)
 }
 
 const styles = StyleSheet.create({

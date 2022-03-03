@@ -1,13 +1,17 @@
 import React from 'react'
 import { Text, StyleSheet, View, TouchableOpacity} from 'react-native'
+import { Context as WalletContext } from '../context/WalletContext'
+
 
 
 const SelectWalletScreen = ({ navigation }) => {
+  const { createWallet } = useContext(WalletContext)
+
     return (
     <>
     <Text style={styles.text}>Select Wallet Screen</Text>
     <View style={styles.buttonContainer} >
-    <TouchableOpacity style={styles.selectWalletButton}>
+    <TouchableOpacity style={styles.selectWalletButton} onPress={()=>{createWallet()}}>
       <Text>Express Wallet creation</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.selectWalletButton} onPress={()=>{navigation.navigate('thirdPartyWalletSelection')}} >
@@ -15,7 +19,7 @@ const SelectWalletScreen = ({ navigation }) => {
     </TouchableOpacity>
     </View>
     </>
-)
+  )
 }
 
 const styles = StyleSheet.create({

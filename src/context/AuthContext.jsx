@@ -37,7 +37,7 @@ const logout = dispatch => async () => {
 
 const tryLocalLogin = dispatch => async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
-if(cookie){
+if(cookie && isCookieValid()){
   dispatch({ type: 'login', payload: cookie})
   navigate('mainFlow')
 }else{
@@ -45,27 +45,23 @@ if(cookie){
 }
 }
 
-const clearErrorMessage = dispatch => () => {
-  dispatch({ type: 'clear_error_message' })
+const isCookieValid = async(cookie) => {
+  const config = {headers:{
+    'my.sid': cookie
+  }}
+  const response = await Api.get('/users/session', config)
+  console.log(response)
+  return true
 }
 
-const signup = (dispatch) => {
-  return async ({ email, password, userName }) => {
-    try{
-      const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
-      console.log(response.data)
-      navigate('selectWallet')
-    } catch (err)
-    {dispatch({ type: 'add_error', payload: 'Something went wrong' }, console.log(err))
-    }
-  }
+const clearErrorMessage = dispatch => () => {
+  dispatch({ type: 'clear_error_message' })
 }
 
 const login = (dispatch) => async ({ email, password }) => {
     try{
       const response = await Api.post('/users/login', { userCredential: email, password: password })
       let cookieArray = response["headers"]["set-cookie"]
-      console.log(cookieArray)
       let cookieString = cookieArray.toString()
       const cookie = cookieString.substring(
         cookieString.indexOf('=') + 1,
@@ -81,6 +77,6 @@ const login = (dispatch) => async ({ email, password }) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { login, signup, logout, clearErrorMessage, tryLocalLogin },
+  { login, logout, clearErrorMessage, tryLocalLogin },
   { cookie: null, errorMessage: '' }
 )
