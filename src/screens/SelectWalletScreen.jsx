@@ -16,7 +16,6 @@ const SelectWalletScreen = ({ navigation }) => {
     </View>
     </>
 )
-
 }
 
 const styles = StyleSheet.create({
@@ -36,7 +35,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5
     }
-
 })
 
 export default SelectWalletScreen
