@@ -32,3 +32,11 @@ exports.storeCustodialWallet = (ourWalletData, password) => {
     }
     return data
 }
+
+exports.validateInput = (userInput, expected) => {
+    let validation = false
+    if (userInput === expected) {
+        validation = true
+    }
+    return validation
+}

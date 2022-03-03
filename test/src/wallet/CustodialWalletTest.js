@@ -4,6 +4,7 @@ const {
     generateSeedPhrase,
     createCustodialWallet,
     storeCustodialWallet,
+    validateInput,
 } = require('../../../src/wallet/CustodialWallet')
 
 describe('generateSeedPhrase', () => {
@@ -66,5 +67,19 @@ describe('storeCustodialWallet', () => {
     it('should return the correct seedPhrase', () => {
         const expected = custodialWalletData.seedPhrase
         assert.equal(actual.seedPhrase, expected)
+    })
+})
+
+describe('validateInput', ()=> {
+    const correctSeedPhrase = 'blouse diet retreat cry sun badge return decide ski stick glory lazy'
+    it('should return false', () => {
+        const userInput = 'diet retreat cry sun badge return decide ski stick glory lazy blouse'
+        const actual = validateInput(userInput, correctSeedPhrase)
+        assert.isNotTrue(actual)
+    })
+    it('should return true', () => {
+        const userInput = 'blouse diet retreat cry sun badge return decide ski stick glory lazy'
+        const actual = validateInput(userInput, correctSeedPhrase)
+        assert.isTrue(actual)
     })
 })
