@@ -53,6 +53,7 @@ const SignupScreen = ( { navigation }) => {
     <NavLink
     routeName='login'
     text='Already have an Account? Sign in!' />
+    <Button title='wallet' onPress={()=>{navigation.navigate('selectWallet')}}/>
   </View>
   )
 }

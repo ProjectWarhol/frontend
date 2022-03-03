@@ -34,22 +34,12 @@ const navigator = createSwitchNavigator({
     forgotPw: ForgotPasswordScreen,
     walletFlow: createStackNavigator({
       selectWallet: SelectWalletScreen,
-      expressWallet: createStackNavigator({
-        done: DoneScreen
-      }),
-      thirdPartyWallet: createStackNavigator({
+        done: DoneScreen,
         thirdPartyWalletSelection: ThirdPartyWalletSelectionScreen,
-        ourWallet: createStackNavigator({
-          recoveryKey: RecoveryKeyScreen,
-            choice: createStackNavigator({
-              storageChoice: StorageChoiceScreen,
-                validation: createStackNavigator({
-                  validatePhrase: validatePhraseScreen
-                })
-              })
-            })
-          })
-        }),
+        recoveryKey: RecoveryKeyScreen,
+        storageChoice: StorageChoiceScreen,
+        validatePhrase: validatePhraseScreen
+        },{ headerMode: 'none'}),
       })
     }),
     mainFlow: createBottomTabNavigator({
