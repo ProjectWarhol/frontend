@@ -32,8 +32,9 @@ const styles = StyleSheet.create({
     selectWalletButton:{
     marginTop: 100,
     alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10
+    backgroundColor: "#ADD8E6",
+    padding: 10,
+    borderRadius: 5
     }
 
 })
