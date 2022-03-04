@@ -8,7 +8,11 @@ const walletReducer = (state, action) => {
     case('createWallet'):
       return {...state }
     case 'signup':
-      return { ...state }
+      return {...state }
+    case 'clear_error_message':
+      return { ...state, errorMessage: '' }
+    case 'add_error':
+      return {...state, errorMessage: action.payload }
     default:
       return state
   }
@@ -27,12 +31,16 @@ const signup = (dispatch) => {
   }
 }
 
+const clearErrorMessage = dispatch => () => {
+  dispatch({ type: 'clear_error_message' })
+}
+
 // const createWallet = dispatch => () => {
 //   createCustodialWallet()
 // }
 
 export const { Provider, Context } = createDataContext(
   walletReducer,
-  { signup },
-  {errorMessage: '', id: null}
+  { signup, clearErrorMessage },
+  { errorMessage: '', email: '', password: '', userName: ''}
 )

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity, Button} from 'react-native'
-import { Context as AuthContext } from '../context/AuthContext'
+import { Context as WalletContext } from '../context/WalletContext'
 
 
 
 const SelectWalletScreen = ({ navigation }) => {
-
+  const { state, signup } = useContext(WalletContext)
 
     return (
     <>
