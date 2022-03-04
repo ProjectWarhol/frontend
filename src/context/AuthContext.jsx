@@ -13,6 +13,8 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: '' }
     case 'logout':
       return { cookie: null, errorMessage: '' }
+    case 'signup':
+      return {...state, id: id}
     default:
       return state
   }
@@ -75,8 +77,20 @@ const login = (dispatch) => async ({ email, password }) => {
     }
   }
 
+  const signup = (dispatch) => {
+    return async ({ email, password, userName }) => {
+      try{
+        const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
+        console.log(response.data)
+        navigate('selectWallet')
+      } catch (err)
+      {dispatch({ type: 'add_error', payload: 'Something went wrong' }, console.log(err))
+      }
+    }
+  }
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { login, logout, clearErrorMessage, tryLocalLogin },
+  { signup, login, logout, clearErrorMessage, tryLocalLogin },
   { cookie: null, errorMessage: '' }
 )

@@ -7,13 +7,11 @@ import { Context as AuthContext } from '../context/AuthContext'
 import { Context as WalletContext } from '../context/WalletContext'
 import NavLink from '../components/NavLink'
 
-const SignupScreen = ( { navigation }) => {
-  const { state, clearErrorMessage } = useContext(AuthContext)
-  const { signup } = useContext(WalletContext)
+const SignupScreen = ({ navigation }) => {
+  const { state, clearErrorMessage, signup } = useContext(AuthContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
   const[userName, setUsername] = useState('')
-
 
   return (
   <View style={styles.container}>

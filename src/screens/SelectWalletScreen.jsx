@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity} from 'react-native'
 import { Context as WalletContext } from '../context/WalletContext'
 
