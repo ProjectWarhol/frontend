@@ -8,7 +8,8 @@ import { Context as WalletContext } from '../context/WalletContext'
 import NavLink from '../components/NavLink'
 
 const SignupScreen = ({ navigation }) => {
-  const { state, clearErrorMessage, signup } = useContext(AuthContext)
+  const { state, clearErrorMessage } = useContext(AuthContext)
+  const { signup } = useContext(WalletContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
   const[userName, setUsername] = useState('')
@@ -53,7 +54,6 @@ const SignupScreen = ({ navigation }) => {
     <NavLink
     routeName='login'
     text='Already have an Account? Sign in!' />
-    <Button title='wallet' onPress={()=>{navigation.navigate('selectWallet')}}/>
   </View>
   )
 }

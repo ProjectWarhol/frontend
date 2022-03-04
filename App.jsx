@@ -54,6 +54,7 @@ const App = createAppContainer(navigator);
 
 export default () => {
   return(
+
     <WalletProvider>
       <AuthProvider>
         <App ref={(navigator)=>{ setNavigator(navigator) }} />

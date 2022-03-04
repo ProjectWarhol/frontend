@@ -6,19 +6,33 @@ import { navigate } from '../navigationRef'
 const walletReducer = (state, action) => {
   switch (action.type){
     case('createWallet'):
-      return {...state, }
+      return {...state }
+    case 'signup':
+      return { ...state }
     default:
       return state
   }
 }
 
-const createWallet = dispatch => () => {
-  const wallet = createCustodialWallet()
-  console.log(wallet)
+const signup = (dispatch) => {
+  return async ({ email, password, userName }) => {
+    try{
+      const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
+      console.log(response.data)
+      dispatch({ type: 'signup' })
+      navigate('selectWallet')
+    } catch (err)
+    {dispatch({ type: 'add_error', payload: 'Something went wrong' }, console.log(err))
+    }
+  }
 }
+
+// const createWallet = dispatch => () => {
+//   createCustodialWallet()
+// }
 
 export const { Provider, Context } = createDataContext(
   walletReducer,
-  { createWallet },
+  { signup },
   {errorMessage: '', id: null}
 )
