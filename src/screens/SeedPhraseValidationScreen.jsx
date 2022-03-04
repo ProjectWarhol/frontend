@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import { StyleSheet, View, TextInput } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
+import { validateInput } from '../wallet/CustodialWallet'
 
 const SeedPhraseValidationScreen = () => {
     const [seedPhrase, setSeedPhrase] = useState('')
-
+    const [validate, setValidate] = useState(false)
+    const testPhrase = 'blouse diet retreat cry sun badge return decide ski stick glory lazy'
+    const checkSeedPhrase = () => {
+        setValidate(()=>validateInput(seedPhrase, testPhrase))
+    }
     return (
         <View style={styles.container}>
             <NavigationEvents />
@@ -22,8 +27,11 @@ const SeedPhraseValidationScreen = () => {
             />
             <Button
                 title="Validate"
-                // onPress={() => login({ email, password })}
+                onPress={()=>checkSeedPhrase()}
             />
+            <Text>
+                {validate===false?'Something wrong with your seed phrase':'You successfully validate your seed phrase'}
+            </Text>
         </View>
     )
 }
