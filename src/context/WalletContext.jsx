@@ -25,7 +25,7 @@ const signup = (dispatch) => {
       {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
       console.log(response.data)
       dispatch({ type: 'signup' })
-      navigate('selectWallet')}
+      navigate('storageChoice')}
       else{dispatch({type: 'add_error', payload: 'Passwords need to match'})}
     } catch (err)
     {dispatch({ type: 'add_error', payload: 'Something went wrong' }, console.log(err))

@@ -8,10 +8,7 @@ import DoneScreen from './src/screens/DoneScreen';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import UnavailableScreen from './src/screens/UnavailableScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import RecoveryKeyScreen from './src/screens/RecoveryKeyScreen';
-import SelectWalletScreen from './src/screens/SelectWalletScreen';
 import SignupScreen from './src/screens/SignupScreen';
-import ThirdPartyWalletSelectionScreen from './src/screens/ThirdPartyWalletSelectionScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import StorageChoiceScreen from './src/screens/StorageChoiceScreen';
 import validatePhraseScreen from './src/screens/ValidatePhraseScreen';
@@ -34,12 +31,9 @@ const navigator = createSwitchNavigator({
     signup: SignupScreen,
     forgotPw: ForgotPasswordScreen,
     walletFlow: createStackNavigator({
-      selectWallet: SelectWalletScreen,
-        done: DoneScreen,
-        thirdPartyWalletSelection: ThirdPartyWalletSelectionScreen,
-        recoveryKey: RecoveryKeyScreen,
-        storageChoice: StorageChoiceScreen,
-        validatePhrase: validatePhraseScreen
+      storageChoice: StorageChoiceScreen,
+      validatePhrase: validatePhraseScreen,
+      done: DoneScreen,
         },{ headerMode: 'none'}),
       })
     }),

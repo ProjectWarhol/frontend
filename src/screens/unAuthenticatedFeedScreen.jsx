@@ -5,7 +5,7 @@ const UnAuthenticatedFeedScreen = ({navigation}) => {
 
   return (<>
   <Text style={styles.text}>UnauthenticatedScreen</Text>
-  <Button title='to selectScreen' onPress={()=>{navigation.navigate('selectWallet')}}/>
+  <Button title='to storage choice' onPress={()=>{navigation.navigate('storageChoice')}}/>
   </>)
 }
 
