@@ -15,7 +15,7 @@ const StorageChoiceScreen = () => {
     <Text>public Key</Text>
     <Text style={styles.walletCredentials}>{state.publicAddress}</Text>
     <View style={styles.buttonContainer}>
-    <Button title={"Store here"} onPress={()=> storeCustodialWallet({array:[state.userName, state.address, state.privateKey, state.index, state.password]})} style={styles.button}/>
+    <Button title={"Store here"} onPress={()=> storeCustodialWallet({credentialArray:[state.userName, state.address, state.privateKey, state.index, state.password]})} style={styles.button}/>
     <Button title={"Store by myself"} style={styles.button}/>
     </View>
     </View>)

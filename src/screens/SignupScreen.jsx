@@ -48,7 +48,7 @@ const SignupScreen = ({ navigation }) => {
     <Spacer/>
     <Input
       secureTextEntry
-      label='Reapeat Password'
+      label='Repeat Password'
       value={repeatedPassword}
       onChangeText={setRepeatedPassword}
       autoCapitalize='none'

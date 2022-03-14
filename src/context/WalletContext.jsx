@@ -72,7 +72,12 @@ const signup = (dispatch) => {
 
 const storeCustodialWallet = (dispatch) => {
   return async (array) => {
-    console.log(array.array[0])
+    console.log(array.credentialArray[0])
+    const userName = array.credentialArray[0]
+    const address = array.credentialArray[1]
+    const privateKey = array.credentialArray[2]
+    const index = array.credentialArray[3]
+    const password = array.credentialArray[4]
   }
 }
 
