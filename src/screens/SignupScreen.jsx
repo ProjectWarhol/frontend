@@ -15,8 +15,8 @@ const SignupScreen = ({ navigation }) => {
 
   return (
   <View style={styles.container}>
-    <NavigationEvents
-    onWillBlur={clearErrorMessage}
+   <NavigationEvents
+    onWillFocus={clearErrorMessage}
     />
     <Spacer/>
       <Text h3>Signup Screen</Text>
@@ -54,7 +54,7 @@ const SignupScreen = ({ navigation }) => {
       autoCapitalize='none'
       autoCorrect={false}
     />
-  {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
+ {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
     <Button
     title='Sign Up'
     onPress={() => signup({ userName, email, password, repeatedPassword })} />

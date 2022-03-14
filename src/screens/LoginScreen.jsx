@@ -14,7 +14,7 @@ const LoginScreen = ( {navigation } ) => {
   return (
   <View style={styles.container}>
     <NavigationEvents
-    onWillBlur={clearErrorMessage}
+    onWillFocus={clearErrorMessage}
     />
     <Spacer/>
       <Text h3>Welcome back</Text>

@@ -9,8 +9,8 @@ const walletReducer = (state, action) => {
       return {...state }
     case 'signup':
       return {...state }
-    case 'clear_error_message':
-      return { ...state, errorMessage: '' }
+      case 'clear_error_message':
+        return { ...state, errorMessage: '' }
     case 'add_error':
       return {...state, errorMessage: action.payload }
     default:
@@ -23,7 +23,7 @@ const signup = (dispatch) => {
     try{
       if (password === repeatedPassword)
       {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
-      console.log(response.data)
+      console.log(response['userId'])
       dispatch({ type: 'signup' })
       navigate('storageChoice')}
       else{dispatch({type: 'add_error', payload: 'Passwords need to match'})}
