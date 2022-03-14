@@ -10,6 +10,7 @@ const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage } = useContext(WalletContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
+  const[repeatedPassword, setRepeatedPassword] = useState('')
   const[userName, setUsername] = useState('')
 
   return (
@@ -44,10 +45,19 @@ const SignupScreen = ({ navigation }) => {
       autoCapitalize='none'
       autoCorrect={false}
     />
+    <Spacer/>
+    <Input
+      secureTextEntry
+      label='Reapeat Password'
+      value={repeatedPassword}
+      onChangeText={setRepeatedPassword}
+      autoCapitalize='none'
+      autoCorrect={false}
+    />
   {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
     <Button
     title='Sign Up'
-    onPress={() => signup({ userName, email, password })} />
+    onPress={() => signup({ userName, email, password, repeatedPassword })} />
     <Spacer/>
     <NavLink
     routeName='login'

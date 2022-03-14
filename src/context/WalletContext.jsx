@@ -19,12 +19,14 @@ const walletReducer = (state, action) => {
 }
 
 const signup = (dispatch) => {
-  return async ({ email, password, userName }) => {
+  return async ({ email, password, repeatedPassword, userName }) => {
     try{
-      const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
+      if (password === repeatedPassword)
+      {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
       console.log(response.data)
       dispatch({ type: 'signup' })
-      navigate('selectWallet')
+      navigate('selectWallet')}
+      else{dispatch({type: 'add_error', payload: 'Passwords need to match'})}
     } catch (err)
     {dispatch({ type: 'add_error', payload: 'Something went wrong' }, console.log(err))
     }
@@ -34,10 +36,6 @@ const signup = (dispatch) => {
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
-
-// const createWallet = dispatch => () => {
-//   createCustodialWallet()
-// }
 
 export const { Provider, Context } = createDataContext(
   walletReducer,
