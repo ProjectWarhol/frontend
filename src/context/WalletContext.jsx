@@ -9,8 +9,16 @@ const walletReducer = (state, action) => {
       return {...state }
     case 'signup':
       return {...state }
-      case 'clear_error_message':
-        return { ...state, errorMessage: '' }
+    case 'clear_error_message':
+      return {...state, errorMessage: '' }
+    case 'add_email':
+      return {...state, email: action.payload}
+    case 'add_password':
+      return {...state, password: action.payload}
+    case 'add_userName':
+      return {...state, userName: action.payload}
+    case 'add_userId':
+      return {...state, userId: action.payload}
     case 'add_error':
       return {...state, errorMessage: action.payload }
     default:
@@ -23,8 +31,13 @@ const signup = (dispatch) => {
     try{
       if (password === repeatedPassword)
       {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
-      console.log(response['userId'])
+      console.log(response.data.userId)
+      userId = response.data.userId
       dispatch({ type: 'signup' })
+      dispatch({ type: 'add_email', payload: `${email}`})
+      dispatch({ type: 'add_password', payload: `${password}`})
+      dispatch({ type: 'add_userName', payload: `${userName}`})
+      dispatch({ type: 'add_userId', payload: `${userId}`})
       navigate('storageChoice')}
       else{dispatch({type: 'add_error', payload: 'Passwords need to match'})}
     } catch (err)
@@ -40,5 +53,5 @@ const clearErrorMessage = dispatch => () => {
 export const { Provider, Context } = createDataContext(
   walletReducer,
   { signup, clearErrorMessage },
-  { errorMessage: '', email: '', password: '', userName: ''}
+  { errorMessage: '', email: '', password: '', userName: '', userId: ''}
 )
