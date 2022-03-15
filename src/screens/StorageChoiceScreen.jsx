@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import { Text, StyleSheet, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Context as WalletContext } from '../context/WalletContext'
+import { navigate } from '../navigationRef'
 
 
 const StorageChoiceScreen = () => {
@@ -15,8 +16,16 @@ const StorageChoiceScreen = () => {
     <Text>public Key</Text>
     <Text style={styles.walletCredentials}>{state.publicAddress}</Text>
     <View style={styles.buttonContainer}>
-    <Button title={"Store here"} onPress={()=> storeCustodialWallet({credentialArray:[state.userName, state.address, state.privateKey, state.index, state.password]})} style={styles.button}/>
-    <Button title={"Store by myself"} style={styles.button}/>
+    <Button
+    title={"Store here"}
+    onPress={()=> storeCustodialWallet({credentialArray:[state.userName, state.address, state.privateKey, state.index, state.password, state.walletId]})}
+    style={styles.button}
+    />
+    <Button
+    title={"Store by myself"}
+    style={styles.button}
+    onPress={()=>{navigate('validatePhrase')}}
+    />
     </View>
     </View>)
 }

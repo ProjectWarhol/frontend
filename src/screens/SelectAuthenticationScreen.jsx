@@ -41,12 +41,12 @@ const SelecteAuthenticationScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container:{
-    display: 'flex'
+    display: 'flex',
   },
   headerContainer:{
     justifyContent:'center',
     flexDirection: 'row',
-    marginTop: 150
+    marginTop: '50%'
   },
   text: {
     fontSize: 30,
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
   buttonDescription:{
     marginLeft: 20,
     marginRight: 20,
+    paddingTop: 10
   }
 })
 
