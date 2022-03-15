@@ -11,7 +11,7 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import StorageChoiceScreen from './src/screens/StorageChoiceScreen';
-import validatePhraseScreen from './src/screens/ValidatePhraseScreen';
+import validateSeedPhraseScreen from './src/screens/ValidateSeedPhraseScreen';
 import UnAuthenticatedFeedScreen from './src/screens/UnAuthenticatedFeedScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import SelectAuthenticationScreen from './src/screens/SelectAuthenticationScreen';
@@ -32,7 +32,7 @@ const navigator = createSwitchNavigator({
     forgotPw: ForgotPasswordScreen,
     walletFlow: createStackNavigator({
       storageChoice: StorageChoiceScreen,
-      validatePhrase: validatePhraseScreen,
+      validateSeedPhrase: validateSeedPhraseScreen,
       done: DoneScreen,
         },{ headerMode: 'none'}),
       })

@@ -24,7 +24,7 @@ const StorageChoiceScreen = () => {
     <Button
     title={"Store by myself"}
     style={styles.button}
-    onPress={()=>{navigate('validatePhrase')}}
+    onPress={()=>{navigate('validateSeedPhrase')}}
     />
     </View>
     </View>)

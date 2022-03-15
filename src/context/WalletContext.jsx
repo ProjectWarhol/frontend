@@ -27,7 +27,7 @@ const walletReducer = (state, action) => {
       return {...state, walletId: action.payload}
     case 'add_index':
       return {...state, index: action.payload}
-    case 'add_error':
+    case 'error_message':
       return {...state, errorMessage: action.payload }
     default:
       return state
@@ -63,9 +63,9 @@ const signup = (dispatch) => {
       dispatch({ type: 'add_userName', payload: `${userName}`})
       dispatch({ type: 'add_userId', payload: `${userId}`})
       navigate('storageChoice')}
-      else{dispatch({type: 'add_error', payload: 'Passwords need to match'})}
+      else{dispatch({type: 'error_message', payload: 'Passwords need to match'})}
     } catch (err)
-    {dispatch({ type: 'add_error', payload: 'Something went wrong' }, console.log(err))
+    {dispatch({ type: 'error_message', payload: 'Something went wrong' }, console.log(err))
     }
   }
 }
@@ -84,12 +84,22 @@ const storeCustodialWallet = (dispatch) => {
   }
 }
 
+const validateInput = (dispatch) => {
+  return (userInput, expected) => {
+  if (userInput === expected) {
+      navigate('done')
+  }
+  else{dispatch({ type: 'error_message', payload: 'There is something wrong with your seedphrase'})}
+  }
+}
+
+
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
 
 export const { Provider, Context } = createDataContext(
   walletReducer,
-  { signup, clearErrorMessage, storeCustodialWallet },
+  { signup, clearErrorMessage, storeCustodialWallet, validateInput },
   { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', walletId: '', index: null }
 )
