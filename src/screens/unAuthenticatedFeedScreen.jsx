@@ -8,6 +8,7 @@ const UnAuthenticatedFeedScreen = ({navigation}) => {
   <Button title='to storage choice' onPress={()=>{navigation.navigate('storageChoice')}}/>
   <Button title='to done' onPress={()=>{navigation.navigate('done')}}/>
   <Button title='to validatescreen' onPress={()=>{navigation.navigate('validateSeedPhrase')}}/>
+  <Button title='to profil' onPress={()=>{navigation.navigate('profile')}}/>
   </>)
 }
 

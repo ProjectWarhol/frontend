@@ -1,4 +1,5 @@
 import React from 'react'
+import { Feather, Entypo, AntDesign } from '@expo/vector-icons'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -36,17 +37,67 @@ const navigator = createSwitchNavigator({
       screen: DoneScreen,
       navigationOptions:{
         headerShown: false,
-        tabBarStyle: { display: "none" },
+        tabBarStyle: { display: 'none' },
         tabBarVisible: false
-      }
-    }
-      })
+          }
+        }
+      },
+    )
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state
+        let iconName
+        if (routeName === 'unAuthenticatedFeed') {
+          iconName = focused ? 'home' : 'home'
+          return <Feather name={iconName} size={25} color={tintColor} />
+        }
+        else if (routeName === 'camera') {
+          iconName = focused ? 'camera' : 'camera'
+          return <Feather name={iconName} size={25} color={tintColor} />
+        }
+        else if (routeName === 'signupFlow') {
+          iconName = focused ? 'login' : 'login'
+          return <Entypo name={iconName} size={25} color={tintColor} />
+        }
+      },
     }),
+    tabBarOptions: {
+      activeTintColor: 'blue',
+      inactiveTintColor: 'gray',
+    },
+}),
   mainFlow: createBottomTabNavigator({
     feed: FeedScreen,
     camera: CameraScreen,
     profile: ProfileScreen,
-    }),
+    },
+    {
+      defaultNavigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+          const { routeName } = navigation.state
+          let iconName
+          if (routeName === 'feed') {
+            iconName = focused ? 'home' : 'home'
+            return <Feather name={iconName} size={25} color={tintColor} />
+          }
+          else if (routeName === 'camera') {
+            iconName = focused ? 'camera' : 'camera'
+            return <Feather name={iconName} size={25} color={tintColor} />
+          }
+          else if (routeName === 'profile') {
+            iconName = focused ? 'user' : 'user'
+            return <AntDesign name={iconName} size={25} color={tintColor} />
+          }
+        },
+      }),
+      tabBarOptions: {
+        activeTintColor: 'blue',
+        inactiveTintColor: 'gray',
+        },
+      }
+    ),
 })
 
 const App = createAppContainer(navigator);
