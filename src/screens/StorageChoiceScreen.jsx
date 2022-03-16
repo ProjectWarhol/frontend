@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
-import { Text, StyleSheet, View } from 'react-native'
-import { Button } from 'react-native-elements'
+import { Text, StyleSheet, View, Button } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Context as WalletContext } from '../context/WalletContext'
 import { navigate } from '../navigationRef'
 
@@ -16,16 +16,20 @@ const StorageChoiceScreen = () => {
     <Text>public Key</Text>
     <Text style={styles.walletCredentials}>{state.publicAddress}</Text>
     <View style={styles.buttonContainer}>
-    <Button
-    title={"Store here"}
-    onPress={()=> storeCustodialWallet({credentialArray:[state.userName, state.address, state.privateKey, state.index, state.password, state.walletId]})}
-    style={styles.button}
-    />
-    <Button
-    title={"Store by myself"}
-    style={styles.button}
-    onPress={()=>{navigate('validateSeedPhrase')}}
-    />
+      <TouchableOpacity
+      onPress={()=> storeCustodialWallet({credentialArray:[state.userName, state.address, state.privateKey, state.index, state.password, state.walletId]})}
+      style={styles.buttonStoreHere}
+      ><Text
+      style={{color: 'white',
+      fontWeight: 'bold'}}
+      >Store here</Text></TouchableOpacity>
+      <TouchableOpacity
+      onPress={()=>{navigate('validateSeedPhrase')}}
+      style={styles.buttonStoreMyself}
+      ><Text
+      style={{color: 'black',
+      fontWeight: 'bold'}}
+      >Store by myself</Text></TouchableOpacity>
     </View>
     </View>)
 }
@@ -33,21 +37,44 @@ const StorageChoiceScreen = () => {
 const styles = StyleSheet.create({
     container:{
       flex:1,
-      borderWidth: 2
+      borderWidth: 2,
+      justifyContent: 'space-evenly',
+      alignItems: 'center',
+      backgroundColor: 'rgb(238, 238, 238)',
     },
     text: {
         fontSize: 40,
     },
     walletCredentials:{
-      padding: 70,
-      borderWidth: 2
+      padding: 50,
+      width: '75%',
+      borderRadius: 20,
+      backgroundColor: 'rgb(251, 253, 253)',
+      overflow: 'hidden'
     },
     buttonContainer:{
       flexDirection: 'row',
       justifyContent: 'space-evenly',
-      marginTop: 20
+      marginTop: 20,
     },
-    button:{
+    buttonStoreHere:{
+      borderRadius: 25,
+      paddingTop: 18,
+      paddingBottom: 18,
+      paddingLeft: 50,
+      paddingRight: 50,
+      backgroundColor: 'rgb(31, 87, 230)',
+      marginRight: 5
+    },
+    buttonStoreMyself:{
+      borderWidth: 4,
+      borderColor: 'rgb(31, 87, 230)',
+      borderRadius: 25,
+      paddingTop: 15,
+      paddingBottom: 15,
+      paddingLeft: 30,
+      paddingRight: 30,
+      marginLeft: 5
     }
 })
 
