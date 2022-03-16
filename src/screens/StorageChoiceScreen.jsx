@@ -3,12 +3,16 @@ import { Text, StyleSheet, View, Button } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Context as WalletContext } from '../context/WalletContext'
 import { navigate } from '../navigationRef'
+import { NavigationEvents } from 'react-navigation'
 
 
 const StorageChoiceScreen = () => {
-  const { state, storeCustodialWallet } = useContext(WalletContext)
+  const { state, storeCustodialWallet, clearErrorMessage } = useContext(WalletContext)
 
   return(<View style={styles.container}>
+    <NavigationEvents
+    onWillFocus={clearErrorMessage}
+    />
     <Text style={styles.text}>Storage Choice Screen</Text>
     <Text style={styles.walletCredentials}>mnemonic phrase</Text>
     <Text>private Key</Text>
@@ -31,6 +35,7 @@ const StorageChoiceScreen = () => {
       fontWeight: 'bold'}}
       >Store by myself</Text></TouchableOpacity>
     </View>
+    {state.errorMessage ? (<Text>{state.errorMessage}</Text> ) : null}
     </View>)
 }
 

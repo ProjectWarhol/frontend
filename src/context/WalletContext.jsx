@@ -74,6 +74,7 @@ const signup = (dispatch) => {
 
 const storeCustodialWallet = (dispatch) => {
   return async (array) => {
+    try{
     const userName = array.credentialArray[0]
     const address = array.credentialArray[1]
     const privateKey = array.credentialArray[2]
@@ -83,8 +84,11 @@ const storeCustodialWallet = (dispatch) => {
     const response = await Api.post(`/wallet/${walletId}`, { userName: userName, address: address, privateKey: privateKey, index: index, password: password })
     dispatch({ type: 'doneScreen_message', payload: 'Your information is stored successfully'})
     navigate('done')
+    }catch(err){
+      dispatch({ type: 'error_message', payload: 'Something went wrong' }, console.log(err))
+      }
+    }
   }
-}
 
 const validateInput = (dispatch) => {
   return (userInput, expected) => {
