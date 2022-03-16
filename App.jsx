@@ -41,7 +41,7 @@ const navigator = createSwitchNavigator({
         tabBarVisible: false
           }
         }
-      },
+      }
     )
   },
   {
@@ -66,6 +66,7 @@ const navigator = createSwitchNavigator({
     tabBarOptions: {
       activeTintColor: 'blue',
       inactiveTintColor: 'gray',
+      showLabel: false
     },
 }),
   mainFlow: createBottomTabNavigator({
