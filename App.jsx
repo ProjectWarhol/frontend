@@ -21,28 +21,39 @@ import { Provider as WalletProvider } from './src/context/WalletContext';
 import  { setNavigator } from './src/navigationRef';
 
 
+const signupFlow = createStackNavigator({
+  selectAuthentication: SelectAuthenticationScreen,
+  login: LoginScreen,
+  signup: SignupScreen,
+  forgotPw: ForgotPasswordScreen,
+  storageChoice: StorageChoiceScreen,
+  validateSeedPhrase: validateSeedPhraseScreen,
+  done: {
+    screen: DoneScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+      }
+    }
+  )
+
+signupFlow.navigationOptions = ({navigation}) =>{
+  let tabBarVisible = true;
+  let routeName = navigation.state.routes[navigation.state.index].routeName
+  if ( routeName == 'done' ) {
+      tabBarVisible = false
+  }
+  return {
+      tabBarVisible,
+  }
+}
+
 const navigator = createSwitchNavigator({
   resolveAuth: ResolveAuthScreen,
   default: createBottomTabNavigator({
     unAuthenticatedFeed: UnAuthenticatedFeedScreen,
     camera: UnavailableScreen,
-    signupFlow: createStackNavigator({
-    selectAuthentication: SelectAuthenticationScreen,
-    login: LoginScreen,
-    signup: SignupScreen,
-    forgotPw: ForgotPasswordScreen,
-    storageChoice: StorageChoiceScreen,
-    validateSeedPhrase: validateSeedPhraseScreen,
-    done: {
-      screen: DoneScreen,
-      navigationOptions:{
-        headerShown: false,
-        tabBarStyle: { display: 'none' },
-        tabBarVisible: false
-          }
-        }
-      }
-    )
+    signupFlow: signupFlow
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
