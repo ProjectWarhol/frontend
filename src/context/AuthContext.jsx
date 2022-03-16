@@ -23,8 +23,7 @@ const logout = dispatch => async () => {
   const config = {headers:{
     'my.sid': cookie
   }}
-  const response = await Api.post('/users/logout', config)
-  console.log(response)
+  await Api.post('/users/logout', config)
   await SecureStore.deleteItemAsync('cookie')
   dispatch({ type: 'logout'})
   navigate('default')
@@ -49,8 +48,7 @@ const isCookieValid = async(cookie) => {
   const config = {headers:{
     'my.sid': cookie
   }}
-  const response = await Api.get('/users/session', config)
-  console.log(response)
+  await Api.get('/users/session', config)
   return true
 }
 

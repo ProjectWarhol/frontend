@@ -1,5 +1,6 @@
 import axios from 'axios'
+import Constants from 'expo-constants'
 
 export default axios.create({
-  baseURL: 'http://e3cd-185-199-104-14.ngrok.io'
+  baseURL: Constants.manifest.extra.URL
 })

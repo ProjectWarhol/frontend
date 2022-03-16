@@ -30,17 +30,22 @@ const navigator = createSwitchNavigator({
     login: LoginScreen,
     signup: SignupScreen,
     forgotPw: ForgotPasswordScreen,
-    walletFlow: createStackNavigator({
-      storageChoice: StorageChoiceScreen,
-      validateSeedPhrase: validateSeedPhraseScreen,
-      done: DoneScreen,
-        },{ headerMode: 'none'}),
+    storageChoice: StorageChoiceScreen,
+    validateSeedPhrase: validateSeedPhraseScreen,
+    done: {
+      screen: DoneScreen,
+      navigationOptions:{
+        headerShown: false,
+        tabBarStyle: { display: "none" },
+        tabBarVisible: false
+      }
+    }
       })
     }),
-    mainFlow: createBottomTabNavigator({
-        feed: FeedScreen,
-        camera: CameraScreen,
-        profile: ProfileScreen,
+  mainFlow: createBottomTabNavigator({
+    feed: FeedScreen,
+    camera: CameraScreen,
+    profile: ProfileScreen,
     }),
 })
 
