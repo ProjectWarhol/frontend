@@ -1,16 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { StyleSheet, Image, View } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
+import { Context as WalletContext } from '../context/WalletContext'
 
 
 const DoneScreen = ({navigation}) => {
+    const { state } = useContext(WalletContext)
+
     return (
     <View style={styles.container}>
     <Image source={require('../../assets/celebration.png')} style={styles.image}/>
     <Spacer/>
-    <Text style={styles.text} h1>Your information is stored successfully!</Text>
-    <Text h4>You can access it in setting</Text>
+    <Text style={styles.text} h1>{state.doneScreenMessage}</Text>
+    <Text h5>You can still access your public address in settings</Text>
     <Spacer/>
     <Button title={'Proceed to UNOS'} onPress={()=>{navigation.navigate('mainFlow')}}/>
     </View>

@@ -29,6 +29,8 @@ const walletReducer = (state, action) => {
       return {...state, index: action.payload}
     case 'error_message':
       return {...state, errorMessage: action.payload }
+    case 'doneScreen_message':
+      return {...state, doneScreenMessage: action.payload}
     default:
       return state
   }
@@ -78,8 +80,8 @@ const storeCustodialWallet = (dispatch) => {
     const index = array.credentialArray[3]
     const password = array.credentialArray[4]
     const walletId = array.credentialArray[5]
-
     const response = await Api.post(`/wallet/${walletId}`, { userName: userName, address: address, privateKey: privateKey, index: index, password: password })
+    dispatch({ type: 'doneScreen_message', payload: 'Your information is stored successfully'})
     navigate('done')
   }
 }
@@ -87,6 +89,7 @@ const storeCustodialWallet = (dispatch) => {
 const validateInput = (dispatch) => {
   return (userInput, expected) => {
   if (userInput === expected) {
+      dispatch({ type: 'doneScreen_message', payload: 'Great job!'})
       navigate('done')
   }
   else{dispatch({ type: 'error_message', payload: 'There is something wrong with your seedphrase'})}
@@ -101,5 +104,5 @@ const clearErrorMessage = dispatch => () => {
 export const { Provider, Context } = createDataContext(
   walletReducer,
   { signup, clearErrorMessage, storeCustodialWallet, validateInput },
-  { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', walletId: '', index: null }
+  { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', walletId: '', index: null, doneScreenMessage: 'You should not be here mate' }
 )

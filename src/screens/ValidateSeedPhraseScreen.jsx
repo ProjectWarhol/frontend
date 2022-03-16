@@ -7,7 +7,7 @@ import { Context as WalletContext } from '../context/WalletContext'
 const ValidateSeedPhraseScreen = ({navigation}) => {
     const { validateInput, clearErrorMessage, state } = useContext(WalletContext)
     const [seedPhrase, setSeedPhrase] = useState('')
-    const testPhrase = 'blouse diet retreat cry sun badge return decide ski stick glory lazy'
+    const testPhrase = 'blouse'
 
     const checkSeedPhrase = () => {
      validateInput(seedPhrase, testPhrase)}
