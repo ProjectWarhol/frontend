@@ -1,10 +1,9 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { Text, StyleSheet, View, SafeAreaView } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Context as WalletContext } from '../context/WalletContext'
 import { navigate } from '../navigationRef'
 import { NavigationEvents } from 'react-navigation'
-
 
 const StorageChoiceScreen = () => {
   const { state, storeCustodialWallet, clearErrorMessage } = useContext(WalletContext)

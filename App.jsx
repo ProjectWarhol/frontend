@@ -23,18 +23,17 @@ import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as WalletProvider } from './src/context/WalletContext';
 import  { setNavigator } from './src/navigationRef';
 
-
 const authenticationFlow = createStackNavigator({
-  selectAuthentication: {
-    screen: SelectAuthenticationScreen,
-    navigationOptions:{
-      headerShown: false,
-        }
-      },
+  selectAuthentication: SelectAuthenticationScreen,
   login: LoginScreen,
   signup: SignupScreen,
   forgotPw: ForgotPasswordScreen,
-  storageChoice: StorageChoiceScreen,
+  storageChoice: {
+    screen: StorageChoiceScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+  },
   validateSeedPhrase: validateSeedPhraseScreen,
   done: {
     screen: DoneScreen,
@@ -43,11 +42,10 @@ const authenticationFlow = createStackNavigator({
         }
       }
     },
-
   )
 
-authenticationFlow.navigationOptions = ({navigation}) =>{
-  let tabBarVisible = true;
+authenticationFlow.navigationOptions = ({navigation}) => {
+  let tabBarVisible = true
   let routeName = navigation.state.routes[navigation.state.index].routeName
   if ( routeName == 'done' ) {
       tabBarVisible = false
@@ -92,9 +90,7 @@ const creationModals = createStackNavigator({
   create: CreateModal,
   selectUpload: SelectUploadModal,
   timelimit: TimeLimitModal
-},{
-  mode: 'modal'
-})
+},screenOptions={ presentation: 'modal' })
 
 const authenticatedUserFlow = createBottomTabNavigator({
   feed: FeedScreen,

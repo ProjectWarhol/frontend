@@ -27,7 +27,7 @@ const logout = dispatch => async () => {
   await SecureStore.deleteItemAsync('cookie')
   dispatch({ type: 'logout'})
   navigate('unAuthenticatedUser')
-}catch(err){
+  }catch(err){
   const cookie = await SecureStore.getItemAsync('cookie')
     await SecureStore.deleteItemAsync('cookie')
     dispatch({ type: 'logout'})

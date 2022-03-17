@@ -30,7 +30,7 @@ const CreationScreen = () => {
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={styles.textStyle}>Show Modal</Text>
+        <Text style={styles.textStyle}>Create your UNOS</Text>
       </Pressable>
     </View>
   );
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "blue",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
