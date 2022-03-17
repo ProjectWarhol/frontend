@@ -64,7 +64,7 @@ const unAuthenticatedUser = createBottomTabNavigator({
         return <Feather name={iconName} size={25} color={tintColor} />
       }
       else if (routeName === 'camera') {
-        iconName = focused ? 'camera' : 'camera'
+        iconName = focused ? 'plus-square' : 'plus-square'
         return <Feather name={iconName} size={25} color={tintColor} />
       }
       else if (routeName === 'authenticationFlow') {
@@ -98,7 +98,7 @@ const navigator = createSwitchNavigator({
             return <Feather name={iconName} size={25} color={tintColor} />
           }
           else if (routeName === 'camera') {
-            iconName = focused ? 'camera' : 'camera'
+            iconName = focused ? 'plus-square' : 'plus-square'
             return <Feather name={iconName} size={25} color={tintColor} />
           }
           else if (routeName === 'profile') {
