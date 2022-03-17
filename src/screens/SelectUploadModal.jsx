@@ -1,9 +1,9 @@
 import React from 'react'
 import { Text, StyleSheet, SafeAreaView } from 'react-native'
 
-const CameraScreen = () => {
+const SelectUploadModal = () => {
     return (<SafeAreaView style={styles.container}>
-    <Text style={styles.text}>Camera Screen</Text>
+    <Text style={styles.text}>upload selection</Text>
     </SafeAreaView>)
 }
 
@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CameraScreen
+export default SelectUploadModal

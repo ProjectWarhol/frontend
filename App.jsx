@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import FeedScreen from './src/screens/FeedScreen';
-import CameraScreen from './src/screens/CameraScreen';
+import CreationScreen from './src/screens/CreationScreen';
 import DoneScreen from './src/screens/DoneScreen';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import UnavailableScreen from './src/screens/UnavailableScreen';
@@ -16,6 +16,9 @@ import validateSeedPhraseScreen from './src/screens/ValidateSeedPhraseScreen';
 import UnAuthenticatedFeedScreen from './src/screens/UnAuthenticatedFeedScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import SelectAuthenticationScreen from './src/screens/SelectAuthenticationScreen';
+import CreateModal from './src/screens/CreateModal';
+import SelectUploadModal from './src/screens/SelectUploadModal';
+import TimeLimitModal from './src/screens/TimeLimitModal';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as WalletProvider } from './src/context/WalletContext';
 import  { setNavigator } from './src/navigationRef';
@@ -85,9 +88,17 @@ const unAuthenticatedUser = createBottomTabNavigator({
   },
 })
 
+const creationModals = createStackNavigator({
+  create: CreateModal,
+  selectUpload: SelectUploadModal,
+  timelimit: TimeLimitModal
+},{
+  mode: 'modal'
+})
+
 const authenticatedUserFlow = createBottomTabNavigator({
   feed: FeedScreen,
-  camera: CameraScreen,
+  creation: creationModals,
   profile: ProfileScreen,
   },
   {
@@ -99,7 +110,7 @@ const authenticatedUserFlow = createBottomTabNavigator({
           iconName = focused ? 'home' : 'home'
           return <Feather name={iconName} size={25} color={tintColor} />
         }
-        else if (routeName === 'camera') {
+        else if (routeName === 'creation') {
           iconName = focused ? 'plus-square' : 'plus-square'
           return <Feather name={iconName} size={25} color={tintColor} />
         }
