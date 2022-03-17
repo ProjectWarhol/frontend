@@ -22,7 +22,12 @@ import  { setNavigator } from './src/navigationRef';
 
 
 const authenticationFlow = createStackNavigator({
-  selectAuthentication: SelectAuthenticationScreen,
+  selectAuthentication: {
+    screen: SelectAuthenticationScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+      },
   login: LoginScreen,
   signup: SignupScreen,
   forgotPw: ForgotPasswordScreen,
@@ -51,7 +56,7 @@ authenticationFlow.navigationOptions = ({navigation}) =>{
 
 const unAuthenticatedUser = createBottomTabNavigator({
   unAuthenticatedFeed: UnAuthenticatedFeedScreen,
-  camera: UnavailableScreen,
+  unavailableScreen: UnavailableScreen,
   authenticationFlow: authenticationFlow
 },
 {
@@ -63,7 +68,7 @@ const unAuthenticatedUser = createBottomTabNavigator({
         iconName = focused ? 'home' : 'home'
         return <Feather name={iconName} size={25} color={tintColor} />
       }
-      else if (routeName === 'camera') {
+      else if (routeName === 'unavailableScreen') {
         iconName = focused ? 'plus-square' : 'plus-square'
         return <Feather name={iconName} size={25} color={tintColor} />
       }
@@ -80,7 +85,7 @@ const unAuthenticatedUser = createBottomTabNavigator({
   },
 })
 
-const mainFlow = createBottomTabNavigator({
+const authenticatedUserFlow = createBottomTabNavigator({
   feed: FeedScreen,
   camera: CameraScreen,
   profile: ProfileScreen,
@@ -115,7 +120,7 @@ const mainFlow = createBottomTabNavigator({
 const navigator = createSwitchNavigator({
   resolveAuth: ResolveAuthScreen,
   unAuthenticatedUser: unAuthenticatedUser,
-  mainFlow: mainFlow
+  authenticatedUserFlow: authenticatedUserFlow
 })
 
 const App = createAppContainer(navigator);

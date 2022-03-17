@@ -15,7 +15,7 @@ const DoneScreen = ({navigation}) => {
     <Text style={styles.text} h1>{state.doneScreenMessage}</Text>
     <Text h5>You can still access your public address in settings</Text>
     <Spacer/>
-    <Button title={'Proceed to UNOS'} onPress={()=>{navigation.navigate('mainFlow')}}/>
+    <Button title={'Proceed to UNOS'} onPress={()=>{navigation.navigate('authenticatedUserFlow')}}/>
     </SafeAreaView>
     )
 }
