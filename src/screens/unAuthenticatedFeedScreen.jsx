@@ -1,8 +1,9 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
-const SigninScreen = () => {
-    return <Text style={styles.text}>Signin Screen</Text>
+const UnAuthenticatedFeedScreen = () => {
+
+  return <Text style={styles.text}>UnauthenticatedScreen</Text>
 }
 
 const styles = StyleSheet.create({
@@ -11,4 +12,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default SigninScreen
+export default UnAuthenticatedFeedScreen

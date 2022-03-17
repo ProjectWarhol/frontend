@@ -1,17 +1,15 @@
-import React, {useState, useContext} from 'react'
-import {  StyleSheet, View } from 'react-native'
+import React, {useState, useContext} from 'react';
+import { StyleSheet, View } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
 
-const SignupScreen = ( { navigation }) => {
-  const {state, signup, clearErrorMessage } = useContext(AuthContext)
+const LoginScreen = ( {navigation } ) => {
+  const { state, login, clearErrorMessage } = useContext(AuthContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
-  const[userName, setUsername] = useState('')
-
 
   return (
   <View style={styles.container}>
@@ -19,15 +17,7 @@ const SignupScreen = ( { navigation }) => {
     onWillBlur={clearErrorMessage}
     />
     <Spacer/>
-      <Text h3>Signup Screen</Text>
-    <Spacer/>
-    <Input
-      label='Username'
-      value={userName}
-      onChangeText={setUsername}
-      autoCapitalize='none'
-      autoCorrect={false}
-    />
+      <Text h3>Welcome back</Text>
     <Spacer/>
     <Input
       label='Email'
@@ -46,13 +36,9 @@ const SignupScreen = ( { navigation }) => {
       autoCorrect={false}
     />
   {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
-    <Button
-    title='Sign Up'
-    onPress={() => signup({ userName, email, password })} />
+    <Button title='Login' onPress={() => login({ email, password })} />
     <Spacer/>
-    <NavLink
-    routeName='login'
-    text='Already have an Account? Sign in!' />
+    <NavLink routeName='signup' text='Dont have an Account yet? Sign up!'/>
   </View>
   )
 }
@@ -73,4 +59,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SignupScreen
+export default LoginScreen
