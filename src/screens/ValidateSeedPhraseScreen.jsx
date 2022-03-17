@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { StyleSheet, View, TextInput } from 'react-native'
+import { StyleSheet, View, TextInput, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
 import { Context as WalletContext } from '../context/WalletContext'
@@ -13,7 +13,7 @@ const ValidateSeedPhraseScreen = ({navigation}) => {
      validateInput(seedPhrase, testPhrase)}
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <NavigationEvents
             onWillFocus={clearErrorMessage}
             />
@@ -36,7 +36,7 @@ const ValidateSeedPhraseScreen = ({navigation}) => {
                 style={styles.validateButton}
             />
             {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
-        </View>
+        </SafeAreaView>
     )
 }
 

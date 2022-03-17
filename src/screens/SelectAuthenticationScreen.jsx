@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import {  StyleSheet, View } from 'react-native'
+import {  StyleSheet, View, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
@@ -9,7 +9,7 @@ const SelecteAuthenticationScreen = ({navigation}) => {
   const { clearErrorMessage } = useContext(AuthContext)
 
   return (
-  <View style={styles.container}>
+  <SafeAreaView style={styles.container}>
   <NavigationEvents
   onWillBlur={clearErrorMessage}
   />
@@ -35,7 +35,7 @@ const SelecteAuthenticationScreen = ({navigation}) => {
   <Text style={styles.buttonDescription}>I want to create an Account</Text>
   </View>
   </View>
-  </View>
+  </SafeAreaView>
   )
 }
 

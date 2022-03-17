@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { StyleSheet, Image, View } from 'react-native'
+import { StyleSheet, Image, View, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
 import { Context as WalletContext } from '../context/WalletContext'
@@ -9,14 +9,14 @@ const DoneScreen = ({navigation}) => {
     const { state } = useContext(WalletContext)
 
     return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
     <Image source={require('../../assets/celebration.png')} style={styles.image}/>
     <Spacer/>
     <Text style={styles.text} h1>{state.doneScreenMessage}</Text>
     <Text h5>You can still access your public address in settings</Text>
     <Spacer/>
     <Button title={'Proceed to UNOS'} onPress={()=>{navigation.navigate('mainFlow')}}/>
-    </View>
+    </SafeAreaView>
     )
 }
 

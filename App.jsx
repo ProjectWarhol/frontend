@@ -107,6 +107,7 @@ const navigator = createSwitchNavigator({
       tabBarOptions: {
         activeTintColor: 'blue',
         inactiveTintColor: 'gray',
+        showLabel: false
         },
       }
     ),
@@ -116,7 +117,6 @@ const App = createAppContainer(navigator);
 
 export default () => {
   return(
-
     <WalletProvider>
       <AuthProvider>
         <App ref={(navigator)=>{ setNavigator(navigator) }} />
@@ -124,4 +124,3 @@ export default () => {
     </WalletProvider>
   )
 }
-

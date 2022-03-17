@@ -1,11 +1,16 @@
 import React from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet, SafeAreaView } from 'react-native'
 
 const ForgotPasswordScreen = () => {
-    return <Text style={styles.text}>forgot screen</Text>
+    return (<SafeAreaView style={styles.container}>
+    <Text style={styles.text}>forgot screen</Text>
+    </SafeAreaView>)
 }
 
 const styles = StyleSheet.create({
+    container:{
+      flex: 1
+    },
     text: {
         fontSize: 30,
     },

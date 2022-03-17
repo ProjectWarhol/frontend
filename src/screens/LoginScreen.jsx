@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, SafeAreaView } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
@@ -12,7 +12,7 @@ const LoginScreen = ( {navigation } ) => {
   const[password, setPassword] = useState('')
 
   return (
-  <View style={styles.container}>
+  <SafeAreaView style={styles.container}>
     <NavigationEvents
     onWillFocus={clearErrorMessage}
     />
@@ -39,7 +39,7 @@ const LoginScreen = ( {navigation } ) => {
     <Button title='Login' onPress={() => login({ email, password })} />
     <Spacer/>
     <NavLink routeName='signup' text='Dont have an Account yet? Sign up!'/>
-  </View>
+  </SafeAreaView>
   )
 }
 

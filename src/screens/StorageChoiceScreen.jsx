@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { Text, StyleSheet, View, Button } from 'react-native'
+import { Text, StyleSheet, View, SafeAreaView } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Context as WalletContext } from '../context/WalletContext'
 import { navigate } from '../navigationRef'
@@ -9,7 +9,7 @@ import { NavigationEvents } from 'react-navigation'
 const StorageChoiceScreen = () => {
   const { state, storeCustodialWallet, clearErrorMessage } = useContext(WalletContext)
 
-  return(<View style={styles.container}>
+  return(<SafeAreaView style={styles.container}>
     <NavigationEvents
     onWillFocus={clearErrorMessage}
     />
@@ -36,7 +36,7 @@ const StorageChoiceScreen = () => {
       >Store by myself</Text></TouchableOpacity>
     </View>
     {state.errorMessage ? (<Text>{state.errorMessage}</Text> ) : null}
-    </View>)
+    </SafeAreaView>)
 }
 
 const styles = StyleSheet.create({
