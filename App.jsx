@@ -80,40 +80,42 @@ const unAuthenticatedUser = createBottomTabNavigator({
   },
 })
 
+const mainFlow = createBottomTabNavigator({
+  feed: FeedScreen,
+  camera: CameraScreen,
+  profile: ProfileScreen,
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state
+        let iconName
+        if (routeName === 'feed') {
+          iconName = focused ? 'home' : 'home'
+          return <Feather name={iconName} size={25} color={tintColor} />
+        }
+        else if (routeName === 'camera') {
+          iconName = focused ? 'plus-square' : 'plus-square'
+          return <Feather name={iconName} size={25} color={tintColor} />
+        }
+        else if (routeName === 'profile') {
+          iconName = focused ? 'user' : 'user'
+          return <AntDesign name={iconName} size={25} color={tintColor} />
+        }
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: 'blue',
+      inactiveTintColor: 'gray',
+      showLabel: false
+      },
+    }
+  )
+
 const navigator = createSwitchNavigator({
   resolveAuth: ResolveAuthScreen,
   unAuthenticatedUser: unAuthenticatedUser,
-  mainFlow: createBottomTabNavigator({
-    feed: FeedScreen,
-    camera: CameraScreen,
-    profile: ProfileScreen,
-    },
-    {
-      defaultNavigationOptions: ({ navigation }) => ({
-        tabBarIcon: ({ focused, horizontal, tintColor }) => {
-          const { routeName } = navigation.state
-          let iconName
-          if (routeName === 'feed') {
-            iconName = focused ? 'home' : 'home'
-            return <Feather name={iconName} size={25} color={tintColor} />
-          }
-          else if (routeName === 'camera') {
-            iconName = focused ? 'plus-square' : 'plus-square'
-            return <Feather name={iconName} size={25} color={tintColor} />
-          }
-          else if (routeName === 'profile') {
-            iconName = focused ? 'user' : 'user'
-            return <AntDesign name={iconName} size={25} color={tintColor} />
-          }
-        },
-      }),
-      tabBarOptions: {
-        activeTintColor: 'blue',
-        inactiveTintColor: 'gray',
-        showLabel: false
-        },
-      }
-    ),
+  mainFlow: mainFlow
 })
 
 const App = createAppContainer(navigator);
