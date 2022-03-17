@@ -21,7 +21,7 @@ import { Provider as WalletProvider } from './src/context/WalletContext';
 import  { setNavigator } from './src/navigationRef';
 
 
-const signupFlow = createStackNavigator({
+const authenticationFlow = createStackNavigator({
   selectAuthentication: SelectAuthenticationScreen,
   login: LoginScreen,
   signup: SignupScreen,
@@ -38,7 +38,7 @@ const signupFlow = createStackNavigator({
 
   )
 
-signupFlow.navigationOptions = ({navigation}) =>{
+authenticationFlow.navigationOptions = ({navigation}) =>{
   let tabBarVisible = true;
   let routeName = navigation.state.routes[navigation.state.index].routeName
   if ( routeName == 'done' ) {
@@ -49,38 +49,40 @@ signupFlow.navigationOptions = ({navigation}) =>{
   }
 }
 
+const unAuthenticatedUser = createBottomTabNavigator({
+  unAuthenticatedFeed: UnAuthenticatedFeedScreen,
+  camera: UnavailableScreen,
+  authenticationFlow: authenticationFlow
+},
+{
+  defaultNavigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      const { routeName } = navigation.state
+      let iconName
+      if (routeName === 'unAuthenticatedFeed') {
+        iconName = focused ? 'home' : 'home'
+        return <Feather name={iconName} size={25} color={tintColor} />
+      }
+      else if (routeName === 'camera') {
+        iconName = focused ? 'camera' : 'camera'
+        return <Feather name={iconName} size={25} color={tintColor} />
+      }
+      else if (routeName === 'authenticationFlow') {
+        iconName = focused ? 'login' : 'login'
+        return <Entypo name={iconName} size={25} color={tintColor} />
+      }
+    },
+  }),
+  tabBarOptions: {
+    activeTintColor: 'blue',
+    inactiveTintColor: 'gray',
+    showLabel: false
+  },
+})
+
 const navigator = createSwitchNavigator({
   resolveAuth: ResolveAuthScreen,
-  unAuthenticatedUser: createBottomTabNavigator({
-    unAuthenticatedFeed: UnAuthenticatedFeedScreen,
-    camera: UnavailableScreen,
-    signupFlow: signupFlow
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state
-        let iconName
-        if (routeName === 'unAuthenticatedFeed') {
-          iconName = focused ? 'home' : 'home'
-          return <Feather name={iconName} size={25} color={tintColor} />
-        }
-        else if (routeName === 'camera') {
-          iconName = focused ? 'camera' : 'camera'
-          return <Feather name={iconName} size={25} color={tintColor} />
-        }
-        else if (routeName === 'signupFlow') {
-          iconName = focused ? 'login' : 'login'
-          return <Entypo name={iconName} size={25} color={tintColor} />
-        }
-      },
-    }),
-    tabBarOptions: {
-      activeTintColor: 'blue',
-      inactiveTintColor: 'gray',
-      showLabel: false
-    },
-}),
+  unAuthenticatedUser: unAuthenticatedUser,
   mainFlow: createBottomTabNavigator({
     feed: FeedScreen,
     camera: CameraScreen,
