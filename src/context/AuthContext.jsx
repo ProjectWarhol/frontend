@@ -26,12 +26,12 @@ const logout = dispatch => async () => {
   await Api.post('/users/logout', config)
   await SecureStore.deleteItemAsync('cookie')
   dispatch({ type: 'logout'})
-  navigate('default')
+  navigate('unAuthenticatedUser')
 }catch(err){
   const cookie = await SecureStore.getItemAsync('cookie')
     await SecureStore.deleteItemAsync('cookie')
     dispatch({ type: 'logout'})
-    navigate('default')
+    navigate('unAuthenticatedUser')
 }}
 
 const tryLocalLogin = dispatch => async () => {
@@ -40,7 +40,7 @@ if(cookie && isCookieValid()){
   dispatch({ type: 'login', payload: cookie})
   navigate('mainFlow')
 }else{
-  navigate('default')
+  navigate('unAuthenticatedUser')
 }
 }
 

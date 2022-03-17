@@ -34,7 +34,8 @@ const signupFlow = createStackNavigator({
       headerShown: false,
         }
       }
-    }
+    },
+
   )
 
 signupFlow.navigationOptions = ({navigation}) =>{
@@ -50,7 +51,7 @@ signupFlow.navigationOptions = ({navigation}) =>{
 
 const navigator = createSwitchNavigator({
   resolveAuth: ResolveAuthScreen,
-  default: createBottomTabNavigator({
+  unAuthenticatedUser: createBottomTabNavigator({
     unAuthenticatedFeed: UnAuthenticatedFeedScreen,
     camera: UnavailableScreen,
     signupFlow: signupFlow
