@@ -31,6 +31,8 @@ const walletReducer = (state, action) => {
       return {...state, errorMessage: action.payload }
     case 'doneScreen_message':
       return {...state, doneScreenMessage: action.payload}
+    case 'clear_user':
+      return {...state, email:'', password: '', userName: '', userId: '', publicAddress: '', privateKey: '', walletId: '', index: ''}
     default:
       return state
   }
@@ -49,7 +51,6 @@ async function createWallet (userId, dispatch) {
     dispatch({ type: 'add_index', payload: `${index}` })
     return walletId
   }
-
 
 const signup = (dispatch) => {
   return async ({ email, password, repeatedPassword, userName }) => {
@@ -100,6 +101,21 @@ const validateInput = (dispatch) => {
   }
 }
 
+const deleteUser = (dispatch) => {
+  return async (array) =>{
+  try{
+  const walletId = array.Array[0]
+  const userId = array.Array[1]
+  const response = await Api.delete(`/wallet/${walletId}`, { id: userId })
+  console.log(response.data)
+  navigate('signup')
+  dispatch({ type: 'clear_user' })
+}
+  catch(err){
+    navigate('signup')
+  }
+  }
+}
 
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
@@ -107,6 +123,6 @@ const clearErrorMessage = dispatch => () => {
 
 export const { Provider, Context } = createDataContext(
   walletReducer,
-  { signup, clearErrorMessage, storeCustodialWallet, validateInput },
+  { signup, clearErrorMessage, storeCustodialWallet, validateInput, deleteUser },
   { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', walletId: '', index: null, doneScreenMessage: 'You should not be here mate' }
 )

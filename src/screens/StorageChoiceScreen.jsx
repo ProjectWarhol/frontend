@@ -4,14 +4,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Context as WalletContext } from '../context/WalletContext'
 import { navigate } from '../navigationRef'
 import { NavigationEvents } from 'react-navigation'
+import { Ionicons } from '@expo/vector-icons'
 
 const StorageChoiceScreen = () => {
-  const { state, storeCustodialWallet, clearErrorMessage } = useContext(WalletContext)
+  const { state, storeCustodialWallet, clearErrorMessage, deleteUser } = useContext(WalletContext)
 
   return(<SafeAreaView style={styles.container}>
     <NavigationEvents
     onWillFocus={clearErrorMessage}
     />
+    <TouchableOpacity style={styles.backButton} onPress={()=>deleteUser({Array:[state.walletId, state.userId]})} ><Ionicons name="chevron-back-sharp" size={34} color="black" /><Text style={styles.backButtonText}>Go Back</Text></TouchableOpacity>
     <Text style={styles.text}>Storage Choice Screen</Text>
     <Text style={styles.walletCredentials}>mnemonic phrase</Text>
     <Text>private Key</Text>
@@ -45,6 +47,14 @@ const styles = StyleSheet.create({
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor: 'rgb(238, 238, 238)',
+    },
+    backButton:{
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginRight: '70%',
+    },
+    backButtonText:{
+      fontSize: 20
     },
     text: {
         fontSize: 40,

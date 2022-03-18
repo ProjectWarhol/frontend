@@ -47,7 +47,7 @@ const authenticationFlow = createStackNavigator({
 authenticationFlow.navigationOptions = ({navigation}) => {
   let tabBarVisible = true
   let routeName = navigation.state.routes[navigation.state.index].routeName
-  if ( routeName == 'done' ) {
+  if ( routeName == 'done' || routeName == 'storageChoice' || routeName == 'validateSeedPhrase' ) {
       tabBarVisible = false
   }
   return {
