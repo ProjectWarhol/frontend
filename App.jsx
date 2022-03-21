@@ -108,15 +108,9 @@ const unAuthenticatedUser = createBottomTabNavigator({
   },
 })
 
-const creationModals = createStackNavigator({
-  create: CreateModal,
-  selectUpload: SelectUploadModal,
-  timelimit: TimeLimitModal
-},screenOptions={ presentation: 'modal' })
-
 const authenticatedUserFlow = createBottomTabNavigator({
   feed: FeedScreen,
-  creation: creationModals,
+  creation: CreationScreen,
   profile: ProfileScreen,
   },
   {
