@@ -1,7 +1,7 @@
 {
-  "name": "warhol-frontend",
+  "name": "unos-frontend",
   "version": "0.0.1",
-  "description": "This is the Project Warhol mobile application",
+  "description": "This is the unos mobile application",
   "keywords": [
     "react",
     "react-native",
@@ -12,7 +12,7 @@
     "social-media"
   ],
   "main": "node_modules/expo/AppEntry.js",
-  "author": "Project Warhol",
+  "author": "Unos team",
   "license": "MIT",
   "private": true,
   "repository": {
