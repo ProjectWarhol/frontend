@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
 import { Context as WalletContext } from '../context/WalletContext'
+import BackButton from '../components/BackButton'
 
 const ValidateSeedPhraseScreen = ({navigation}) => {
     const { validateInput, clearErrorMessage, state } = useContext(WalletContext)
@@ -18,6 +19,8 @@ const ValidateSeedPhraseScreen = ({navigation}) => {
             onWillFocus={clearErrorMessage}
             />
             <NavigationEvents />
+            <BackButton routeName='storageChoice'/>
+            <View style={styles.seedPhraseContainer}>
             <Text h3>Validate Your Seed Phrase</Text>
             <TextInput
                 style={styles.input}
@@ -36,6 +39,7 @@ const ValidateSeedPhraseScreen = ({navigation}) => {
                 style={styles.validateButton}
             />
             {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
+            </View>
         </SafeAreaView>
     )
 }
@@ -43,11 +47,11 @@ const ValidateSeedPhraseScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        marginBottom: 200,
         marginLeft: 25,
         marginRight: 25,
-        marginTop: 50,
+    },
+    seedPhraseContainer:{
+      marginTop: '40%'
     },
     input: {
         height: 200,

@@ -1,10 +1,11 @@
 import React, {useState, useContext} from 'react'
-import {  StyleSheet, View, SafeAreaView } from 'react-native'
+import {  StyleSheet, SafeAreaView } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
 import { Context as WalletContext } from '../context/WalletContext'
 import NavLink from '../components/NavLink'
+import BackButton from '../components/BackButton'
 
 const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage } = useContext(WalletContext)
@@ -18,6 +19,7 @@ const SignupScreen = ({ navigation }) => {
    <NavigationEvents
     onWillFocus={clearErrorMessage}
     />
+    <BackButton routeName='selectAuthentication'/>
     <Spacer/>
       <Text h3>Signup Screen</Text>
     <Spacer/>
@@ -69,11 +71,8 @@ const SignupScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
-      marginBottom: 200,
       marginLeft: 25,
       marginRight: 25,
-      marginTop: 50
     },
     errorMessage: {
       fontSize: 16,

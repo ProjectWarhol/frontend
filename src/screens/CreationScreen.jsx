@@ -1,8 +1,9 @@
-import React, { useState }from 'react'
-import { Alert, Modal, StyleSheet, Text, Pressable, View, SafeAreaView } from 'react-native'
+import React, { useState } from "react";
+import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 
 const CreationScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -12,8 +13,8 @@ const CreationScreen = () => {
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
-        }}
-      >
+      }}
+    >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Hello World!</Text>
@@ -30,7 +31,7 @@ const CreationScreen = () => {
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={styles.textStyle}>Create your UNOS</Text>
+        <Text style={styles.textStyle}>Show Modal</Text>
       </Pressable>
     </View>
   );
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "blue",
+    backgroundColor: "#F194FF",
   },
   buttonClose: {
     backgroundColor: "#2196F3",

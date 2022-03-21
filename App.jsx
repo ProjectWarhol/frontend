@@ -24,17 +24,39 @@ import { Provider as WalletProvider } from './src/context/WalletContext';
 import  { setNavigator } from './src/navigationRef';
 
 const authenticationFlow = createStackNavigator({
-  selectAuthentication: SelectAuthenticationScreen,
-  login: LoginScreen,
-  signup: SignupScreen,
+  selectAuthentication: {
+    screen: SelectAuthenticationScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+  },
+  login:{ screen: LoginScreen,
+  navigationOptions:{
+    headerShown: false,
+      }
+    },
+  signup: {
+    screen: SignupScreen,
+    navigationOptions:{
+      headerShown: false,
+      gestureDirection: 'horizontal-inverted'
+        }
+  },
   forgotPw: ForgotPasswordScreen,
   storageChoice: {
     screen: StorageChoiceScreen,
     navigationOptions:{
       headerShown: false,
+      gestureDirection: 'horizontal-inverted'
         }
   },
-  validateSeedPhrase: validateSeedPhraseScreen,
+  validateSeedPhrase: {
+    screen: validateSeedPhraseScreen,
+    navigationOptions:{
+      headerShown: false,
+      gestureDirection: 'horizontal-inverted'
+        }
+  },
   done: {
     screen: DoneScreen,
     navigationOptions:{

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import { withNavigation } from 'react-navigation'
 
 const BackButton = ({ navigation, routeName, }) => {
@@ -26,4 +27,4 @@ const styles = StyleSheet.create({
   }
 )
 
-export default BackButton(NavLink)
+export default withNavigation(BackButton)

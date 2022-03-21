@@ -5,6 +5,7 @@ import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
+import BackButton from '../components/BackButton'
 
 const LoginScreen = ( {navigation } ) => {
   const { state, login, clearErrorMessage } = useContext(AuthContext)
@@ -16,8 +17,9 @@ const LoginScreen = ( {navigation } ) => {
     <NavigationEvents
     onWillFocus={clearErrorMessage}
     />
+    <BackButton routeName='selectAuthentication'/>
     <Spacer/>
-      <Text h3>Welcome back</Text>
+      <Text style={styles.header} h3>Welcome back</Text>
     <Spacer/>
     <Input
       label='Email'
@@ -46,11 +48,11 @@ const LoginScreen = ( {navigation } ) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
-      marginBottom: 200,
       marginLeft: 25,
       marginRight: 25,
-      marginTop: 50
+    },
+    header:{
+      marginTop: '25%'
     },
     errorMessage: {
       fontSize: 16,
