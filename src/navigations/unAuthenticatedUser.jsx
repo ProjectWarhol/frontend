@@ -1,4 +1,4 @@
-import { Entypo } from '@expo/vector-icons'
+import { Entypo, Feather } from '@expo/vector-icons'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import UnavailableScreen from '../screens/UnavailableScreen';
 import UnAuthenticatedFeedScreen from '../screens/UnAuthenticatedFeedScreen';
@@ -11,7 +11,7 @@ const unAuthenticatedUser = createBottomTabNavigator({
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+    tabBarIcon: ({ tintColor }) => {
       const { routeName } = navigation.state
       let iconName
       if (routeName === 'unAuthenticatedFeed') {
