@@ -25,7 +25,6 @@ const logout = dispatch => async () => {
     'my.sid': cookie
   }}
   const response = await Api.post('users/logout', config)
-  console.log(response)
   await SecureStore.deleteItemAsync('cookie')
   dispatch({ type: 'logout'})
   navigate('default')
@@ -34,7 +33,6 @@ const logout = dispatch => async () => {
   await SecureStore.deleteItemAsync('cookie')
   dispatch({ type: 'logout'})
   navigate('default')
-  console.log(err)
 }}
 
 const tryLocalLogin = dispatch => async () => {
@@ -56,7 +54,6 @@ const signup = (dispatch) => {
   return async ({ email, password, userName }) => {
     try{
       const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
-      console.log(response.data)
       navigate('selectWallet')
     } catch (err)
     {dispatch({ type: 'add_error', payload: 'Something went wrong' }, console.log(err))
