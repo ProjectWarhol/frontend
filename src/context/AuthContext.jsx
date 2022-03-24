@@ -38,7 +38,7 @@ const tryLocalLogin = dispatch => async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
 if(cookie && isCookieValid()){
   dispatch({ type: 'login', payload: cookie})
-  navigate('authenticatedUserFlow')
+  navigate('authenticatedUser')
 }else{
   navigate('unAuthenticatedUser')
 }
@@ -67,7 +67,7 @@ const login = (dispatch) => async ({ email, password }) => {
       )
       await SecureStore.setItemAsync('cookie', cookie)
       dispatch({ type: 'login', payload: cookie})
-      navigate('authenticatedUserFlow')
+      navigate('authenticatedUser')
     } catch (err){
       {dispatch({ type: 'add_error',  payload: 'Something went wrong' }, console.log(err))}
     }
