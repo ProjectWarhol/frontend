@@ -77,6 +77,7 @@ node_modules/
 # React Native Stack Base
 
 .expo
+.expo-shared
 __generated__
 
 ### ReactNative.Android Stack ###
