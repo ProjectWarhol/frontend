@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
-const StorageChoiceScreen = () => {
+const WalletInformationScreen = () => {
     return <Text style={styles.text}>Storage Choice Screen</Text>
 }
 
@@ -11,4 +11,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default StorageChoiceScreen
+export default WalletInformationScreen

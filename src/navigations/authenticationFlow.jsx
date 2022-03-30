@@ -3,7 +3,7 @@ import DoneScreen from '../screens/DoneScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import SignupScreen from '../screens/SignupScreen';
 import LoginScreen from '../screens/LoginScreen';
-import StorageChoiceScreen from '../screens/StorageChoiceScreen';
+import walletInformationScreen from '../screens/WalletInformationScreen';
 import validateSeedPhraseScreen from '../screens/ValidateSeedPhraseScreen';
 import SelectAuthenticationScreen from '../screens/SelectAuthenticationScreen';
 
@@ -26,9 +26,9 @@ const authenticationFlow = createStackNavigator({
       gestureDirection: 'horizontal-inverted'
         }
   },
-  forgotPw: ForgotPasswordScreen,
-  storageChoice: {
-    screen: StorageChoiceScreen,
+  forgotPassword: ForgotPasswordScreen,
+  walletInformation: {
+    screen: walletInformationScreen,
     navigationOptions:{
       headerShown: false,
       gestureDirection: 'horizontal-inverted'
@@ -53,7 +53,7 @@ const authenticationFlow = createStackNavigator({
 authenticationFlow.navigationOptions = ({navigation}) => {
   let tabBarVisible = true
   let routeName = navigation.state.routes[navigation.state.index].routeName
-  if ( routeName == 'done' || routeName == 'storageChoice' || routeName == 'validateSeedPhrase' ) {
+  if ( routeName == 'done' || routeName == 'walletInformation' || routeName == 'validateSeedPhrase' ) {
       tabBarVisible = false
   }
   return {
