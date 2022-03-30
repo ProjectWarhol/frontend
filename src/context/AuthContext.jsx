@@ -19,8 +19,8 @@ const authReducer = (state, action) => {
       return {...state, publicAddress: action.payload}
     case 'add_privateKey':
       return {...state, privateKey: action.payload}
-    case 'add_mnemonic':
-      return {...state, mnemonic: action.payload}
+    case 'add_mnemonicPhrase':
+      return {...state, mnemonicPhrase: action.payload}
     case 'add_walletId':
       return {...state, walletId: action.payload}
     case 'error_message':
@@ -36,7 +36,7 @@ const authReducer = (state, action) => {
   }
 }
 
-async function createWallet ( dispatch, email, password, userName) {
+async function expressSignup ( dispatch, email, password, userName) {
   const response = await Api.post('/users/express', {userName: userName, email: email, password: password})
   let cookieArray = response["headers"]["set-cookie"]
   let cookieString = cookieArray.toString()
@@ -46,11 +46,11 @@ async function createWallet ( dispatch, email, password, userName) {
   await SecureStore.setItemAsync('cookie', cookie)
   const publicAddress = response.data.wallet.address
   const privateKey = response.data.wallet.privateKey
-  const mnemonic = response.data.mnemonic
+  const mnemonicPhrase = response.data.mnemonic
   const walletId = response.data.user.walletId
   dispatch({ type: 'add_publicAddress', payload: `${publicAddress}`})
   dispatch({ type: 'add_privateKey', payload: `${privateKey}` })
-  dispatch({ type: 'add_mnemonic', payload: `${mnemonic}` })
+  dispatch({ type: 'add_mnemonicPhrase', payload: `${mnemonicPhrase}` })
   return walletId
 }
 
@@ -60,7 +60,7 @@ const signup = (dispatch) => {
       if (password === repeatedPassword)
       {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
       const userId = response.data.userId
-      const walletId = await createWallet( dispatch, email, password, userName)
+      const walletId = await expressSignup( dispatch, email, password, userName)
       dispatch({ type: 'signup' })
       dispatch({ type: 'add_email', payload: `${email}`})
       dispatch({ type: 'add_password', payload: `${password}`})
@@ -135,8 +135,7 @@ const login = (dispatch) => async ({ email, password }) => {
     try{
     const walletId = array.Array[0]
     const userId = array.Array[1]
-    const response = await Api.delete(`/wallet/${walletId}`, { id: userId })
-    console.log(response.data)
+    await Api.delete(`/wallet/${walletId}`, { id: userId })
     navigate('signup')
     dispatch({ type: 'clear_user' })
   }
@@ -149,5 +148,5 @@ const login = (dispatch) => async ({ email, password }) => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { login, logout, clearErrorMessage, tryLocalLogin, signup, deleteUser },
-  { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonic: '', walletId: '' }
+  { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonicPhrase: '', walletId: '' }
 )

@@ -6,7 +6,7 @@ import { navigate } from '../navigationRef'
 import { NavigationEvents } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 
-const StorageChoiceScreen = () => {
+const walletInformationScreen = () => {
   const { state, clearErrorMessage, deleteUser } = useContext(AuthContext)
 
   return(<SafeAreaView style={styles.container}>
@@ -14,8 +14,9 @@ const StorageChoiceScreen = () => {
     onWillFocus={clearErrorMessage}
     />
     <TouchableOpacity style={styles.backButton} onPress={()=>deleteUser({Array:[state.walletId, state.userId]})} ><Ionicons name="chevron-back-sharp" size={34} color="black" /><Text style={styles.backButtonText}>Go Back</Text></TouchableOpacity>
-    <Text style={styles.text}>Storage Choice Screen</Text>
-    <Text style={styles.walletCredentials}>mnemonic phrase</Text>
+    <Text style={styles.text}>wallet information</Text>
+    <Text>mnemonic phrase</Text>
+    <Text style={styles.walletCredentials}>{state.mnemonicPhrase}</Text>
     <Text>private Key</Text>
     <Text style={styles.walletCredentials}>{state.privateKey}</Text>
     <Text>public Key</Text>
@@ -85,4 +86,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default StorageChoiceScreen
+export default walletInformationScreen
