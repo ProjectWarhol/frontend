@@ -21,8 +21,6 @@ const authReducer = (state, action) => {
       return {...state, privateKey: action.payload}
     case 'add_mnemonic':
       return {...state, mnemonic: action.payload}
-    case 'add_walletId':
-      return {...state, walletId: action.payload}
     case 'error_message':
       return {...state, errorMessage: action.payload }
     case 'login':
@@ -46,12 +44,10 @@ async function createWallet ( dispatch, email, password, userName) {
   await SecureStore.setItemAsync('cookie', cookie)
   const publicAddress = response.data.wallet.address
   const privateKey = response.data.wallet.privateKey
-  const walletId = response.data.walletId
   const mnemonic = response.data.mnemonic
   dispatch({ type: 'add_publicAddress', payload: `${publicAddress}`})
   dispatch({ type: 'add_privateKey', payload: `${privateKey}` })
   dispatch({ type: 'add_mnemonic', payload: `${mnemonic}` })
-  return walletId
 }
 
 const signup = (dispatch) => {
@@ -132,5 +128,5 @@ const login = (dispatch) => async ({ email, password }) => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { login, logout, clearErrorMessage, tryLocalLogin, signup },
-  { cookie: null, errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', walletId: '', mnemonic: '' }
+  { cookie: null, errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonic: '' }
 )
