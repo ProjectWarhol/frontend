@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
-const ValidatePhraseScreen = () => {
+const ValidateSeedPhraseScreen = () => {
     return <Text style={styles.text}>Signup Screen</Text>
 }
 
@@ -11,4 +11,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default ValidatePhraseScreen
+export default ValidateSeedPhraseScreen
