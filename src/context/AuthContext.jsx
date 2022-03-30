@@ -21,16 +21,16 @@ const authReducer = (state, action) => {
       return {...state, privateKey: action.payload}
     case 'add_mnemonic':
       return {...state, mnemonic: action.payload}
+    case 'add_walletId':
+      return {...state, walletId: action.payload}
     case 'error_message':
       return {...state, errorMessage: action.payload }
-    case 'login':
-      return {errorMessage: '', cookie: action.payload}
     case 'clear_error_message':
       return { ...state, errorMessage: '' }
     case 'clear_user':
-      return {...state, email:'', password: '', userName: '', userId: '', publicAddress: '', privateKey: '', mnemonic: ''}
+      return {...state, email:'', password: '', userName: '', userId: '', publicAddress: '', privateKey: '', mnemonic: '', walletId: ''}
     case 'logout':
-      return { cookie: null, errorMessage: '' }
+      return { errorMessage: '' }
     default:
       return state
   }
@@ -47,9 +47,11 @@ async function createWallet ( dispatch, email, password, userName) {
   const publicAddress = response.data.wallet.address
   const privateKey = response.data.wallet.privateKey
   const mnemonic = response.data.mnemonic
+  const walletId = response.data.user.walletId
   dispatch({ type: 'add_publicAddress', payload: `${publicAddress}`})
   dispatch({ type: 'add_privateKey', payload: `${privateKey}` })
   dispatch({ type: 'add_mnemonic', payload: `${mnemonic}` })
+  return walletId
 }
 
 const signup = (dispatch) => {
@@ -57,13 +59,14 @@ const signup = (dispatch) => {
     try{
       if (password === repeatedPassword)
       {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
-      userId = response.data.userId
-      await createWallet( dispatch, email, password, userName)
+      const userId = response.data.userId
+      const walletId = await createWallet( dispatch, email, password, userName)
       dispatch({ type: 'signup' })
       dispatch({ type: 'add_email', payload: `${email}`})
       dispatch({ type: 'add_password', payload: `${password}`})
       dispatch({ type: 'add_userName', payload: `${userName}`})
       dispatch({ type: 'add_userId', payload: `${userId}`})
+      dispatch({ type: 'add_walletId', payload: `${walletId}`})
       navigate('storageChoice')}
       else{dispatch({type: 'error_message', payload: 'Passwords need to match'})}
     } catch (err)
@@ -90,15 +93,14 @@ const logout = dispatch => async () => {
 
 const tryLocalLogin = dispatch => async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
-if(cookie && isCookieValid()){
-  dispatch({ type: 'login', payload: cookie})
+if(cookie && isCookieValid(cookie)){
   navigate('authenticatedUser')
 }else{
   navigate('unAuthenticatedUser')
 }
 }
 
-const isCookieValid = async(cookie) => {
+async function isCookieValid(cookie) {
   const config = {headers:{
     'my.sid': cookie
   }}
@@ -120,7 +122,6 @@ const login = (dispatch) => async ({ email, password }) => {
         cookieString.indexOf(';')
       )
       await SecureStore.setItemAsync('cookie', cookie)
-      dispatch({ type: 'login', payload: cookie})
       navigate('authenticatedUser')
     } catch (err){
       {dispatch({ type: 'error_message',  payload: 'Something went wrong' }, console.log(err))}
@@ -146,5 +147,5 @@ const login = (dispatch) => async ({ email, password }) => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { login, logout, clearErrorMessage, tryLocalLogin, signup, deleteUser },
-  { cookie: null, errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonic: '' }
+  { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonic: '', walletId: '' }
 )

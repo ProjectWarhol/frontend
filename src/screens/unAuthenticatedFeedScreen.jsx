@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Text, StyleSheet, Button, SafeAreaView } from 'react-native'
+import { Context as AuthContext } from '../context/AuthContext'
 
 const UnAuthenticatedFeedScreen = ({navigation}) => {
+  const { state } = useContext(AuthContext)
 
   return (<SafeAreaView style={styles.container}>
   <Text style={styles.text}>UnauthenticatedScreen</Text>
@@ -9,6 +11,7 @@ const UnAuthenticatedFeedScreen = ({navigation}) => {
   <Button title='to done' onPress={()=>{navigation.navigate('done')}}/>
   <Button title='to validatescreen' onPress={()=>{navigation.navigate('validateSeedPhrase')}}/>
   <Button title='to profil' onPress={()=>{navigation.navigate('profile')}}/>
+
   </SafeAreaView>)
 }
 
