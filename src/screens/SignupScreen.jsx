@@ -3,12 +3,12 @@ import {  StyleSheet, SafeAreaView } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
-import { Context as WalletContext } from '../context/WalletContext'
+import { Context as AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
 import BackButton from '../components/BackButton'
 
 const SignupScreen = ({ navigation }) => {
-  const { state, signup, clearErrorMessage } = useContext(WalletContext)
+  const { state, signup, clearErrorMessage } = useContext(AuthContext)
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
   const[repeatedPassword, setRepeatedPassword] = useState('')

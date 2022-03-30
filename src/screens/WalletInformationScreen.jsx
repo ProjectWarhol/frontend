@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
-const ValidatePhraseScreen = () => {
-    return <Text style={styles.text}>Signup Screen</Text>
+const WalletInformationScreen = () => {
+    return <Text style={styles.text}>Storage Choice Screen</Text>
 }
 
 const styles = StyleSheet.create({
@@ -11,4 +11,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default ValidatePhraseScreen
+export default WalletInformationScreen
