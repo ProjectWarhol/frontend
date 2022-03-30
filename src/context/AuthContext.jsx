@@ -19,46 +19,41 @@ const authReducer = (state, action) => {
 }
 
 const logout = dispatch => async () => {
-  try{
-  const cookie = await SecureStore.getItemAsync('cookie')
+  try { const cookie = await SecureStore.getItemAsync('cookie')
   const config = {headers:{
     'my.sid': cookie
   }}
-  const response = await Api.post('users/logout', config)
+  await Api.post('/users/logout', config)
   await SecureStore.deleteItemAsync('cookie')
   dispatch({ type: 'logout'})
-  navigate('default')
-}catch(err){
-  await SecureStore.getItemAsync('cookie')
-  await SecureStore.deleteItemAsync('cookie')
-  dispatch({ type: 'logout'})
-  navigate('default')
+  navigate('unAuthenticatedUser')
+  }catch(err){
+  const cookie = await SecureStore.getItemAsync('cookie')
+    await SecureStore.deleteItemAsync('cookie')
+    dispatch({ type: 'logout'})
+    navigate('unAuthenticatedUser')
 }}
 
 const tryLocalLogin = dispatch => async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
-  if (cookie) {
-      dispatch({ type: 'login', payload: cookie})
-      navigate('mainFlow')
-  }
-  else{
-      navigate('default')
-  }
+if(cookie && isCookieValid()){
+  dispatch({ type: 'login', payload: cookie})
+  navigate('authenticatedUser')
+}else{
+  navigate('unAuthenticatedUser')
+}
+}
+
+const isCookieValid = async(cookie) => {
+  const config = {headers:{
+    'my.sid': cookie
+  }}
+  await Api.get('/users/session', config)
+  return true
 }
 
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
-}
-
-const signup = (dispatch) => {
-  return async ({ email, password, userName }) => {
-    try{
-      const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
-      navigate('selectWallet')
-    } catch (err)
-    {dispatch({ type: 'add_error', payload: 'Something went wrong' }, console.log(err))
-    }
-  }
 }
 
 const login = (dispatch) => async ({ email, password }) => {
@@ -72,7 +67,7 @@ const login = (dispatch) => async ({ email, password }) => {
       )
       await SecureStore.setItemAsync('cookie', cookie)
       dispatch({ type: 'login', payload: cookie})
-      navigate('mainFlow')
+      navigate('authenticatedUser')
     } catch (err){
       {dispatch({ type: 'add_error',  payload: 'Something went wrong' }, console.log(err))}
     }
@@ -80,6 +75,7 @@ const login = (dispatch) => async ({ email, password }) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { login, signup, logout, clearErrorMessage, tryLocalLogin },
+  { login, logout, clearErrorMessage, tryLocalLogin },
   { cookie: null, errorMessage: '' }
 )
+

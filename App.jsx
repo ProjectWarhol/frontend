@@ -19,6 +19,7 @@ import UnAuthenticatedFeedScreen from './src/screens/UnAuthenticatedFeedScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import SelectAuthenticationScreen from './src/screens/SelectAuthenticationScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import { Provider as WalletProvider } from './src/context/WalletContext';
 import  { setNavigator } from './src/navigationRef';
 
 
@@ -63,9 +64,11 @@ const App = createAppContainer(navigator);
 
 export default () => {
   return(
+    <WalletProvider>
     <AuthProvider>
       <App ref={(navigator)=>{ setNavigator(navigator) }} />
     </AuthProvider>
+  </WalletProvider>
   )
 }
 
