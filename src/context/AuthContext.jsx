@@ -27,6 +27,8 @@ const authReducer = (state, action) => {
       return {errorMessage: '', cookie: action.payload}
     case 'clear_error_message':
       return { ...state, errorMessage: '' }
+    case 'clear_user':
+      return {...state, email:'', password: '', userName: '', userId: '', publicAddress: '', privateKey: '', mnemonic: ''}
     case 'logout':
       return { cookie: null, errorMessage: '' }
     default:
@@ -125,8 +127,24 @@ const login = (dispatch) => async ({ email, password }) => {
     }
   }
 
+  const deleteUser = (dispatch) => {
+    return async (array) =>{
+    try{
+    const walletId = array.Array[0]
+    const userId = array.Array[1]
+    const response = await Api.delete(`/wallet/${walletId}`, { id: userId })
+    console.log(response.data)
+    navigate('signup')
+    dispatch({ type: 'clear_user' })
+  }
+    catch(err){
+      navigate('signup')
+    }
+  }
+}
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { login, logout, clearErrorMessage, tryLocalLogin, signup },
+  { login, logout, clearErrorMessage, tryLocalLogin, signup, deleteUser },
   { cookie: null, errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonic: '' }
 )
