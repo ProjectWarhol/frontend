@@ -79,7 +79,8 @@ const logout = dispatch => async () => {
   try { const cookie = await SecureStore.getItemAsync('cookie')
   const config = {headers:{
     'my.sid': cookie
-  }}
+  }
+}
   await Api.post('/users/logout', config)
   await SecureStore.deleteItemAsync('cookie')
   dispatch({ type: 'logout'})
@@ -89,7 +90,8 @@ const logout = dispatch => async () => {
     await SecureStore.deleteItemAsync('cookie')
     dispatch({ type: 'logout'})
     navigate('unAuthenticatedUser')
-}}
+  }
+}
 
 const tryLocalLogin = dispatch => async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
@@ -113,20 +115,20 @@ const clearErrorMessage = dispatch => () => {
 }
 
 const login = (dispatch) => async ({ email, password }) => {
-    try{
-      const response = await Api.post('/users/login', { userCredential: email, password: password })
-      let cookieArray = response["headers"]["set-cookie"]
-      let cookieString = cookieArray.toString()
-      const cookie = cookieString.substring(
-        cookieString.indexOf('=') + 1,
-        cookieString.indexOf(';')
-      )
-      await SecureStore.setItemAsync('cookie', cookie)
-      navigate('authenticatedUser')
+  try{
+    const response = await Api.post('/users/login', { userCredential: email, password: password })
+    let cookieArray = response["headers"]["set-cookie"]
+    let cookieString = cookieArray.toString()
+    const cookie = cookieString.substring(
+      cookieString.indexOf('=') + 1,
+      cookieString.indexOf(';')
+    )
+    await SecureStore.setItemAsync('cookie', cookie)
+    navigate('authenticatedUser')
     } catch (err){
       {dispatch({ type: 'error_message',  payload: 'Something went wrong' }, console.log(err))}
-    }
   }
+}
 
   const deleteUser = (dispatch) => {
     return async (array) =>{
