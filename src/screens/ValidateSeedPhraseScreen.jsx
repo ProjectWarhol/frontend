@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
 const ValidateSeedPhraseScreen = () => {
-    return <Text style={styles.text}>Signup Screen</Text>
+    return <Text style={styles.text}>validate</Text>
 }
 
 const styles = StyleSheet.create({
