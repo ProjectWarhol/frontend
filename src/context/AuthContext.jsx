@@ -5,7 +5,25 @@ import { navigate } from '../navigationRef'
 
 const authReducer = (state, action) => {
   switch (action.type){
-    case 'add_error':
+    case 'signup':
+      return {...state }
+    case 'add_email':
+      return {...state, email: action.payload}
+    case 'add_password':
+      return {...state, password: action.payload}
+    case 'add_userName':
+      return {...state, userName: action.payload}
+    case 'add_userId':
+      return {...state, userId: action.payload}
+    case 'add_publicAddress':
+      return {...state, publicAddress: action.payload}
+    case 'add_privateKey':
+      return {...state, privateKey: action.payload}
+    case 'add_mnemonic':
+      return {...state, mnemonic: action.payload}
+    case 'add_walletId':
+      return {...state, walletId: action.payload}
+    case 'error_message':
       return {...state, errorMessage: action.payload }
     case 'login':
       return {errorMessage: '', cookie: action.payload}
@@ -15,6 +33,44 @@ const authReducer = (state, action) => {
       return { cookie: null, errorMessage: '' }
     default:
       return state
+  }
+}
+
+async function createWallet ( dispatch, email, password, userName) {
+  const response = await Api.post('/users/express', {userName: userName, email: email, password: password})
+  let cookieArray = response["headers"]["set-cookie"]
+  let cookieString = cookieArray.toString()
+  const cookie = cookieString.substring(
+  cookieString.indexOf('=') + 1,
+  cookieString.indexOf(';'))
+  await SecureStore.setItemAsync('cookie', cookie)
+  const publicAddress = response.data.wallet.address
+  const privateKey = response.data.wallet.privateKey
+  const walletId = response.data.walletId
+  const mnemonic = response.data.mnemonic
+  dispatch({ type: 'add_publicAddress', payload: `${publicAddress}`})
+  dispatch({ type: 'add_privateKey', payload: `${privateKey}` })
+  dispatch({ type: 'add_mnemonic', payload: `${mnemonic}` })
+  return walletId
+}
+
+const signup = (dispatch) => {
+  return async ({ email, password, repeatedPassword, userName }) => {
+    try{
+      if (password === repeatedPassword)
+      {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
+      userId = response.data.userId
+      await createWallet( dispatch, email, password, userName)
+      dispatch({ type: 'signup' })
+      dispatch({ type: 'add_email', payload: `${email}`})
+      dispatch({ type: 'add_password', payload: `${password}`})
+      dispatch({ type: 'add_userName', payload: `${userName}`})
+      dispatch({ type: 'add_userId', payload: `${userId}`})
+      navigate('storageChoice')}
+      else{dispatch({type: 'error_message', payload: 'Passwords need to match'})}
+    } catch (err)
+    {dispatch({ type: 'error_message', payload: 'Something went wrong' }, console.log(err))
+    }
   }
 }
 
@@ -69,13 +125,12 @@ const login = (dispatch) => async ({ email, password }) => {
       dispatch({ type: 'login', payload: cookie})
       navigate('authenticatedUser')
     } catch (err){
-      {dispatch({ type: 'add_error',  payload: 'Something went wrong' }, console.log(err))}
+      {dispatch({ type: 'error_message',  payload: 'Something went wrong' }, console.log(err))}
     }
   }
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { login, logout, clearErrorMessage, tryLocalLogin },
-  { cookie: null, errorMessage: '' }
+  { login, logout, clearErrorMessage, tryLocalLogin, signup },
+  { cookie: null, errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', walletId: '', mnemonic: '' }
 )
-
