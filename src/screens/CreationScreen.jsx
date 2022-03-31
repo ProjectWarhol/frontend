@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Modal, StyleSheet, Text, Pressable, SafeAreaView, View } from "react-native";
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { withNavigation } from 'react-navigation'
 
-const CreationScreen = ({navigation, props}) => {
+const CreationScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(true);
 
    navigation.addListener('didFocus', () => {
@@ -11,7 +11,7 @@ const CreationScreen = ({navigation, props}) => {
     });
 
   return (
-    <View style={styles.centeredView}>
+    <SafeAreaView style={styles.centeredView}>
       <GestureRecognizer onSwipeDown={ () => setModalVisible(false) }>
       <Modal
         animationType="slide"
@@ -37,7 +37,7 @@ const CreationScreen = ({navigation, props}) => {
         </View>
       </Modal>
       </GestureRecognizer>
-    </View>
+    </SafeAreaView>
   );
 };
 
