@@ -19,7 +19,7 @@ const ValidateSeedPhraseScreen = ({navigation}) => {
             onWillFocus={clearErrorMessage}
             />
             <NavigationEvents />
-            <BackButton routeName='storageChoice'/>
+            <BackButton routeName='walletInformation'/>
             <View style={styles.seedPhraseContainer}>
             <Text h3>Validate Your Seed Phrase</Text>
             <TextInput
