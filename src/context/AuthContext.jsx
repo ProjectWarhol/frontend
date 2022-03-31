@@ -145,8 +145,18 @@ const login = (dispatch) => async ({ email, password }) => {
   }
 }
 
+const validateInput = (dispatch) => {
+  return (userInput, expected) => {
+  if (userInput === expected) {
+      dispatch({ type: 'doneScreen_message', payload: 'Great job!'})
+      navigate('done')
+  }
+  else{dispatch({ type: 'error_message', payload: 'There is something wrong with your seedphrase'})}
+  }
+}
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { login, logout, clearErrorMessage, tryLocalLogin, signup, deleteUser },
+  { login, logout, clearErrorMessage, tryLocalLogin, signup, deleteUser, validateInput },
   { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonicPhrase: '', walletId: '' }
 )
