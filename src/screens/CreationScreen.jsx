@@ -4,9 +4,11 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 
 const CreationScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(true);
+  const [camera, setCamera] = useState(false)
+  const [cameraRoll, setCameraRoll] = useState(false)
 
   useEffect(() => {
-    if(modalVisible === false){
+    if(modalVisible === false && camera === false && cameraRoll === false){
       navigation.navigate('feed')
       setModalVisible(true)
     }
@@ -29,15 +31,19 @@ const CreationScreen = ({navigation}) => {
           <View style={styles.modalView}>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {navigation.navigate('camera'),
+                              setCamera(true)}
+                              }
             >
-              <Text style={styles.textStyle}>Create New Nft</Text>
+              <Text style={styles.textStyle}>Camera</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {navigation.navigate('cameraRoll'),
+                             setCameraRoll(true)}
+                              }
             >
-              <Text style={styles.textStyle}>Create derivative</Text>
+              <Text style={styles.textStyle}>Upload from Gallery</Text>
             </Pressable>
           </View>
         </View>
