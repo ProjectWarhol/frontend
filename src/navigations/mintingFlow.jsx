@@ -4,8 +4,18 @@ import CameraScreen from '../screens/CameraScreen'
 import CameraRollScreen from '../screens/CameraRollScreen'
 
 const mintingFlow = createStackNavigator({
-  creation: CreationScreen,
-  camera: CameraScreen,
+  creation: {
+    screen: CreationScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+      },
+  camera: {
+    screen: CameraScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+  },
   cameraRoll: CameraRollScreen
 })
 
