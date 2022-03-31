@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import React, { useState } from "react";
+import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import GestureRecognizer from 'react-native-swipe-gestures';
+import { withNavigation } from 'react-navigation'
 
-const CreationScreen = ({navigation}) => {
+const CreationScreen = ({navigation, props}) => {
   const [modalVisible, setModalVisible] = useState(true);
-  const [camera, setCamera] = useState(false)
-  const [cameraRoll, setCameraRoll] = useState(false)
 
-  useEffect(() => {
-    if(modalVisible === false && camera === false && cameraRoll === false){
-      navigation.navigate('feed')
+   navigation.addListener('didFocus', () => {
       setModalVisible(true)
-    }
-  })
+    });
 
   return (
     <View style={styles.centeredView}>
@@ -21,27 +17,19 @@ const CreationScreen = ({navigation}) => {
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
       >
         <View style={styles.modalContainer}>
-          <Pressable style={styles.aboveModalView} onPress={() => {setModalVisible(false)}} />
+          <Pressable style={styles.aboveModalView} onPress={() => {setModalVisible(false), navigation.navigate('feed')}} />
           <View style={styles.modalView}>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {navigation.navigate('camera'),
-                              setCamera(true)}
-                              }
+              onPress={() => {navigation.navigate('camera'), setModalVisible(false)}}
             >
               <Text style={styles.textStyle}>Camera</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {navigation.navigate('cameraRoll'),
-                             setCameraRoll(true)}
-                              }
+              onPress={() => {navigation.navigate('cameraRoll'), setModalVisible(false)}}
             >
               <Text style={styles.textStyle}>Upload from Gallery</Text>
             </Pressable>
@@ -111,4 +99,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CreationScreen;
+export default withNavigation(CreationScreen);

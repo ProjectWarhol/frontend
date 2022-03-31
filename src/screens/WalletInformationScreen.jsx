@@ -37,7 +37,6 @@ const walletInformationScreen = () => {
 const styles = StyleSheet.create({
     container:{
       flex:1,
-      borderWidth: 2,
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor: 'rgb(238, 238, 238)',
