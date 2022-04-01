@@ -37,7 +37,6 @@ const pickImage = dispatch => async () => {
     return false
   }
   else if(result.cancelled){
-    navigate('creation')
     return true
   }
 };

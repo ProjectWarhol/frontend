@@ -15,7 +15,7 @@ const CreationScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.centeredView}>
-      <GestureRecognizer onSwipeDown={ () => setModalVisible(false) }>
+      <GestureRecognizer onSwipeDown={ () => {setModalVisible(false), navigation.navigate('feed')} }>
       <Modal
         animationType="slide"
         transparent={true}
