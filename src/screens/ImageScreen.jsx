@@ -7,7 +7,7 @@ const ImageScreen = ({navigation}) => {
 
     return (
     <SafeAreaView style={styles.container}>
-    <Pressable style={styles.backButton} onPress={()=>{navigation.navigate('camera')}}>
+    <Pressable style={styles.backButton} onPress={()=>{navigation.goBack()}}>
       <Text style={{fontSize: 20}}>Back</Text>
       </Pressable>
     <Image source={{uri: state.image}} style={styles.image}/>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
       flex: 0.1
     },
     button:{
-      padding: 15,
+      padding: 10,
       backgroundColor: 'blue',
       borderWidth: 2,
       borderColor: 'black',

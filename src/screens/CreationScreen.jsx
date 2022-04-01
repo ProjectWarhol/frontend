@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, StyleSheet, Text, Pressable, SafeAreaView, View } from "react-native";
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { withNavigation } from 'react-navigation'
+import { Context as MintingContext } from '../context/MintingContext'
 
 const CreationScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(true);
 
-   navigation.addListener('didFocus', () => {
+  const { pickImage } = useContext(MintingContext)
+
+  navigation.addListener('didFocus', () => {
       setModalVisible(true)
     });
 
@@ -29,7 +32,7 @@ const CreationScreen = ({navigation}) => {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {navigation.navigate('cameraRoll'), setModalVisible(false)}}
+              onPress={async () => {setModalVisible(await pickImage())}}
             >
               <Text style={styles.textStyle}>Upload from Gallery</Text>
             </Pressable>

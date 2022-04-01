@@ -1,6 +1,7 @@
 import createDataContext from "./createDataContext"
 import Api from '../api/api'
 import { navigate } from '../navigationRef'
+import * as ImagePicker from 'expo-image-picker';
 
 const mintingReducer = (state, action) => {
   switch (action.type){
@@ -19,8 +20,30 @@ const takePicture = dispatch => async (camera) => {
   }
 }
 
+const pickImage = dispatch => async () => {
+  // No permissions request is necessary for launching the image library
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  console.log(result);
+
+  if (!result.cancelled) {
+    dispatch({type: 'image', payload: result.uri} )
+    navigate('image')
+    return false
+  }
+  else if(result.cancelled){
+    navigate('creation')
+    return true
+  }
+};
+
 export const { Provider, Context } = createDataContext(
   mintingReducer,
-  { takePicture },
+  { takePicture, pickImage },
   { image: null }
 )
