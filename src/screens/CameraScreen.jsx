@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Pressable} from 'react-native';
 import { Camera } from 'expo-camera';
-import reactDom from 'react-dom';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { Context as MintingContext } from '../context/MintingContext'
 
-
-export default function App() {
+export default function App({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
-  const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+
+  const { takePicture } = useContext(MintingContext)
 
   useEffect(() => {
     (async () => {
@@ -16,13 +19,6 @@ export default function App() {
       setHasPermission(status === 'granted');
     })();
   }, []);
-
-  const takePicture = async () => {
-    if(camera){
-      const data = await camera.takePictureAsync(null)
-      setImage(data.uri)
-    }
-  }
 
   if (hasPermission === null) {
     return <View />;
@@ -37,7 +33,16 @@ export default function App() {
       type={type}
       ref={ref => setCamera(ref)}
       >
+      <Pressable style={styles.cancelButton} onPress={()=>{navigation.navigate('creation')}}>
+        <Text style={styles.text}>Cancel</Text>
+        </Pressable>
         <View style={styles.buttonContainer}>
+        <Pressable style={styles.galleryButton}>
+          <Entypo name="image" size={40} color="white" />
+          </Pressable>
+          <Pressable style={styles.pictureButton}
+          onPress={()=> takePicture(camera)}
+          ><Ionicons name="camera-outline" size={50} color="white" /></Pressable>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -47,11 +52,8 @@ export default function App() {
                   : Camera.Constants.Type.back
               );
             }}>
-            <Text style={styles.text}> Flip </Text>
+            <MaterialIcons name="flip-camera-ios" size={40} color="white" />
           </TouchableOpacity>
-          <Pressable style={styles.pictureButton}
-          onPress={()=> takePicture()}
-          />
         </View>
       </Camera>
     </View>
@@ -65,26 +67,29 @@ const styles = StyleSheet.create({
   camera: {
     flex: 1,
   },
+  cancelButton:{
+    marginTop: '10%',
+    marginLeft: '5%'
+  },
   buttonContainer: {
     flex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
     margin: 20,
+    justifyContent: 'space-between'
+  },
+  galleryButton:{
+    alignSelf: 'flex-end',
+  },
+  pictureButton:{
+    borderRadius: 40,
+    alignSelf: 'flex-end',
+    borderWidth: 2,
+    borderColor: 'white',
+    padding: 5
   },
   button: {
     alignSelf: 'flex-end',
-    alignContent: 'center',
-    borderColor: 'white',
-    borderWidth: 2,
-  },
-  pictureButton:{
-    borderColor: 'white',
-    borderWidth: 2,
-    alignSelf: 'flex-end',
-    padding: 30,
-    marginLeft: '30%',
-    borderRadius: 40,
-    backgroundColor: 'white'
   },
   text: {
     fontSize: 18,

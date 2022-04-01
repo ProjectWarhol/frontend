@@ -2,6 +2,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import CreationScreen from '../screens/CreationScreen'
 import CameraScreen from '../screens/CameraScreen'
 import CameraRollScreen from '../screens/CameraRollScreen'
+import ImageScreen from '../screens/ImageScreen'
 
 const mintingFlow = createStackNavigator({
   creation: {
@@ -16,7 +17,13 @@ const mintingFlow = createStackNavigator({
       headerShown: false,
         }
   },
-  cameraRoll: CameraRollScreen
+  cameraRoll: CameraRollScreen,
+  image: {
+    screen: ImageScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+  }
 })
 
 export default mintingFlow

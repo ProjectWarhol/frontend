@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import { StyleSheet, Image, View, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
