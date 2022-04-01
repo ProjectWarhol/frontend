@@ -151,7 +151,7 @@ const validateInput = (dispatch) => {
       dispatch({ type: 'doneScreen_message', payload: 'Great job!'})
       navigate('done')
   }
-  else{dispatch({ type: 'error_message', payload: 'There is something wrong with your seedphrase'})}
+  else{dispatch({ type: 'error_message', payload: 'Your seed phrase was not typed correctly'})}
   }
 }
 
