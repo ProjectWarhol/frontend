@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import CreationScreen from '../screens/CreationScreen'
 import CameraScreen from '../screens/CameraScreen'
-import ImageScreen from '../screens/ImageScreen'
+import UploadConfigurationScreen from '../screens/UploadConfigurationScreen'
 
 const mintingFlow = createStackNavigator({
   camera: {
@@ -11,7 +11,7 @@ const mintingFlow = createStackNavigator({
         }
   },
   image: {
-    screen: ImageScreen,
+    screen: UploadConfigurationScreen,
     navigationOptions:{
       headerShown: false,
         }
