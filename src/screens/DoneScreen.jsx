@@ -11,7 +11,7 @@ const DoneScreen = ({navigation}) => {
     <Image source={require('../../assets/celebration.png')} style={styles.image}/>
     <Spacer/>
     <Text style={styles.text} h1>Great Job!</Text>
-    <Text h5>You can always access your wallet information in the settings</Text>
+    <Text h5>you can always access your wallet information in the settings</Text>
     <Spacer/>
     <Button title={'Proceed to UNOS'} onPress={()=>{navigation.navigate('authenticatedUser')}}/>
     </SafeAreaView>

@@ -1,12 +1,12 @@
 import { Feather, AntDesign } from '@expo/vector-icons';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import FeedScreen from '../screens/FeedScreen';
-import CreationScreen from '../screens/CreationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import mintingFlow from './mintingFlow'
 
 const authenticatedUser = createBottomTabNavigator({
   feed: FeedScreen,
-  creation: CreationScreen,
+  mintingFlow: mintingFlow,
   profile: ProfileScreen,
   },
   {
@@ -18,7 +18,7 @@ const authenticatedUser = createBottomTabNavigator({
           iconName = 'home'
           return <Feather name={iconName} size={25} color={tintColor} />
         }
-        else if (routeName === 'creation') {
+        else if (routeName === 'mintingFlow') {
           iconName = 'plus-square'
           return <Feather name={iconName} size={25} color={tintColor} />
         }
