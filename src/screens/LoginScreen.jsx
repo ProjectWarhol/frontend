@@ -1,10 +1,11 @@
 import React, {useState, useContext} from 'react';
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, SafeAreaView } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
 import { Context as AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
+import BackButton from '../components/BackButton'
 
 const LoginScreen = ( {navigation } ) => {
   const { state, login, clearErrorMessage } = useContext(AuthContext)
@@ -12,12 +13,13 @@ const LoginScreen = ( {navigation } ) => {
   const[password, setPassword] = useState('')
 
   return (
-  <View style={styles.container}>
+  <SafeAreaView style={styles.container}>
     <NavigationEvents
-    onWillBlur={clearErrorMessage}
+    onWillFocus={clearErrorMessage}
     />
+    <BackButton routeName='selectAuthentication'/>
     <Spacer/>
-      <Text h3>Welcome back</Text>
+      <Text style={styles.header} h3>Welcome back</Text>
     <Spacer/>
     <Input
       label='Email'
@@ -39,18 +41,18 @@ const LoginScreen = ( {navigation } ) => {
     <Button title='Login' onPress={() => login({ email, password })} />
     <Spacer/>
     <NavLink routeName='signup' text='Dont have an Account yet? Sign up!'/>
-  </View>
+  </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
-      marginBottom: 200,
       marginLeft: 25,
       marginRight: 25,
-      marginTop: 50
+    },
+    header:{
+      marginTop: '25%'
     },
     errorMessage: {
       fontSize: 16,

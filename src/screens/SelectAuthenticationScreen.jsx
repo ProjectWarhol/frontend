@@ -1,11 +1,18 @@
-import React from 'react'
-import {  StyleSheet, View } from 'react-native'
+import React, { useContext } from 'react'
+import {  StyleSheet, View, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
+import { Context as AuthContext } from '../context/AuthContext'
+import { NavigationEvents } from 'react-navigation'
 
 const SelecteAuthenticationScreen = ({navigation}) => {
+  const { clearErrorMessage } = useContext(AuthContext)
+
   return (
-  <View style={styles.container}>
+  <SafeAreaView style={styles.container}>
+  <NavigationEvents
+  onWillBlur={clearErrorMessage}
+  />
   <View style={styles.headerContainer}>
   <Text style={styles.text} h3>Welcome</Text>
   </View>
@@ -28,18 +35,18 @@ const SelecteAuthenticationScreen = ({navigation}) => {
   <Text style={styles.buttonDescription}>I want to create an Account</Text>
   </View>
   </View>
-  </View>
+  </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container:{
-    display: 'flex'
+    display: 'flex',
   },
   headerContainer:{
     justifyContent:'center',
     flexDirection: 'row',
-    marginTop: 150
+    marginTop: '50%'
   },
   text: {
     fontSize: 30,
@@ -62,6 +69,7 @@ const styles = StyleSheet.create({
   buttonDescription:{
     marginLeft: 20,
     marginRight: 20,
+    paddingTop: 10
   }
 })
 
