@@ -28,13 +28,13 @@ const CreationScreen = ({navigation}) => {
               style={[styles.button, styles.buttonClose]}
               onPress={() => {navigation.navigate('camera'), setModalVisible(false)}}
             >
-              <Text style={styles.textStyle}>Camera</Text>
+              <Text style={styles.textStyle}>Create new NFT</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={async () => {setModalVisible(await pickImage())}}
             >
-              <Text style={styles.textStyle}>Upload from Gallery</Text>
+              <Text style={styles.textStyle}>Create Derivative</Text>
             </Pressable>
           </View>
         </View>

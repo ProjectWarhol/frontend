@@ -4,13 +4,19 @@ import CameraScreen from '../screens/CameraScreen'
 import UploadConfigurationScreen from '../screens/UploadConfigurationScreen'
 
 const mintingFlow = createStackNavigator({
+  creation:{
+    screen: CreationScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+  },
   camera: {
     screen: CameraScreen,
     navigationOptions:{
       headerShown: false,
         }
   },
-  image: {
+  uploadConfiguration: {
     screen: UploadConfigurationScreen,
     navigationOptions:{
       headerShown: false,

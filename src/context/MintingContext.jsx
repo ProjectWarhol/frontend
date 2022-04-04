@@ -16,7 +16,7 @@ const takePicture = dispatch => async (camera) => {
   if(camera){
     const data = await camera.takePictureAsync(null)
     dispatch({type: 'image', payload: data.uri} )
-    navigate('UploadConfigurationScreen')
+    navigate('uploadConfiguration')
   }
 }
 
@@ -33,7 +33,7 @@ const pickImage = dispatch => async () => {
 
   if (!result.cancelled) {
     dispatch({type: 'image', payload: result.uri} )
-    navigate('UploadConfigurationScreen')
+    navigate('uploadConfiguration')
     return false
   }
   else if(result.cancelled){

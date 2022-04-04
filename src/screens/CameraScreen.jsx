@@ -11,7 +11,7 @@ export default function App({navigation}) {
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
-  const { takePicture, pickImage } = useContext(MintingContext)
+  const { takePicture, pickImage, state } = useContext(MintingContext)
 
   useEffect(() => {
     (async () => {
@@ -37,7 +37,7 @@ export default function App({navigation}) {
         <Text style={styles.text}>Cancel</Text>
         </Pressable>
         <View style={styles.buttonContainer}>
-        <Pressable style={styles.galleryButton} onPress={()=>{pickImage()}}>
+        <Pressable style={styles.galleryButton} onPress={()=>{pickImage(), console.log(state.image)}}>
           <Entypo name="image" size={40} color="white" />
           </Pressable>
           <Pressable style={styles.pictureButton}
