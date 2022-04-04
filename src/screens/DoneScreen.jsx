@@ -1,14 +1,39 @@
-import React from 'react'
-import { Text, StyleSheet } from 'react-native'
+import React, {useContext} from 'react'
+import { StyleSheet, Image, View, SafeAreaView } from 'react-native'
+import { Text, Button } from 'react-native-elements'
+import Spacer from '../components/Spacer'
 
-const DoneScreen = () => {
-    return <Text style={styles.text}>DoneScreen</Text>
+
+const DoneScreen = ({navigation}) => {
+
+    return (
+    <SafeAreaView style={styles.container}>
+    <Image source={require('../../assets/celebration.png')} style={styles.image}/>
+    <Spacer/>
+    <Text style={styles.text} h1>Great Job!</Text>
+    <Text h5>You can still access your public address in settings</Text>
+    <Spacer/>
+    <Button title={'Proceed to UNOS'} onPress={()=>{navigation.navigate('authenticatedUser')}}/>
+    </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 30,
-    },
+  container:{
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height:'100%',
+    width:'100%'
+  },
+  image:{
+    width: 100,
+    height: 100,
+    resizeMode: 'contain'
+  },
+  text:{
+    paddingBottom: 20
+  }
 })
 
 export default DoneScreen
