@@ -65,8 +65,8 @@ node_modules/
 .pnp.*
 
 ### Node Patch ###
-# Serverless Webpack directories
-.webpack/
+# Serverless  directories
+./
 
 ### react ###
 .DS_*
@@ -198,7 +198,7 @@ Temporary Items
 ### SolidityTruffle ###
 # production
 build
-build_webpack
+build_
 
 # misc
 npm-debug.log
