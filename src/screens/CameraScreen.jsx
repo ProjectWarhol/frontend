@@ -33,7 +33,7 @@ export default function App({navigation}) {
       type={type}
       ref={ref => setCamera(ref)}
       >
-      <Pressable style={styles.cancelButton} onPress={()=>{navigation.navigate('feed')}}>
+      <Pressable style={styles.cancelButton} onPress={()=>{navigation.navigate('creation')}}>
         <Text style={styles.text}>Cancel</Text>
         </Pressable>
         <View style={styles.buttonContainer}>
