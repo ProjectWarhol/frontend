@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { StyleSheet, View, TextInput, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
-import { Context as AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 import BackButton from '../components/BackButton'
 
 const ValidateSeedPhraseScreen = ({navigation}) => {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginLeft: 25,
-        marginRight: 25,
+        marginRight: 25
     },
     seedPhraseContainer:{
       marginTop: '40%'
