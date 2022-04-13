@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { Text, StyleSheet, Button, SafeAreaView } from 'react-native'
-import { Context as AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 
 const UnAuthenticatedFeedScreen = ({navigation}) => {
   const { state } = useContext(AuthContext)

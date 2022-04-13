@@ -99,13 +99,14 @@ if(cookie && isCookieValid(cookie)){
   navigate('authenticatedUser')
 }else{
   navigate('unAuthenticatedUser')
-}
+  }
 }
 
 async function isCookieValid(cookie) {
   const config = {headers:{
     'my.sid': cookie
-  }}
+    }
+  }
   await Api.get('/users/session', config)
   return true
 }

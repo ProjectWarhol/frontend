@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Text, StyleSheet, SafeAreaView } from 'react-native'
 import { Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
-import { Context as AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 
 const ProfileScreen = () => {
   const { logout } = useContext(AuthContext)

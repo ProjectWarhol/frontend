@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Text, StyleSheet, View, SafeAreaView } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Context as AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 import { navigate } from '../navigationRef'
 import { NavigationEvents } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'

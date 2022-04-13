@@ -1,11 +1,15 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import renderer from 'react-test-renderer';
 import 'react-native-gesture-handler/jestSetup';
 
 import ValidateSeedPhraseScreen from '../../src/screens/ValidateSeedPhraseScreen';
-import { Context as AuthContext, AuthProvider, validateInput } from '../../src/context/AuthContext';
+import { AuthProvider, AuthContext} from '../../src/context/AuthContext';
 
 jest.useFakeTimers()
+
+const navigation = {
+  navigate: jest.fn()
+}
 
 jest.mock('@expo/vector-icons/build/vendor/react-native-vector-icons/lib/create-icon-set.js', () => {
   return () => '';
@@ -19,12 +23,12 @@ jest.mock('react-navigation', () => ({
   ), NavigationEvents: 'mockNavigationEvents'
 }));
 
-test('renders correctly', async () => {
-  const tree = await renderer.create(
-    <AuthProvider value={null}>
-      <ValidateSeedPhraseScreen />
-    </AuthProvider>, {}).toJSON();
+const tree = renderer.create(
+  <AuthProvider value={null}>
+    <ValidateSeedPhraseScreen navigation={navigation} />
+  </AuthProvider>, {}).getInstance()
+
+test('renders correctly', () => {
   expect(tree).toMatchSnapshot();
 });
-
 

@@ -40,7 +40,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest -u"
+    "test": "jest"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
