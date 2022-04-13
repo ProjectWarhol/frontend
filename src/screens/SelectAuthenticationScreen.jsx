@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import {  StyleSheet, View, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import Spacer from '../components/Spacer'
-import { Context as AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 import { NavigationEvents } from 'react-navigation'
 
 const SelecteAuthenticationScreen = ({navigation}) => {
@@ -20,6 +20,7 @@ const SelecteAuthenticationScreen = ({navigation}) => {
   <View style={styles.buttonParent}>
   <View style={styles.loginButtonContainer}>
   <Button
+  testID='login'
   title='Log in'
   style={styles.button}
   onPress={()=>{navigation.navigate('login')}}
@@ -28,6 +29,7 @@ const SelecteAuthenticationScreen = ({navigation}) => {
   </View >
   <View style={styles.signupButtonContainer}>
   <Button
+  testID='signup'
   title='Sign up'
   style={styles.button}
   onPress={()=>{navigation.navigate('signup')}}
