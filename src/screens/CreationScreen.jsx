@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, StyleSheet, Text, Pressable, SafeAreaView, View } from "react-native";
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { withNavigation } from 'react-navigation'
+import { Context as MintingContext } from '../context/MintingContext'
 
 const CreationScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(true);
 
-   navigation.addListener('didFocus', () => {
+  const { pickImage } = useContext(MintingContext)
+
+  navigation.addListener('didFocus', () => {
       setModalVisible(true)
     });
 
   return (
     <SafeAreaView style={styles.centeredView}>
-      <GestureRecognizer onSwipeDown={ () => setModalVisible(false) }>
+      <GestureRecognizer onSwipeDown={ () => {setModalVisible(false), navigation.navigate('feed')} }>
       <Modal
         animationType="slide"
         transparent={true}
@@ -25,13 +28,13 @@ const CreationScreen = ({navigation}) => {
               style={[styles.button, styles.buttonClose]}
               onPress={() => {navigation.navigate('camera'), setModalVisible(false)}}
             >
-              <Text style={styles.textStyle}>Camera</Text>
+              <Text style={styles.textStyle}>Create new NFT</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {navigation.navigate('cameraRoll'), setModalVisible(false)}}
+              onPress={async () => {setModalVisible(await pickImage())}}
             >
-              <Text style={styles.textStyle}>Upload from Gallery</Text>
+              <Text style={styles.textStyle}>Create Derivative</Text>
             </Pressable>
           </View>
         </View>
