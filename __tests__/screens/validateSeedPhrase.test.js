@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import renderer from 'react-test-renderer';
-import 'react-native-gesture-handler/jestSetup';
 
 import ValidateSeedPhraseScreen from '../../src/screens/ValidateSeedPhraseScreen';
-import { AuthProvider, AuthContext} from '../../src/context/AuthContext';
+import { AuthProvider } from '../../src/context/AuthContext';
 
 jest.useFakeTimers()
 
