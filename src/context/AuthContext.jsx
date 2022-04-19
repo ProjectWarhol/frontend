@@ -103,12 +103,16 @@ if(cookie && isCookieValid(cookie)){
 }
 
 async function isCookieValid(cookie) {
-  const config = {headers:{
+  try
+ { const config = {headers:{
     'my.sid': cookie
     }
   }
   await Api.get('/users/session', config)
-  return true
+  return true}
+  catch{
+    return false
+  }
 }
 
 const clearErrorMessage = dispatch => () => {

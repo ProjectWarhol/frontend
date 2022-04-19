@@ -39,7 +39,7 @@ const pickImage = dispatch => async () => {
   }
 };
 
-export const { Provider, Context } = createDataContext(
+export const { Provider: MintingProvider , Context: MintingContext } = createDataContext(
   mintingReducer,
   { takePicture, pickImage },
   { image: null }
