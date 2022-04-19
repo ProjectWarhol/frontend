@@ -93,7 +93,7 @@ const logout = dispatch => async () => {
   }
 }
 
-const tryLocalLogin = dispatch => async () => {
+const tryLocalLogin = async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
 if(cookie && isCookieValid(cookie)){
   navigate('authenticatedUser')
