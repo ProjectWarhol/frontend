@@ -4,7 +4,7 @@ import { Camera } from 'expo-camera';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { Context as MintingContext } from '../context/MintingContext'
+import { MintingContext } from '../context/MintingContext'
 
 export default function App({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);

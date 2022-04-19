@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { Text, StyleSheet, SafeAreaView, Image, Pressable, TextInput, View} from 'react-native'
-import { Context as MintingContext } from '../context/MintingContext'
+import { MintingContext } from '../context/MintingContext'
 import Checkbox from 'expo-checkbox'
 import { AntDesign } from '@expo/vector-icons';
 

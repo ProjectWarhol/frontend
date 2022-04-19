@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Modal, StyleSheet, Text, Pressable, SafeAreaView, View } from "react-native";
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { withNavigation } from 'react-navigation'
-import { Context as MintingContext } from '../context/MintingContext'
+import { MintingContext } from '../context/MintingContext'
 
 const CreationScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(true);

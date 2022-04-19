@@ -5,7 +5,7 @@ const ResolveAuthScreen = () => {
   const { tryLocalLogin } = useContext(AuthContext)
 
   useEffect(() => {
-    tryLocalLogin()
+    tryLocalLogin
   }, [])
 
   return null
