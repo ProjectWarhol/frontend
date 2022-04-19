@@ -29,8 +29,6 @@ const pickImage = dispatch => async () => {
     quality: 1,
   });
 
-  console.log(result);
-
   if (!result.cancelled) {
     dispatch({type: 'image', payload: result.uri} )
     navigate('uploadConfiguration')
