@@ -38,6 +38,7 @@ const authReducer = (state, action) => {
 
 async function expressSignup ( dispatch, email, password, userName) {
   const response = await Api.post('/users/express', {userName: userName, email: email, password: password})
+  console.log('here is express'+response)
   let cookieArray = response["headers"]["set-cookie"]
   let cookieString = cookieArray.toString()
   const cookie = cookieString.substring(
@@ -58,8 +59,9 @@ const signup = (dispatch) => {
   return async ({ email, password, repeatedPassword, userName }) => {
     try{
       if (password === repeatedPassword)
-      {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
+      {const response = await Api.post('/users/createUser', {userName: userName, email: email, password: password })
       const userId = response.data.userId
+      console.log(userId)
       const walletId = await expressSignup( dispatch, email, password, userName)
       dispatch({ type: 'signup' })
       dispatch({ type: 'add_email', payload: `${email}`})
