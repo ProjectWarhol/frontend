@@ -2,7 +2,8 @@ import React from "react";
 import renderer from 'react-test-renderer';
 
 import ValidateSeedPhraseScreen from '../../src/screens/ValidateSeedPhraseScreen';
-import { AuthProvider } from '../../src/context/AuthContext';
+import { AuthProvider, validateInput } from '../../src/context/AuthContext';
+import { exp } from "react-native-reanimated";
 
 jest.useFakeTimers()
 
@@ -31,3 +32,9 @@ test('renders correctly', () => {
   expect(tree).toMatchSnapshot();
 });
 
+test('gives wrong input to validateInput function', () => {
+  const userInput = 'hello'
+  const expected = 'blouse'
+  validateInput(userInput, expected)
+  expect(validateInput).toReturn(false)
+})

@@ -5,7 +5,7 @@ import Spacer from '../components/Spacer'
 import { AuthContext } from '../context/AuthContext'
 import { NavigationEvents } from 'react-navigation'
 
-const SelecteAuthenticationScreen = ({navigation}) => {
+const SelectAuthenticationScreen = ({navigation}) => {
   const { clearErrorMessage } = useContext(AuthContext)
 
   return (
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default SelecteAuthenticationScreen
+export default SelectAuthenticationScreen

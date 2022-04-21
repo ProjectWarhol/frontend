@@ -155,7 +155,10 @@ const validateInput = (dispatch) => {
   if (userInput === expected) {
       navigate('done')
   }
-  else{dispatch({ type: 'error_message', payload: 'your seed phrase was not typed correctly'})}
+  else{
+    dispatch({ type: 'error_message', payload: 'your seed phrase was not typed correctly'})
+    return false
+    }
   }
 }
 
