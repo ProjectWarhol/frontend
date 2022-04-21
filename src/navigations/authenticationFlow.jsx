@@ -6,7 +6,6 @@ import LoginScreen from '../screens/LoginScreen';
 import walletInformationScreen from '../screens/WalletInformationScreen';
 import validateSeedPhraseScreen from '../screens/ValidateSeedPhraseScreen';
 import SelectAuthenticationScreen from '../screens/SelectAuthenticationScreen';
-import MnemonicScreen from '../screens/MnemonicScreen';
 
 const authenticationFlow = createStackNavigator({
   selectAuthentication: {
@@ -48,7 +47,6 @@ const authenticationFlow = createStackNavigator({
       headerShown: false,
         }
       },
-  Mnemonic: MnemonicScreen
     },
   )
 
