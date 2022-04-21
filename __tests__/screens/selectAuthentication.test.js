@@ -1,6 +1,6 @@
 import React from "react";
-import { create, act } from "react-test-renderer";
-import SelecteAuthenticationScreen from "../../src/screens/SelectAuthenticationScreen";
+import { create } from "react-test-renderer";
+import SelectAuthenticationScreen from "../../src/screens/SelectAuthenticationScreen";
 import { AuthProvider } from '../../src/context/AuthContext';
 
 const navigation = {
@@ -8,12 +8,12 @@ const navigation = {
 }
 
 jest.mock('react-navigation', () => ({
-  withNavigation: SelecteAuthenticationScreen => props => (
-    <SelecteAuthenticationScreen navigation={{ navigate: jest.fn() }} {...props} />
+  withNavigation: SelectAuthenticationScreen => props => (
+    <SelectAuthenticationScreen navigation={{ navigate: jest.fn() }} {...props} />
   ), NavigationEvents: 'mockNavigationEvents'
 }));
 
-const tree = create(<AuthProvider value={null}><SelecteAuthenticationScreen navigation={navigation}/></AuthProvider>)
+const tree = create(<AuthProvider value={null}><SelectAuthenticationScreen navigation={navigation}/></AuthProvider>)
 
 test('snapshot', ()=>{
   expect(tree).toMatchSnapshot()
