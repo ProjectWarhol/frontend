@@ -13,7 +13,11 @@ jest.mock('react-navigation', () => ({
   ), NavigationEvents: 'mockNavigationEvents'
 }));
 
-const tree = create(<AuthProvider value={null}><SelectAuthenticationScreen navigation={navigation}/></AuthProvider>)
+const tree = create(
+    <AuthProvider value={null}>
+        <SelectAuthenticationScreen navigation={navigation} />
+    </AuthProvider>
+)
 
 test('snapshot', ()=>{
   expect(tree).toMatchSnapshot()

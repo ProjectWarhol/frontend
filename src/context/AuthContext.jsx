@@ -36,6 +36,10 @@ const authReducer = (state, action) => {
   }
 }
 
+export const validateEmail = (email) => {
+  return /\S+@\S+\.\S+/.test(String(email).toLowerCase());
+};
+
 async function expressSignup ( dispatch, email, password, userName) {
   const response = await Api.post('/users/express', {userName: userName, email: email, password: password})
   console.log('here is express'+response)
@@ -58,8 +62,12 @@ async function expressSignup ( dispatch, email, password, userName) {
 const signup = (dispatch) => {
   return async ({ email, password, repeatedPassword, userName }) => {
     try{
-      if (password === repeatedPassword)
-      {const response = await Api.post('/users/createUser', {userName: userName, email: email, password: password })
+      if (!validateEmail(email)){
+        dispatch({type: 'error_message', payload: 'email is not valid'})
+      }
+      else if (password === repeatedPassword )
+      {dispatch({type: 'clear_error_message'})
+      const response = await Api.post('/users/createUser', {userName: userName, email: email, password: password })
       const userId = response.data.userId
       console.log(userId)
       const walletId = await expressSignup( dispatch, email, password, userName)
@@ -152,10 +160,11 @@ const login = (dispatch) => async ({ email, password }) => {
   }
 }
 
-const validateInput = (dispatch) => {
+export const validateInput = (dispatch) => {
   return (userInput, expected) => {
   if (userInput === expected) {
       navigate('done')
+      return true
   }
   else{
     dispatch({ type: 'error_message', payload: 'your seed phrase was not typed correctly'})
