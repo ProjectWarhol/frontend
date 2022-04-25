@@ -1,3 +1,159 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `null`;
+exports[`renders correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "flex": 1,
+      "marginLeft": 25,
+      "marginRight": 25,
+    }
+  }
+>
+  <mockNavigationEvents
+    onWillFocus={[Function]}
+  />
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginRight": "70%",
+        "opacity": 1,
+      }
+    }
+  >
+    <Text />
+    <Text
+      style={
+        Object {
+          "fontSize": 20,
+        }
+      }
+    >
+      Go Back
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "marginTop": "40%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#242424",
+          "fontSize": 36,
+        }
+      }
+    >
+      Validate Your Seed Phrase
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      autoCorrect={false}
+      editable={true}
+      maxLength={200}
+      multiline={true}
+      onChangeText={[Function]}
+      placeholder="Your Validation Seed Phrase"
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "borderRadius": 10,
+          "borderWidth": 1,
+          "fontSize": 20,
+          "height": 200,
+          "margin": 12,
+          "padding": 10,
+        }
+      }
+      testID="input"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "borderRadius": 3,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 3,
+          },
+          undefined,
+          false,
+        ]
+      }
+    >
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "busy": false,
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+            "paddingBottom": 15,
+          }
+        }
+        testID="validateButton"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#2089dc",
+              "borderColor": "#2089dc",
+              "borderRadius": 3,
+              "borderWidth": 0,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "padding": 8,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 18,
+                "paddingVertical": 1,
+                "textAlign": "center",
+              }
+            }
+          >
+            Validate
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;
