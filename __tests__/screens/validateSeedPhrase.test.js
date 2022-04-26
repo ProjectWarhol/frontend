@@ -1,8 +1,13 @@
 import React from 'react'
-import { act, create, fireEvent } from 'react-test-renderer'
-
+import { create, fireEvent } from 'react-test-renderer'
+import { render, fireEvent as fire } from 'react-native-testing-library'
+import { Button } from 'react-native-elements'
 import ValidateSeedPhraseScreen from '../../src/screens/ValidateSeedPhraseScreen'
-import { AuthProvider, AuthContext } from '../../src/context/AuthContext'
+import {
+    AuthProvider,
+    AuthContext,
+    validateInput,
+} from '../../src/context/AuthContext'
 
 jest.useFakeTimers()
 
@@ -42,22 +47,24 @@ test('renders correctly', () => {
     expect(tree).toMatchSnapshot()
 })
 
-test('click validate Button', () => {
-    const validateInput = jest.fn()
-    const tree = create(
-        <AuthProvider value={{ validateInput }}>
-            <ValidateSeedPhraseScreen navigation={navigation} />
-        </AuthProvider>,
-        {}
+it('clicks the validate input button', () => {
+    const Test = ({ onPress, validateInput }) => (
+        <Button
+            testID="btn"
+            onPress={() => {
+                onPress()
+                validateInput('blosue', 'blouse')
+            }}
+        />
     )
-    const input = tree.root.findByProps({
-        testID: 'input',
-    })
-    const validateButton = tree.root.findByProps({
-        testID: 'validateButton',
-    }).props
-    act(() => {
-        validateButton.onPress(validateInput)
-    })
-    expect(validateInput).toHaveBeenCalledTimes(0)
+    const onPress = jest.fn()
+    const { getByTestId } = render(
+        <AuthProvider>
+            <AuthContext.Consumer>
+                {(value) => <Test onPress={onPress} {...value} />}
+            </AuthContext.Consumer>
+        </AuthProvider>
+    )
+    fire(getByTestId('btn'), 'onPress')
+    expect(onPress).toHaveBeenCalled()
 })
