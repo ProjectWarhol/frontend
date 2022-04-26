@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   backButton:{
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: '70%',
+    marginRight: '70%'
   },
   backButtonText:{
     fontSize: 20

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
-import { Text, StyleSheet, SafeAreaView, Image, Button } from 'react-native'
-import { Context as MintingContext } from '../context/MintingContext'
+import { StyleSheet, SafeAreaView, Image } from 'react-native'
+import { MintingContext } from '../context/MintingContext'
 
 const ImageScreen = ({navigation}) => {
   const { state } = useContext(MintingContext)

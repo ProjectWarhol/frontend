@@ -2,23 +2,18 @@ import React, { useState, useContext, useEffect } from 'react'
 import { StyleSheet, View, TextInput, SafeAreaView } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation'
-import { Context as AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 import BackButton from '../components/BackButton'
 
 const ValidateSeedPhraseScreen = ({navigation}) => {
     const { validateInput, clearErrorMessage, state } = useContext(AuthContext)
-    const [seedPhrase, setSeedPhrase] = useState('')
-    const testPhrase = 'blouse'
+    const [userInput, setUserInput] = useState('')
+    const expected = 'blouse'
 
-    const checkSeedPhrase = () => {
-     validateInput(seedPhrase, testPhrase)}
-
-    return (
-        <SafeAreaView style={styles.container}>
+    return (<SafeAreaView style={styles.container}>
             <NavigationEvents
             onWillFocus={clearErrorMessage}
             />
-            <NavigationEvents />
             <BackButton routeName='walletInformation'/>
             <View style={styles.seedPhraseContainer}>
             <Text h3>Validate Your Seed Phrase</Text>
@@ -26,29 +21,30 @@ const ValidateSeedPhraseScreen = ({navigation}) => {
                 style={styles.input}
                 editable
                 multiline
-                onChangeText={(text) => setSeedPhrase(text)}
-                value={seedPhrase}
+                onChangeText={(text) => setUserInput(text)}
+                value={userInput}
                 placeholder="Your Validation Seed Phrase"
                 autoCorrect={false}
                 autoCapitalize='none'
                 maxLength={200}
+                testID='input'
             />
             <Button
                 title="Validate"
-                onPress={() => checkSeedPhrase(seedPhrase, testPhrase)}
+                onPress={() => validateInput(userInput, expected)}
                 style={styles.validateButton}
+                testID='validateButton'
             />
             {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text> ) : null}
             </View>
-        </SafeAreaView>
-    )
+        </SafeAreaView>)
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginLeft: 25,
-        marginRight: 25,
+        marginRight: 25
     },
     seedPhraseContainer:{
       marginTop: '40%'

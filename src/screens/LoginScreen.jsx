@@ -1,9 +1,9 @@
 import React, {useState, useContext} from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native'
-import { Text, Input, Button } from 'react-native-elements'
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { Text, Input, Button } from 'react-native-elements';
 import { NavigationEvents } from 'react-navigation'
 import Spacer from '../components/Spacer'
-import { Context as AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 import NavLink from '../components/NavLink'
 import BackButton from '../components/BackButton'
 

@@ -36,8 +36,13 @@ const authReducer = (state, action) => {
   }
 }
 
+export const validateEmail = (email) => {
+  return /\S+@\S+\.\S+/.test(String(email).toLowerCase());
+};
+
 async function expressSignup ( dispatch, email, password, userName) {
   const response = await Api.post('/users/express', {userName: userName, email: email, password: password})
+  console.log('here is express'+response)
   let cookieArray = response["headers"]["set-cookie"]
   let cookieString = cookieArray.toString()
   const cookie = cookieString.substring(
@@ -57,9 +62,14 @@ async function expressSignup ( dispatch, email, password, userName) {
 const signup = (dispatch) => {
   return async ({ email, password, repeatedPassword, userName }) => {
     try{
-      if (password === repeatedPassword)
-      {const response = await Api.post('/users/createUser', { email: email, password: password, userName: userName })
+      if (!validateEmail(email)){
+        dispatch({type: 'error_message', payload: 'email is not valid'})
+      }
+      else if (password === repeatedPassword )
+      {dispatch({type: 'clear_error_message'})
+      const response = await Api.post('/users/createUser', {userName: userName, email: email, password: password })
       const userId = response.data.userId
+      console.log(userId)
       const walletId = await expressSignup( dispatch, email, password, userName)
       dispatch({ type: 'signup' })
       dispatch({ type: 'add_email', payload: `${email}`})
@@ -93,21 +103,26 @@ const logout = dispatch => async () => {
   }
 }
 
-const tryLocalLogin = dispatch => async () => {
+const tryLocalLogin = async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
 if(cookie && isCookieValid(cookie)){
   navigate('authenticatedUser')
 }else{
   navigate('unAuthenticatedUser')
-}
+  }
 }
 
 async function isCookieValid(cookie) {
-  const config = {headers:{
+  try
+ { const config = {headers:{
     'my.sid': cookie
-  }}
+    }
+  }
   await Api.get('/users/session', config)
-  return true
+  return true}
+  catch{
+    return false
+  }
 }
 
 const clearErrorMessage = dispatch => () => {
@@ -145,17 +160,20 @@ const login = (dispatch) => async ({ email, password }) => {
   }
 }
 
-const validateInput = (dispatch) => {
+export const validateInput = (dispatch) => {
   return (userInput, expected) => {
   if (userInput === expected) {
-      dispatch({ type: 'doneScreen_message', payload: 'Great job!'})
       navigate('done')
+      return true
   }
-  else{dispatch({ type: 'error_message', payload: 'your seed phrase was not typed correctly'})}
-  }
-}
+  else{
+    dispatch({ type: 'error_message', payload: 'your seed phrase was not typed correctly'})
+    return false
+    }
+  }}
 
-export const { Provider, Context } = createDataContext(
+
+export const { Provider: AuthProvider, Context: AuthContext } = createDataContext(
   authReducer,
   { login, logout, clearErrorMessage, tryLocalLogin, signup, deleteUser, validateInput },
   { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonicPhrase: '', walletId: '' }

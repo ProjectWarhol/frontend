@@ -1,11 +1,11 @@
-import React, { useEffect, useContext } from 'react'
-import { Context as AuthContext } from '../context/AuthContext';
+import { useEffect, useContext } from 'react'
+import { AuthContext } from '../context/AuthContext';
 
 const ResolveAuthScreen = () => {
   const { tryLocalLogin } = useContext(AuthContext)
 
   useEffect(() => {
-    tryLocalLogin()
+    tryLocalLogin
   }, [])
 
   return null
