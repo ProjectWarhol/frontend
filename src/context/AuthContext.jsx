@@ -170,8 +170,8 @@ export const validateInput = (dispatch) => {
     dispatch({ type: 'error_message', payload: 'your seed phrase was not typed correctly'})
     return false
     }
-  }
-}
+  }}
+
 
 export const { Provider: AuthProvider, Context: AuthContext } = createDataContext(
   authReducer,
