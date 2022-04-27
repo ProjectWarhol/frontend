@@ -5,10 +5,10 @@ import { NavigationEvents } from 'react-navigation'
 import { AuthContext } from '../context/AuthContext'
 import BackButton from '../components/BackButton'
 
-const ValidateSeedPhraseScreen = ({navigation}) => {
+const ValidateSeedPhraseScreen = () => {
     const { validateInput, clearErrorMessage, state } = useContext(AuthContext)
     const [userInput, setUserInput] = useState('')
-    const expected = 'blouse'
+    const expected = state.mnemonicPhrase
 
     return (<SafeAreaView style={styles.container}>
             <NavigationEvents
