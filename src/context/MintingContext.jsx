@@ -17,6 +17,7 @@ const mintingReducer = (state, action) => {
 const takePicture = dispatch => async (camera) => {
   if(camera){
     const data = await camera.takePictureAsync(null)
+    console.log(data)
     dispatch({type: 'image', payload: data.uri} )
     navigate('uploadConfiguration')
   }

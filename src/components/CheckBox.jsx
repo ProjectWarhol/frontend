@@ -2,8 +2,7 @@ import Checkbox from 'expo-checkbox'
 import React, { useState } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-const CheckBox = ({text}) => {
-  const [isChecked, setChecked] = useState(false)
+const CheckBox = ({text, lazyIsChecked}) => {
 
   return(
     <View style={styles.checkboxContainer}>

@@ -21,15 +21,13 @@ const UploadConfigurationScreen = ({navigation}) => {
     <Image source={{uri: state.image}} style={styles.image}/>
       <Text style={styles.text}>Title</Text>
       {state.isDerivative ?
-      (<><TextInput
+      (<><Text
         style={styles.titleInput}
-        placeholder="Title already set"
-       />
+       >Title already set</Text>
        <Text style={styles.text}>Description</Text>
-       <TextInput
+       <Text
         style={styles.descriptionInput}
-        placeholder="Description already set"
-       /></>)
+       >Description already set</Text></>)
       :
       (<>
       <TextInput
@@ -95,7 +93,7 @@ const UploadConfigurationScreen = ({navigation}) => {
     onValueChange={setChecked} />
     <Text style={styles.checkboxText}>Confirmation of validity</Text>
     </View>
-    <Pressable style={styles.continueButton}>
+    <Pressable style={styles.continueButton} onPress={()=>{navigation.navigate('setupRoyalties')}}>
     <Text style={{paddingRight: '1%'}}>
       Continue
     </Text>
