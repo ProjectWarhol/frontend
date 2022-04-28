@@ -7,7 +7,7 @@ import { MintingContext } from '../context/MintingContext'
 const CreationScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(true);
 
-  const { pickImage } = useContext(MintingContext)
+  const { state, pickImage, toggleBool } = useContext(MintingContext)
 
   navigation.addListener('didFocus', () => {
       setModalVisible(true)
@@ -32,7 +32,7 @@ const CreationScreen = ({navigation}) => {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={async () => {setModalVisible(await pickImage())}}
+              onPress={async () => {setModalVisible(await pickImage()), toggleBool(state.isDerivative)}}
             >
               <Text style={styles.textStyle}>Create Derivative</Text>
             </Pressable>

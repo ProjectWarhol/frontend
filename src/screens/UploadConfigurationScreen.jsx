@@ -20,7 +20,19 @@ const UploadConfigurationScreen = ({navigation}) => {
       </Pressable>
     <Image source={{uri: state.image}} style={styles.image}/>
       <Text style={styles.text}>Title</Text>
-    <TextInput
+      {state.isDerivative ?
+      (<><TextInput
+        style={styles.titleInput}
+        placeholder="Title already set"
+       />
+       <Text style={styles.text}>Description</Text>
+       <TextInput
+        style={styles.descriptionInput}
+        placeholder="Description already set"
+       /></>)
+      :
+      (<>
+      <TextInput
      style={styles.titleInput}
      editable
      multiline
@@ -40,7 +52,7 @@ const UploadConfigurationScreen = ({navigation}) => {
      autoCorrect={false}
      autoCapitalize='none'
      maxLength={100}
-    />
+    /></>) }
     <Text style={styles.text}>Add Tags</Text>
     <View style={styles.tagContainer}>
     <TextInput

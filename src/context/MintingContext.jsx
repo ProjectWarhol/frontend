@@ -7,6 +7,8 @@ const mintingReducer = (state, action) => {
   switch (action.type){
     case 'image':
       return {...state, image: action.payload}
+    case 'setDerivative':
+      return {isDerivative: action.payload}
     default:
       return state
   }
@@ -32,6 +34,7 @@ const pickImage = dispatch => async () => {
   if (!result.cancelled) {
     dispatch({type: 'image', payload: result.uri} )
     navigate('uploadConfiguration')
+    dispatch({type: 'setDerivative', payload: false} )
     return false
   }
   else if(result.cancelled){
@@ -39,8 +42,10 @@ const pickImage = dispatch => async () => {
   }
 };
 
+const toggleBool = (dispatch) => (val) => {val = !val, dispatch({type: 'setDerivative', payload: val})}
+
 export const { Provider: MintingProvider , Context: MintingContext } = createDataContext(
   mintingReducer,
-  { takePicture, pickImage },
-  { image: null }
+  { takePicture, pickImage, toggleBool },
+  { image: null, isDerivative: false }
 )

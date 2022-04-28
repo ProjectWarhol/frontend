@@ -1,10 +1,6 @@
 import React from 'react'
 import { cleanup } from 'react-native-testing-library'
-import {
-    validateEmail,
-    validateInput,
-    authReducer,
-} from '../../src/context/AuthContext'
+import { validateEmail, validateInput } from '../../src/context/AuthContext'
 
 describe('AuthContext', () => {
     const navigation = {

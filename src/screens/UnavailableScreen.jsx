@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, SafeAreaView, Tou } from 'react-native'
+import { Text, StyleSheet, SafeAreaView } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
