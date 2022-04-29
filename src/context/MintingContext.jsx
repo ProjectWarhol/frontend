@@ -9,6 +9,12 @@ const mintingReducer = (state, action) => {
       return {...state, image: action.payload}
     case 'setDerivative':
       return {isDerivative: action.payload}
+    case 'setDate':
+      return {...state, date: action.payload}
+    case 'setTitle':
+      return{...state, title: action.payload}
+    case 'setDescription':
+      return{...state, description: action.payload}
     default:
       return state
   }
@@ -16,9 +22,9 @@ const mintingReducer = (state, action) => {
 
 const takePicture = dispatch => async (camera) => {
   if(camera){
-    const data = await camera.takePictureAsync(null)
-    console.log(data)
+    const data = await camera.takePictureAsync({exif: true})
     dispatch({type: 'image', payload: data.uri} )
+    dispatch({type: 'date', payload: data.DateTimeOriginal})
     navigate('uploadConfiguration')
   }
 }
@@ -43,10 +49,25 @@ const pickImage = dispatch => async () => {
   }
 };
 
+const uploadConfiguration = dispatch => (title, description) => {
+  dispatch({type: 'setDescription', payload: description})
+  dispatch({type: 'setTitle', payload: title})
+}
+
+const mint = async (name, description, image, publicAddress, date, price) => {
+try{
+  await Api.post('/nft/mint', {name: name, description: description,
+  image: image, creatorAdress: publicAddress, ownerAdress: publicAddress, date: date,
+  location: 'Berlin', positionInTree: 0, amountSold: price})
+ }
+ catch{
+ }
+}
+
 const toggleBool = (dispatch) => (val) => {val = !val, dispatch({type: 'setDerivative', payload: val})}
 
 export const { Provider: MintingProvider , Context: MintingContext } = createDataContext(
   mintingReducer,
-  { takePicture, pickImage, toggleBool },
-  { image: null, isDerivative: false }
+  { takePicture, pickImage, toggleBool, mint, uploadConfiguration },
+  { image: null, isDerivative: false, date: null, title: '', description: '' }
 )

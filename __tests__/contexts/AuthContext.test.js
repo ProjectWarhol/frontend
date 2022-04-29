@@ -1,6 +1,10 @@
 import React from 'react'
 import { cleanup } from 'react-native-testing-library'
-import { validateEmail, validateInput } from '../../src/context/AuthContext'
+import {
+    validateEmail,
+    validateInput,
+    login,
+} from '../../src/context/AuthContext'
 
 describe('AuthContext', () => {
     const navigation = {
@@ -30,4 +34,6 @@ describe('AuthContext', () => {
         const expected = 'hello'
         expect(validateInput(userInput, userInput)).toBeTruthy()
     })
+
+    it('logs the user in'), () => {}
 })

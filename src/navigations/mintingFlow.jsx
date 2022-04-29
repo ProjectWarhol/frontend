@@ -2,7 +2,8 @@ import { createStackNavigator } from 'react-navigation-stack'
 import CreationScreen from '../screens/CreationScreen'
 import CameraScreen from '../screens/CameraScreen'
 import UploadConfigurationScreen from '../screens/UploadConfigurationScreen'
-import SetupRoyaltiesScreen from '../screens/SetupRoyaltiesScreen'
+import SetupPriceScreen from '../screens/SetupPriceScreen'
+import RoyaltyShareScreen from '../screens/RoyaltyShareScreen'
 
 const mintingFlow = createStackNavigator({
   creation:{
@@ -23,8 +24,14 @@ const mintingFlow = createStackNavigator({
       headerShown: false,
         }
   },
-  setupRoyalties:{
-    screen: SetupRoyaltiesScreen,
+  setupPrice:{
+    screen: SetupPriceScreen,
+    navigationOptions:{
+      headerShown: false,
+        }
+  },
+  royaltyShare:{
+    screen: RoyaltyShareScreen,
     navigationOptions:{
       headerShown: false,
         }

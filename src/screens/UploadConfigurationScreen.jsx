@@ -5,7 +5,7 @@ import Checkbox from 'expo-checkbox'
 import { AntDesign } from '@expo/vector-icons';
 
 const UploadConfigurationScreen = ({navigation}) => {
-  const { state } = useContext(MintingContext)
+  const { state, uploadConfiguration } = useContext(MintingContext)
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -93,7 +93,7 @@ const UploadConfigurationScreen = ({navigation}) => {
     onValueChange={setChecked} />
     <Text style={styles.checkboxText}>Confirmation of validity</Text>
     </View>
-    <Pressable style={styles.continueButton} onPress={()=>{navigation.navigate('setupRoyalties')}}>
+    <Pressable style={styles.continueButton} onPress={()=>{navigation.navigate('setupPrice'), uploadConfiguration(title,description)}}>
     <Text style={{paddingRight: '1%'}}>
       Continue
     </Text>
