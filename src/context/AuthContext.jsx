@@ -9,8 +9,6 @@ const authReducer = (state, action) => {
       return {...state }
     case 'add_email':
       return {...state, email: action.payload}
-    case 'add_password':
-      return {...state, password: action.payload}
     case 'add_userName':
       return {...state, userName: action.payload}
     case 'add_userId':
@@ -40,25 +38,6 @@ export const validateEmail = (email) => {
   return /\S+@\S+\.\S+/.test(String(email).toLowerCase());
 };
 
-async function expressSignup ( dispatch, email, password, userName) {
-  const response = await Api.post('/users/express', {userName: userName, email: email, password: password})
-  console.log('here is express'+response)
-  let cookieArray = response["headers"]["set-cookie"]
-  let cookieString = cookieArray.toString()
-  const cookie = cookieString.substring(
-  cookieString.indexOf('=') + 1,
-  cookieString.indexOf(';'))
-  await SecureStore.setItemAsync('cookie', cookie)
-  const publicAddress = response.data.wallet.address
-  const privateKey = response.data.wallet.privateKey
-  const mnemonicPhrase = response.data.mnemonic
-  const walletId = response.data.user.walletId
-  dispatch({ type: 'add_publicAddress', payload: `${publicAddress}`})
-  dispatch({ type: 'add_privateKey', payload: `${privateKey}` })
-  dispatch({ type: 'add_mnemonicPhrase', payload: `${mnemonicPhrase}` })
-  return walletId
-}
-
 const signup = (dispatch) => {
   return async ({ email, password, repeatedPassword, userName }) => {
     try{
@@ -67,17 +46,19 @@ const signup = (dispatch) => {
       }
       else if (password === repeatedPassword )
       {dispatch({type: 'clear_error_message'})
-      const response = await Api.post('/users/createUser', {userName: userName, email: email, password: password })
-      const userId = response.data.userId
-      console.log(userId)
-      const walletId = await expressSignup( dispatch, email, password, userName)
+      const response = await Api.post('/users/express', {userName: userName, email: email, password: password })
+      const publicAddress = response.data.walletInformation.address
+      const privateKey = response.data.walletInformation.privateKey
+      const mnemonicPhrase = response.data.mnemonicPhrase
+      const walletId = response.data.walletId
+      dispatch({ type: 'add_publicAddress', payload: `${publicAddress}`})
+      dispatch({ type: 'add_privateKey', payload: `${privateKey}` })
+      dispatch({ type: 'add_mnemonicPhrase', payload: `${mnemonicPhrase}` })
       dispatch({ type: 'signup' })
       dispatch({ type: 'add_email', payload: `${email}`})
-      dispatch({ type: 'add_password', payload: `${password}`})
       dispatch({ type: 'add_userName', payload: `${userName}`})
-      dispatch({ type: 'add_userId', payload: `${userId}`})
       dispatch({ type: 'add_walletId', payload: `${walletId}`})
-      navigate('storageChoice')}
+      navigate('walletInformation')}
       else{dispatch({type: 'error_message', payload: 'Passwords need to match'})}
     } catch (err)
     {dispatch({ type: 'error_message', payload: 'Something went wrong' }, console.log(err))
@@ -176,5 +157,5 @@ export const validateInput = (dispatch) => {
 export const { Provider: AuthProvider, Context: AuthContext } = createDataContext(
   authReducer,
   { login, logout, clearErrorMessage, tryLocalLogin, signup, deleteUser, validateInput },
-  { errorMessage: '', email: '', password: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonicPhrase: '', walletId: '' }
+  { errorMessage: '', email: '', userName: '', userId: '', privateKey: '', publicAddress: '', mnemonicPhrase: '', walletId: '' }
 )
