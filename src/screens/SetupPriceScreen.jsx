@@ -73,7 +73,9 @@ const SetupPriceScreen = ({navigation}) => {
     <Text style={styles.checkboxText}>Add Lazy Minting</Text>
     </View>
      <Spacer/>
-     <Button title={splitRoyaltiesIsChecked ? 'Set Royalty Shares': 'Upload'} onPress={()=>{splitRoyaltiesIsChecked ? navigation.navigate('royaltyShare') : mint(name, description, image, publicAddress, date, price)}}/>
+     <Button title={splitRoyaltiesIsChecked ?
+      'Set Royalty Shares': 'Upload'} onPress={()=>{splitRoyaltiesIsChecked ?
+      navigation.navigate('royaltyShare') : mint({price})}}/>
     </SafeAreaView>)
 }
 

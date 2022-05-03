@@ -54,20 +54,25 @@ const uploadConfiguration = dispatch => (title, description) => {
   dispatch({type: 'setTitle', payload: title})
 }
 
-const mint = async (name, description, image, publicAddress, date, price) => {
-try{
-  await Api.post('/nft/mint', {name: name, description: description,
-  image: image, creatorAdress: publicAddress, ownerAdress: publicAddress, date: date,
-  location: 'Berlin', positionInTree: 0, amountSold: price})
- }
- catch{
- }
-}
+// name, description, image, userName, publicAddress, date,
+
+// const mint = async ({price}) => {
+// try{
+//   response = await Api.post('/nft/mint', {name: 'name', description: 'description',
+//   image: 'image', creatorUsername: 'Massi_Ricci', creatorAdress: '0x4001B03038A24d75808b2F2d13f436aF152A8C04', ownerAdress: '0x4001B03038A24d75808b2F2d13f436aF152A8C04', date: '2022-04-30 15:05:54.496103+02',
+//   location: 'Berlin', positionInTree: 0, amountSold: price})
+//   console.log(response)
+//   navigate('feed')
+//  }
+//  catch(err){
+//   console.log(err)
+//  }
+// }
 
 const toggleBool = (dispatch) => (val) => {val = !val, dispatch({type: 'setDerivative', payload: val})}
 
 export const { Provider: MintingProvider , Context: MintingContext } = createDataContext(
   mintingReducer,
-  { takePicture, pickImage, toggleBool, mint, uploadConfiguration },
+  { takePicture, pickImage, toggleBool, uploadConfiguration},
   { image: null, isDerivative: false, date: null, title: '', description: '' }
 )

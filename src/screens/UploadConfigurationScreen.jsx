@@ -33,7 +33,6 @@ const UploadConfigurationScreen = ({navigation}) => {
       <TextInput
      style={styles.titleInput}
      editable
-     multiline
      onChangeText={(text) => setTitle(text)}
      placeholder="Title"
      autoCorrect={false}
@@ -44,7 +43,6 @@ const UploadConfigurationScreen = ({navigation}) => {
     <TextInput
      style={styles.descriptionInput}
      editable
-     multiline
      onChangeText={(text) => setDescription(text)}
      placeholder="Description"
      autoCorrect={false}

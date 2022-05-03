@@ -79,6 +79,7 @@ const logout = dispatch => async () => {
   }catch(err){
   const cookie = await SecureStore.getItemAsync('cookie')
     await SecureStore.deleteItemAsync('cookie')
+    console.log('as')
     dispatch({ type: 'logout'})
     navigate('unAuthenticatedUser')
   }
@@ -86,14 +87,17 @@ const logout = dispatch => async () => {
 
 const tryLocalLogin = async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
-if(cookie && isCookieValid(cookie)){
+  console.log(cookie)
+  console.log(Boolean(cookie))
+  console.log(Boolean(await isCookieValid({cookie})))
+if(cookie && await isCookieValid({cookie})){
   navigate('authenticatedUser')
 }else{
   navigate('unAuthenticatedUser')
   }
 }
 
-async function isCookieValid(cookie) {
+const isCookieValid = async ({cookie}) => {
   try
  { const config = {headers:{
     'my.sid': cookie
