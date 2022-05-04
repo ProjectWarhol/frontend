@@ -56,10 +56,10 @@ const uploadConfiguration = dispatch => (title, description) => {
 
 // name, description, image, userName, publicAddress, date,
 
-const mint = dispatch =>  {return async ({price}) => {
+const mint = dispatch =>  {return async ({ price, image, date, name, description, userName, publicAddress }) => {
   try{
-  const response = await Api.post('/nft/mint', {name: 'name', description: 'description',
-  image: 'image', creatorUsername: 'Massi_Ricci', creatorAdress: '0x4001B03038A24d75808b2F2d13f436aF152A8C04', ownerAdress: '0x4001B03038A24d75808b2F2d13f436aF152A8C04', date: '2022-04-30 15:05:54.496103+02',
+  const response = await Api.post('/nft/mint', {name: name, description: description,
+  image: image, creatorUsername: userName, creatorAdress: publicAddress, ownerAdress: publicAddress, date: date,
   location: 'Berlin', positionInTree: 0, amountSold: price})
   console.log(response)
   navigate('feed')
