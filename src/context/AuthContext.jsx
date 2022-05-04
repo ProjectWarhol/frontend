@@ -77,15 +77,14 @@ const logout = dispatch => async () => {
   dispatch({ type: 'logout'})
   navigate('unAuthenticatedUser')
   }catch(err){
-  const cookie = await SecureStore.getItemAsync('cookie')
+    await SecureStore.getItemAsync('cookie')
     await SecureStore.deleteItemAsync('cookie')
-    console.log('as')
     dispatch({ type: 'logout'})
     navigate('unAuthenticatedUser')
   }
 }
 
-const tryLocalLogin = async () => {
+const tryLocalLogin = dispatch => {return async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
   console.log(cookie)
   console.log(Boolean(cookie))
@@ -94,8 +93,9 @@ if(cookie && await isCookieValid({cookie})){
   navigate('authenticatedUser')
 }else{
   navigate('unAuthenticatedUser')
+  await SecureStore.deleteItemAsync('cookie')
   }
-}
+}}
 
 const isCookieValid = async ({cookie}) => {
   try

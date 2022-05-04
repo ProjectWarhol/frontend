@@ -5,7 +5,7 @@ import Spacer from '../components/Spacer'
 import { MintingContext } from '../context/MintingContext'
 import { AuthContext } from '../context/AuthContext'
 import { Button } from 'react-native-elements'
-
+import UploadButton from '../components/UploadButton'
 
 const SetupPriceScreen = ({navigation}) => {
     const [price, setPrice] = useState(0)
@@ -13,18 +13,20 @@ const SetupPriceScreen = ({navigation}) => {
     const [splitRoyaltiesIsChecked, setSplitRoyaltiesIsChecked] = useState(false)
     const [lazyMinting, setLazyMinting] = useState(false)
 
-    const authContext = useContext(AuthContext)
-    const userName = authContext.state.userName
-    const publicAddress = authContext.state.publicAddress
+    // const authContext = useContext(AuthContext)
+    // const userName = authContext.state.userName
+    // const publicAddress = authContext.state.publicAddress
 
-    const { state, mint } = useContext(MintingContext)
-    const image = state.image
-    const date = state.date
-    const name = state.title
-    const description = state.description
+    // const mintingContext = useContext(MintingContext)
+    // const image = state.image
+    // const date = state.date
+    // const name = state.title
+    // const description = state.description
+
+    const life = false
 
     return( <SafeAreaView style={styles.container}>
-    {state.isDerivative ?
+    {life ?
     (<><Text style={styles.text}>Price</Text>
     <Spacer/>
     <TextInput
@@ -75,7 +77,8 @@ const SetupPriceScreen = ({navigation}) => {
      <Spacer/>
      <Button title={splitRoyaltiesIsChecked ?
       'Set Royalty Shares': 'Upload'} onPress={()=>{splitRoyaltiesIsChecked ?
-      navigation.navigate('royaltyShare') : mint({price})}}/>
+      navigation.navigate('royaltyShare') : navigate('feed')}}/>
+    <UploadButton price={price}/>
     </SafeAreaView>)
 }
 
