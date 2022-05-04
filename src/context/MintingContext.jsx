@@ -30,7 +30,6 @@ const takePicture = dispatch => async (camera) => {
 }
 
 const pickImage = dispatch => async () => {
-  // No permissions request is necessary for launching the image library
   let result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.All,
     allowsEditing: true,
@@ -54,10 +53,9 @@ const uploadConfiguration = dispatch => (title, description) => {
   dispatch({type: 'setTitle', payload: title})
 }
 
-// name, description, image, userName, publicAddress, date,
-
 const mint = dispatch =>  {return async ({ price, image, date, name, description, userName, publicAddress }) => {
   try{
+  console.log([price, image, date, name, description, userName, publicAddress])
   const response = await Api.post('/nft/mint', {name: name, description: description,
   image: image, creatorUsername: userName, creatorAdress: publicAddress, ownerAdress: publicAddress, date: date,
   location: 'Berlin', positionInTree: 0, amountSold: price})

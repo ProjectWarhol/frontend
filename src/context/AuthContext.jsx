@@ -86,9 +86,6 @@ const logout = dispatch => async () => {
 
 const tryLocalLogin = dispatch => {return async () => {
   const cookie = await SecureStore.getItemAsync('cookie')
-  console.log(cookie)
-  console.log(Boolean(cookie))
-  console.log(Boolean(await isCookieValid({cookie})))
 if(cookie && await isCookieValid({cookie})){
   navigate('authenticatedUser')
 }else{
@@ -124,6 +121,14 @@ const login = (dispatch) => async ({ email, password }) => {
       cookieString.indexOf(';')
     )
     await SecureStore.setItemAsync('cookie', cookie)
+    const userName = response.data.user.userName
+    const walletId = response.data.user.walletId
+    dispatch({type: 'add_userName', payload: userName})
+    const walletInfo = await Api.get(`/wallet/${walletId}`, { password: password })
+    const publicAddres = walletInfo.data.publicKey
+    console.log(walletInfo.data.userAccount)
+    //dispatch wallet info here update needed!!
+    dispatch({type: 'add_publicAddress', payload: publicAddres})
     navigate('authenticatedUser')
     } catch (err){
       {dispatch({ type: 'error_message',  payload: 'Something went wrong' }, console.log(err))}

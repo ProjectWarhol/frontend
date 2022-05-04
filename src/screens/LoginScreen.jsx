@@ -22,7 +22,7 @@ const LoginScreen = ( {navigation } ) => {
       <Text style={styles.header} h3>Welcome back</Text>
     <Spacer/>
     <Input
-      label='Email'
+      label='Email or Username'
       value={email}
       onChangeText={setEmail}
       autoCapitalize='none'

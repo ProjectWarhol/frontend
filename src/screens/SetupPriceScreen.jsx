@@ -3,7 +3,6 @@ import { Text, StyleSheet, SafeAreaView, TextInput, View } from 'react-native'
 import Checkbox from 'expo-checkbox'
 import Spacer from '../components/Spacer'
 import { MintingContext } from '../context/MintingContext'
-import { AuthContext } from '../context/AuthContext'
 import { Button } from 'react-native-elements'
 import UploadButton from '../components/UploadButton'
 
@@ -13,20 +12,10 @@ const SetupPriceScreen = ({navigation}) => {
     const [splitRoyaltiesIsChecked, setSplitRoyaltiesIsChecked] = useState(false)
     const [lazyMinting, setLazyMinting] = useState(false)
 
-    // const authContext = useContext(AuthContext)
-    // const userName = authContext.state.userName
-    // const publicAddress = authContext.state.publicAddress
-
-    // const mintingContext = useContext(MintingContext)
-    // const image = state.image
-    // const date = state.date
-    // const name = state.title
-    // const description = state.description
-
-    const life = false
+    const {state} = useContext(MintingContext)
 
     return( <SafeAreaView style={styles.container}>
-    {life ?
+    {state.isDerivative ?
     (<><Text style={styles.text}>Price</Text>
     <Spacer/>
     <TextInput
@@ -75,10 +64,7 @@ const SetupPriceScreen = ({navigation}) => {
     <Text style={styles.checkboxText}>Add Lazy Minting</Text>
     </View>
      <Spacer/>
-     <Button title={splitRoyaltiesIsChecked ?
-      'Set Royalty Shares': 'Upload'} onPress={()=>{splitRoyaltiesIsChecked ?
-      navigation.navigate('royaltyShare') : navigate('feed')}}/>
-    <UploadButton price={price}/>
+     {splitRoyaltiesIsChecked ? <Button title='Set Royalty Shares' onPress={()=>{navigation.navigate('royaltyShare')}}/> : <UploadButton price={price}/> }
     </SafeAreaView>)
 }
 
