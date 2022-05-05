@@ -111,7 +111,7 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
 
-const login = (dispatch) => async ({ email, password }) => {
+export const login = dispatch => async ({ email, password }) => {
   try{
     const response = await Api.post('/users/login', { userCredential: email, password: password })
     let cookieArray = response["headers"]["set-cookie"]

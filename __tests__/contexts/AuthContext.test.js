@@ -30,6 +30,4 @@ describe('AuthContext', () => {
         const expected = 'hello'
         expect(validateInput(userInput, userInput)).toBeTruthy()
     })
-
-    it('logs the user in'), () => {}
 })
