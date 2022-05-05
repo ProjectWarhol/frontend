@@ -38,6 +38,25 @@ export const validateEmail = (email) => {
   return /\S+@\S+\.\S+/.test(String(email).toLowerCase());
 };
 
+async function expressSignup ( dispatch, email, password, userName) {
+  const response = await Api.post('/users/express', {userName: userName, email: email, password: password})
+  console.log('here is express'+response)
+  let cookieArray = response["headers"]["set-cookie"]
+  let cookieString = cookieArray.toString()
+  const cookie = cookieString.substring(
+  cookieString.indexOf('=') + 1,
+  cookieString.indexOf(';'))
+  await SecureStore.setItemAsync('cookie', cookie)
+  const publicAddress = response.data.wallet.address
+  const privateKey = response.data.wallet.privateKey
+  const mnemonicPhrase = response.data.mnemonic
+  const walletId = response.data.user.walletId
+  dispatch({ type: 'add_publicAddress', payload: `${publicAddress}`})
+  dispatch({ type: 'add_privateKey', payload: `${privateKey}` })
+  dispatch({ type: 'add_mnemonicPhrase', payload: `${mnemonicPhrase}` })
+  return walletId
+}
+
 const signup = (dispatch) => {
   return async ({ email, password, repeatedPassword, userName }) => {
     try{
