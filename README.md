@@ -42,10 +42,6 @@ Requirements for the software and other tools to build, test and push
 Tests can be found in the __test__ folder.
 Tests are run by using yarn test.
 
-## Deployment
-
-Coming soon...
-
 ## Documentation
 
 A documentation of this project can be found in the https://www.notion.so/frontend-f08e10f1e0fd4fecb5300f9f45e52f3f for the frontend. It contains several sub-folders for the individual parts of the frontend.
