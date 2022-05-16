@@ -7,19 +7,19 @@ const authReducer = (state, action) => {
   switch (action.type){
     case 'signup':
       return {...state }
-    case 'add_email':
+    case 'email':
       return {...state, email: action.payload}
-    case 'add_userName':
+    case 'userName':
       return {...state, userName: action.payload}
-    case 'add_userId':
+    case 'userId':
       return {...state, userId: action.payload}
-    case 'add_publicAddress':
+    case 'publicAddress':
       return {...state, publicAddress: action.payload}
-    case 'add_privateKey':
+    case 'privateKey':
       return {...state, privateKey: action.payload}
-    case 'add_mnemonicPhrase':
+    case 'mnemonicPhrase':
       return {...state, mnemonicPhrase: action.payload}
-    case 'add_walletId':
+    case 'walletId':
       return {...state, walletId: action.payload}
     case 'error_message':
       return {...state, errorMessage: action.payload }
@@ -51,13 +51,13 @@ const signup = (dispatch) => {
       const privateKey = response.data.walletInformation.privateKey
       const mnemonicPhrase = response.data.mnemonicPhrase
       const walletId = response.data.walletId
-      dispatch({ type: 'add_publicAddress', payload: `${publicAddress}`})
-      dispatch({ type: 'add_privateKey', payload: `${privateKey}` })
-      dispatch({ type: 'add_mnemonicPhrase', payload: `${mnemonicPhrase}` })
+      dispatch({ type: 'publicAddress', payload: `${publicAddress}`})
+      dispatch({ type: 'privateKey', payload: `${privateKey}` })
+      dispatch({ type: 'mnemonicPhrase', payload: `${mnemonicPhrase}` })
       dispatch({ type: 'signup' })
-      dispatch({ type: 'add_email', payload: `${email}`})
-      dispatch({ type: 'add_userName', payload: `${userName}`})
-      dispatch({ type: 'add_walletId', payload: `${walletId}`})
+      dispatch({ type: 'email', payload: `${email}`})
+      dispatch({ type: 'userName', payload: `${userName}`})
+      dispatch({ type: 'walletId', payload: `${walletId}`})
       navigate('walletInformation')}
       else{dispatch({type: 'error_message', payload: 'Passwords need to match'})}
     } catch (err)
@@ -77,7 +77,6 @@ const logout = dispatch => async () => {
   dispatch({ type: 'logout'})
   navigate('unAuthenticatedUser')
   }catch(err){
-    await SecureStore.getItemAsync('cookie')
     await SecureStore.deleteItemAsync('cookie')
     dispatch({ type: 'logout'})
     navigate('unAuthenticatedUser')
@@ -123,12 +122,12 @@ export const login = dispatch => async ({ email, password }) => {
     await SecureStore.setItemAsync('cookie', cookie)
     const userName = response.data.user.userName
     const walletId = response.data.user.walletId
-    dispatch({type: 'add_userName', payload: userName})
+    dispatch({type: 'userName', payload: userName})
     const walletInfo = await Api.get(`/wallet/${walletId}`, { password: password })
     const publicAddres = walletInfo.data.publicKey
     console.log(walletInfo.data.userAccount)
     //dispatch wallet info here update needed!!
-    dispatch({type: 'add_publicAddress', payload: publicAddres})
+    dispatch({type: 'publicAddress', payload: publicAddres})
     navigate('authenticatedUser')
     } catch (err){
       {dispatch({ type: 'error_message',  payload: 'Something went wrong' }, console.log(err))}
