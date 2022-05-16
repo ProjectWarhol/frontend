@@ -1,5 +1,5 @@
 import api from '../../src/api/api'
-import { login } from '../../src/context/AuthContext'
+import { loginFunction } from '../../src/context/AuthContext'
 import { cleanup } from 'react-native-testing-library'
 
 describe('Login tests', () => {
@@ -11,14 +11,19 @@ describe('Login tests', () => {
         //     api.post.mockResolvedValue({})
         // })
 
-        it('should call endpoint with given email & password', async () => {
-            await expect(login(email, password)).rejects.toThrow()
+        it('should call endpoint with wrong email & password', () => {
+            expect(loginFunction(email, password)).rejects.toEqual({
+                error: 500,
+            })
         })
 
-        it('should call endpoint with given email & password', async () => {
-            await expect(
-                login('Takahiro_Mitsui', 'TakahiroMitsui')
-            ).resolves.toThrow()
+        it('should call endpoint with correct email & password', () => {
+            expect(
+                loginFunction('Takahiro_Mitsui', 'TakahiroMitsui')
+            ).resolves.toReturn({
+                userName: 'Takahiro_Mitsui',
+                publicAddress: undefined,
+            })
         })
     })
 })

@@ -110,9 +110,8 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
 
-export const login = dispatch => async ({ email, password }) => {
-  try{
-    const response = await Api.post('/users/login', { userCredential: email, password: password })
+export async function loginFunction (email, password) {
+  const response = await Api.post('/users/login', { userCredential: email, password: password })
     let cookieArray = response["headers"]["set-cookie"]
     let cookieString = cookieArray.toString()
     const cookie = cookieString.substring(
@@ -121,12 +120,20 @@ export const login = dispatch => async ({ email, password }) => {
     )
     await SecureStore.setItemAsync('cookie', cookie)
     const userName = response.data.user.userName
+    console.log(userName)
     const walletId = response.data.user.walletId
-    dispatch({type: 'userName', payload: userName})
     const walletInfo = await Api.get(`/wallet/${walletId}`, { password: password })
-    const publicAddres = walletInfo.data.publicKey
-    console.log(walletInfo.data.userAccount)
+    const publicAddress = walletInfo.data.publicKey
+    // console.log(walletInfo.data.userAccount)
     //dispatch wallet info here update needed!!
+    return {userName, publicAddress}
+}
+
+export const login = dispatch => async ({ email, password }) => {
+  try{
+    const {userName, publicAddress} = await loginFunction(email, password, dispatch)
+    console.log(userName)
+    dispatch({type: 'userName', payload: userName})
     dispatch({type: 'publicAddress', payload: publicAddres})
     navigate('authenticatedUser')
     } catch (err){
