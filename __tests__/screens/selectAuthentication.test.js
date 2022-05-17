@@ -1,17 +1,24 @@
-import React from "react";
-import { create } from "react-test-renderer";
-import SelectAuthenticationScreen from "../../src/screens/SelectAuthenticationScreen";
-import { AuthProvider } from '../../src/context/AuthContext';
+import React from 'react'
+import { create } from 'react-test-renderer'
+import SelectAuthenticationScreen from '../../src/screens/SelectAuthenticationScreen'
+import { AuthProvider } from '../../src/context/AuthContext'
+
+jest.useFakeTimers()
 
 const navigation = {
-  navigate: jest.fn()
+    navigate: jest.fn(),
 }
 
 jest.mock('react-navigation', () => ({
-  withNavigation: SelectAuthenticationScreen => props => (
-    <SelectAuthenticationScreen navigation={{ navigate: jest.fn() }} {...props} />
-  ), NavigationEvents: 'mockNavigationEvents'
-}));
+    withNavigation: (SelectAuthenticationScreen) => (props) =>
+        (
+            <SelectAuthenticationScreen
+                navigation={{ navigate: jest.fn() }}
+                {...props}
+            />
+        ),
+    NavigationEvents: 'mockNavigationEvents',
+}))
 
 const tree = create(
     <AuthProvider value={null}>
@@ -19,18 +26,18 @@ const tree = create(
     </AuthProvider>
 )
 
-test('snapshot', ()=>{
-  expect(tree).toMatchSnapshot()
+test('snapshot', () => {
+    expect(tree).toMatchSnapshot()
 })
 
-test('press login button', ()=>{
-  const loginButton = tree.root.findByProps({ testID: 'login'}).props
-  loginButton.onPress()
-  expect(navigation.navigate).toBeCalledWith('login')
+test('press login button', () => {
+    const loginButton = tree.root.findByProps({ testID: 'login' }).props
+    loginButton.onPress()
+    expect(navigation.navigate).toBeCalledWith('login')
 })
 
-test('press signup button', ()=>{
-  const signupButton = tree.root.findByProps({ testID: 'signup'}).props
-  signupButton.onPress()
-  expect(navigation.navigate).toBeCalledWith('signup')
+test('press signup button', () => {
+    const signupButton = tree.root.findByProps({ testID: 'signup' }).props
+    signupButton.onPress()
+    expect(navigation.navigate).toBeCalledWith('signup')
 })

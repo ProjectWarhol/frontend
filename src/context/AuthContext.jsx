@@ -66,14 +66,19 @@ const signup = (dispatch) => {
   }
 }
 
-const logout = dispatch => async () => {
-  try { const cookie = await SecureStore.getItemAsync('cookie')
+export async function logoutFunction(){
+  const cookie = await SecureStore.getItemAsync('cookie')
   const config = {headers:{
     'my.sid': cookie
   }
 }
   await Api.post('/users/logout', config)
   await SecureStore.deleteItemAsync('cookie')
+}
+
+const logout = dispatch => async () => {
+  try {
+  logoutFunction
   dispatch({ type: 'logout'})
   navigate('unAuthenticatedUser')
   }catch(err){
@@ -120,7 +125,6 @@ export async function loginFunction (email, password) {
     )
     await SecureStore.setItemAsync('cookie', cookie)
     const userName = response.data.user.userName
-    console.log(userName)
     const walletId = response.data.user.walletId
     const walletInfo = await Api.get(`/wallet/${walletId}`, { password: password })
     const publicAddress = walletInfo.data.publicKey
@@ -131,10 +135,9 @@ export async function loginFunction (email, password) {
 
 export const login = dispatch => async ({ email, password }) => {
   try{
-    const {userName, publicAddress} = await loginFunction(email, password, dispatch)
-    console.log(userName)
+    const {userName, publicAddress} = await loginFunction(email, password)
     dispatch({type: 'userName', payload: userName})
-    dispatch({type: 'publicAddress', payload: publicAddres})
+    dispatch({type: 'publicAddress', payload: publicAddress})
     navigate('authenticatedUser')
     } catch (err){
       {dispatch({ type: 'error_message',  payload: 'Something went wrong' }, console.log(err))}

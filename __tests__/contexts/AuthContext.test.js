@@ -27,7 +27,6 @@ describe('AuthContext', () => {
 
     it('gives valid input to validateInputPhrase', () => {
         const userInput = 'blouse'
-        const expected = 'hello'
         expect(validateInput(userInput, userInput)).toBeTruthy()
     })
 })
