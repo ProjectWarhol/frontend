@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 import { MintingContext } from '../context/MintingContext'
 import { AuthContext } from '../context/AuthContext'
