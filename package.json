@@ -1,96 +1,38 @@
 {
-  "name": "unos-frontend",
-  "version": "0.0.1",
-  "jest": {
-    "preset": "jest-expo",
-    "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json"
-    ],
-    "transform": {
-      "^.+.jsx?$": "babel-jest"
-    }
-  },
-  "description": "This is the unos mobile application",
-  "keywords": [
-    "react",
-    "react-native",
-    "nft",
-    "blockchain",
-    "web3",
-    "solidity",
-    "social-media"
-  ],
-  "main": "node_modules/expo/AppEntry.js",
-  "author": "Unos team",
-  "license": "MIT",
+  "name": "frontend",
+  "version": "0.1.0",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ProjectWarhol/frontend"
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "lint": "eslint",
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject",
-    "test": "jest"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "dependencies": {
-    "@react-native-community/masked-view": "^0.1.11",
-    "@react-navigation/native": "^6.0.8",
-    "@testing-library/react-hooks": "^8.0.0",
-    "axios": "^0.26.0",
-    "babel-jest": "^27.5.1",
-    "babel-preset-react-native": "^4.0.1",
-    "expo": "^44.0.0",
-    "expo-camera": "~12.1.2",
-    "expo-checkbox": "~2.0.0",
-    "expo-image-picker": "~12.0.1",
-    "expo-secure-store": "~11.1.0",
-    "expo-status-bar": "~1.2.0",
-    "jest-expo": "^44.0.1",
-    "jest-react-native": "^18.0.0",
-    "mocha": "^9.2.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-is": "^17.0.2",
-    "react-native": "^0.64.3",
-    "react-native-dotenv": "^3.3.1",
-    "react-native-elements": "^3.4.2",
-    "react-native-gesture-handler": "2.1.1",
-    "react-native-reanimated": "~2.3.1",
-    "react-native-safe-area-context": "3.3.2",
-    "react-native-screens": "~3.10.1",
-    "react-native-swipe-gestures": "^1.0.5",
-    "react-native-testing-library": "^6.0.0",
-    "react-native-web": "0.17.1",
-    "react-navigation": "^4.4.4",
-    "react-navigation-stack": "^2.10.4",
-    "react-navigation-tabs": "^2.11.2",
-    "react-test-renderer": "17",
-    "ts-jest": "^27.1.3"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/preset-env": "^7.16.11",
-    "@testing-library/jest-native": "^4.0.4",
-    "@testing-library/react-native": "^9.0.0",
-    "@types/jest": "^27.4.0",
-    "chai": "^4.3.6",
-    "dotenv": "^16.0.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
-    "eslint": "^7.12.1",
-    "eslint-plugin-react": "^7.28.0",
-    "husky": "^7.0.2",
-    "jest": "^26.6.3",
-    "ts-jest": "^27.1.3"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
