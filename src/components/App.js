@@ -8,13 +8,15 @@ import CreatePost from "./CreatePost.js";
 import Login from "./Login.js";
 import Profile from "./Profile.js";
 import Search from "./Search.js";
-import Signup from "./SIgnup.js";
+import Signup from "./Signup.js";
 import '../css/App.css';
 
 
 export default function App() {
+  const {alert, setAlert} = useState(null)
+
   return (
-    <div className="App">
+    <div className="fill-parent">
       <BrowserRouter>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container fluid>
@@ -42,6 +44,8 @@ export default function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {alert? <AlertDismissible {...alert} deleteAlert={() => setAlert(null)}/> 
+      : null}
         <Routes>
           <Route element={<AllPosts/>} path="/" exact/>
           <Route element={<AlertDismissible/>} path="/alert"/>
@@ -49,7 +53,7 @@ export default function App() {
           <Route element={<Login/>} path="/users/login"/>
           <Route element={<Profile/>} path="/users/:userName"/>
           <Route element={<Search/>} path="/search"/>
-          <Route element={<Signup/>} path="/signup"/>
+          <Route element={<Signup setAlert={setAlert}/>} path="/signup"/>
         </Routes>
       </BrowserRouter>
     </div>
