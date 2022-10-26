@@ -16,46 +16,49 @@ export default function App() {
   const {alert, setAlert} = useState(null)
 
   return (
-    <div className="fill-parent">
-      <BrowserRouter>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container fluid>
-          <LinkContainer to="/">
-            <Navbar.Brand>Stag</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle />
-          <Navbar.Collapse>
-            <Nav className= "me-auto">
-              <LinkContainer to="/">
-                <Nav.Link>Feed</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/search">
-                <Nav.Link>Search</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/mint">
-                <Nav.Link>Post</Nav.Link>
-              </LinkContainer>
-            </Nav>
-            <Nav>
-              <Navbar.Text>
-                <Link to="/signup">Not Signed In</Link>
-              </Navbar.Text>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      {alert? <AlertDismissible {...alert} deleteAlert={() => setAlert(null)}/> 
-      : null}
-        <Routes>
-          <Route element={<AllPosts/>} path="/" exact/>
-          <Route element={<AlertDismissible/>} path="/alert"/>
-          <Route element={<CreatePost/>} path="/mint" />
-          <Route element={<Login/>} path="/users/login"/>
-          <Route element={<Profile/>} path="/users/:userName"/>
-          <Route element={<Search/>} path="/search"/>
-          <Route element={<Signup setAlert={setAlert}/>} path="/signup"/>
-        </Routes>
-      </BrowserRouter>
+    <div className="App">
+      <div className="menuContainer"></div>
+      <img src="https://i.imgur.com/1ZQ2Z9C.png" alt="logo" className="logo"/>
+      <main></main>
     </div>
+    // <div className="fill-parent">
+    //   <BrowserRouter>
+    //   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    //     <Container fluid>
+    //       <LinkContainer to="/">
+    //         <Navbar.Brand>Stag</Navbar.Brand>
+    //       </LinkContainer>
+    //       <Navbar.Toggle />
+    //       <Navbar.Collapse>
+    //         <Nav className= "me-auto">
+    //           <LinkContainer to="/">
+    //             <Nav.Link>Feed</Nav.Link>
+    //           </LinkContainer>
+    //           <LinkContainer to="/search">
+    //             <Nav.Link>Search</Nav.Link>
+    //           </LinkContainer>
+    //           <LinkContainer to="/mint">
+    //             <Nav.Link>Post</Nav.Link>
+    //           </LinkContainer>
+    //         </Nav>
+    //         <Nav>
+    //           <Navbar.Text>
+    //             <Link to="/signup">Not Signed In</Link>
+    //           </Navbar.Text>
+    //         </Nav>
+    //       </Navbar.Collapse>
+    //     </Container>
+    //   </Navbar>
+    //     <Routes>
+    //       <Route element={<AllPosts/>} path="/" exact/>
+    //       <Route element={<AlertDismissible/>} path="/alert"/>
+    //       <Route element={<CreatePost/>} path="/mint" />
+    //       <Route element={<Login/>} path="/users/login"/>
+    //       <Route element={<Profile/>} path="/users/:userName"/>
+    //       <Route element={<Search/>} path="/search"/>
+    //       <Route element={<Signup setAlert= {setAlert} />} path="/signup"/>
+    //     </Routes>
+    //   </BrowserRouter>
+    // </div>
   );
 }

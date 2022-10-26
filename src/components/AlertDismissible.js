@@ -2,13 +2,13 @@ import { useState } from "react";
 import {Alert} from "react-bootstrap";
 
 
-export default function AlertDismissible(message, variant, deleteAlert){
-const [show, setshow] = useState(true);
+export default function AlertDismissible(variant, message, deleteAlert){
+const [show, setShow] = useState(true);
 
     if(show){
         return <Alert variant={variant} onClose={() => {
             deleteAlert(); 
-            setshow(false)
+            setShow(false)
             }}
             dimissible
         > 

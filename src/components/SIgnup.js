@@ -1,9 +1,10 @@
+import { render } from "@testing-library/react";
 import {useState} from "react";
 import {Form, Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom"
 import "../css/signUp.css"
 
-export default function Signup(setAlert){
+export default function Signup({setAlert}){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -22,8 +23,14 @@ export default function Signup(setAlert){
         }
         fetch("/users/express", requestOptions).then(res=> {
             return res.json()
-        }).then(data => console.log(data))
-        
+        }).then(data => 
+            console.log(data)
+            )
+        .catch((err) => {console.log(err)});
+        setUsername('')
+        setPassword('')
+        setEmail('')
+        setTimeout(() => {navigate("/")}, 3000) 
     }
     
     return (
