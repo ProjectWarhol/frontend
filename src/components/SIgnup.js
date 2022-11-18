@@ -1,52 +1,93 @@
-import { render } from "@testing-library/react";
-import {useState} from "react";
-import {Form, Button} from "react-bootstrap";
-import {useNavigate} from "react-router-dom"
-import "../css/signUp.css"
+import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-export default function Signup({setAlert}){
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const navigate = useNavigate()
-    
-    function createAccount(e){
-        e.preventDefault();
-        const requestOptions={
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                userName: username,
-                password: password,
-                email: email,
-            })
+export default function SignUp({ setAlert, setUser, setWallet }) {
+  const [Email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  let error
+
+  function createAccount(e) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: Email,
+        password: password,
+        userName: username,
+      }),
+    };
+
+    fetch("/users/express", requestOptions)
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+         error = res.statusText
         }
-        fetch("/users/express", requestOptions).then(res=> {
-            return res.json()
-        }).then(data => 
-            console.log(data)
-            )
-        .catch((err) => {console.log(err)});
-        setUsername('')
-        setPassword('')
-        setEmail('')
-        setTimeout(() => {navigate("/")}, 3000) 
-    }
-    
-    return (
-    <Form className="sign-up-form">
-        <Form.Group controlId="mb-4">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Enter Username" value={username} onChange={e => setUsername(e.target.value)}/>
-        </Form.Group>
-        <Form.Group controlId="mb-4">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="text" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)}/>
-        </Form.Group>
-        <Form.Group controlId="mb-4">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="text" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
-        </Form.Group>
-        <Button variant="primary" type="submit" onClick={createAccount}>Create Account</Button>
-    </Form>);
+      })
+      .then((data) =>{
+        if (!data) {
+          setAlert({
+            variant: "danger",
+            message: "A User with that name already Exists!",
+          });
+        } 
+        else {
+          setAlert({ variant: "success", message: "Successfully signup up!" });
+          setUser(data.userId);
+          setWallet({walletId: data.walletId, publicKey: data.walletInformation.address, PrivateKey: data.walletInformation.privateKey})
+          navigate("/");
+        }
+      })
+      .catch((err) => console.error(err));
+  }
+
+  function updateUsername(e) {
+    setUsername(e.target.value);
+  }
+
+  function updateEmail(e) {
+    setEmail(e.target.value);
+  }
+
+  function updatePassword(e) {
+    setPassword(e.target.value);
+  }
+
+  return (
+    <Form className="center-form">
+      <Form.Group className="mb-4">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Username"
+          onInput={updateUsername}
+        />
+      </Form.Group>
+      <Form.Group className="mb-4">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Email"
+          onInput={updateEmail}
+        />
+      </Form.Group>
+      <Form.Group className="mb-4">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          onInput={updatePassword}
+        />
+      </Form.Group>
+      <Button variant="primary" type="button" onClick={createAccount}>
+        Create Account
+      </Button>
+    </Form>
+  );
 }
