@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -26,14 +27,16 @@ export default function Profile({ user, setAlert }) {
        error = res.statusText
       }
     }).then((data) => {
-      console.log(data)
+      if(data.userName === params.username) {
+        setOwner(true);
+      }
       setProfileData(data.user)
     })
   }, [params.username, user]);
 
   function updateFollowing(profile) {
-    for (let promoter of profile.followers) {
-      if (promoter.username === user) {
+    for (let promoter of profile.promoting) {
+      if (promoter.userName === user) {
         setPromoting(true);
         return;
       }
@@ -67,7 +70,7 @@ export default function Profile({ user, setAlert }) {
         },
         body: JSON.stringify({ user: user, id: profileData._id }),
       };
-      fetch("/addFollower", requestOptions)
+      fetch("/promoting/" + profileData.id, requestOptions)
         .then((res) => res.json())
         .then((_data) => updateProfile(params.username));
     } else {
@@ -121,13 +124,13 @@ export default function Profile({ user, setAlert }) {
             <p>
               <strong>Promoters</strong>
             </p>
-            <h4>{profileData.followers ? profileData.followers.length : 0}</h4>
+            <h4>{profileData.promoters ? profileData.promoters : 0}</h4>
           </div>
           <div className="vertical-data">
             <p>
               <strong>Promoting</strong>
             </p>
-            <h4>{profileData.following ? profileData.following : 0}</h4>
+            <h4>{profileData.promoting ? profileData.promoting : 0}</h4>
           </div>
           <div className="follow-button">
             {user && !owner ? (

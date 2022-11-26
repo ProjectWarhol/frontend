@@ -1,10 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/alt-text */
 import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../css/CreatePost.css";
 
 export default function CreatePost({ user, setAlert }) {
-  const [caption, setCaption] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setdescription] = useState("");
   const [file, setFile] = useState("");
   const navigate = useNavigate();
 
@@ -24,14 +27,15 @@ export default function CreatePost({ user, setAlert }) {
 
   function makePost() {
     const formData = new FormData();
-    formData.append("user", user);
-    formData.append("caption", caption);
-    formData.append("file", file);
+    formData.append("creatorUsername", user);
+    formData.append("name", title);
+    formData.append("description", description);
+    formData.append("image", file);
     const requestOptions = {
       method: "POST",
       body: formData,
     };
-    fetch("/createPost", requestOptions)
+    fetch("/nft/mint", requestOptions)
       .then((_res) => {
         setAlert({ variant: "success", message: "Post created!" });
         navigate("/");
@@ -52,10 +56,15 @@ export default function CreatePost({ user, setAlert }) {
           <input type="file" accept="image/*" onChange={uploadFile} />
         </Form.Group>
         <Form.Group className="mb-3">
+        <Form.Control
+            type="text"
+            placeholder="Enter a title"
+            onInput={(e) => setTitle(e.target.value)}
+          />
           <Form.Control
             type="text"
-            placeholder="Enter a Caption"
-            onInput={(e) => setCaption(e.target.value)}
+            placeholder="Enter a description"
+            onInput={(e) => setdescription(e.target.value)}
           />
         </Form.Group>
         <div className="post-button-wrapper">
@@ -63,8 +72,7 @@ export default function CreatePost({ user, setAlert }) {
             variant="primary"
             type="button"
             onClick={makePost}
-            className="post-button"
-          >
+            className="post-button">
             Post
           </Button>
         </div>
