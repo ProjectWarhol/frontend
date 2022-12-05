@@ -1,11 +1,12 @@
-#steps to initialise
-download the backend development repo from:
-https://github.com/ProjectWarhol/backend
+Steps to install:
 
-then run the following commands:
-1. npm install
-2. npm install --g truffle
-3. npm start
-
-documentation can be found here:
-https://www.notion.so/Tech-4defdfc05bc046688d2d728b90037e5b
+1. Download and install Ganache from here;
+    https://trufflesuite.com/ganache/
+2. Run the Following commands
+    `npm install -g truffle`
+    `truffle compile`
+    ` truffle migrate --reset`
+3. to run test:
+    ` truffle test`
+4. run application
+    `npm start`
