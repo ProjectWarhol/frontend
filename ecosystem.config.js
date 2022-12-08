@@ -15,7 +15,7 @@ module.exports = {
       key: '~/.ssh/deploy.key',
       ref: 'origin/main',
       repo: 'https://github.com/ProjectWarhol/frontend.git',
-      path: '/var/www/frontend',
+      path: '/var/www',
       'post-deploy':
         'npm install && pm2 startOrRestart ecosystem.config.js && pm2 save',
     },
