@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'prod',
-      script: 'npm run build && npm run start',
+      script: 'npm install && npm run build && npm run start',
       time: true,
     },
   ],
@@ -15,7 +15,7 @@ module.exports = {
       key: '~/.ssh/deploy.key',
       ref: 'origin/main',
       repo: 'https://github.com/ProjectWarhol/frontend.git',
-      path: '/var/www',
+      path: '/var/www/frontend',
       'post-deploy':
         'npm install && pm2 startOrRestart ecosystem.config.js && pm2 save',
     },
