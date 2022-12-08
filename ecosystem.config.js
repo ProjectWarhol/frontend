@@ -1,8 +1,8 @@
 module.exports = {
   apps: [
     {
-      name: 'prod',
-      script: 'npm install && npm run build && npm run start',
+      name: 'frontend-prod',
+      script: 'yarn build && yarn start',
       time: true,
     },
   ],
@@ -17,7 +17,7 @@ module.exports = {
       repo: 'https://github.com/ProjectWarhol/frontend.git',
       path: '/var/www/frontend',
       'post-deploy':
-        'npm install && pm2 startOrRestart ecosystem.config.js && pm2 save',
+        'yarn install && pm2 startOrRestart ecosystem.config.js && pm2 save',
     },
   },
 };
