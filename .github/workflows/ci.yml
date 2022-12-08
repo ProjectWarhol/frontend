@@ -41,4 +41,4 @@ jobs:
         run: sudo npm install pm2@latest -g
 
       - name: Deploy
-        run: env $(cat .env | grep -v \"#\" | xargs) && pm2 deploy ecosystem.config.js production
+        run: env $(cat .env | grep -v \"#\" | xargs) && pm2 deploy ecosystem.config.js production --force
