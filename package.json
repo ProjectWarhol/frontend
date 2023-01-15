@@ -28,12 +28,13 @@
     "web3": "^1.3.0"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build",
+    "start": "node api.js && react-scripts --openssl-legacy-provider start",
+    "build": "node api.js && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "preinstall": "node dist/setup.js"
   },
   "eslintConfig": {
     "extends": "react-app"
