@@ -2,7 +2,7 @@
   "name": "UnosApp",
   "version": "0.1.0",
   "description": "Decentralized Social Media",
-  "author": "Dapp University",
+  "author": "Omar Badawy",
   "homepage": ".",
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.1.0",
